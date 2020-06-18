@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "generics"
+version = "2.0.3"
+
+description = "A class-based toolkit designed with OOP in mind."
+readme = "docs/index.md"
+license = "BSD-2-Clause"
+
+homepage = "https://pypi.org/project/generics/"
+repository = "https://github.com/proofit404/generics/"
+documentation = "https://proofit404.github.io/generics/"
+
+authors = ["Artem Malyshev <proofit404@gmail.com>"]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Topic :: Software Development",
+]
+
+packages = [
+    { include = "_generics", from = "src" },
+    { include = "generics", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "~2.7 || ^3.5"
+
+[build-system]
+requires = ["poetry"]
+build-backend = "poetry.masonry.api"

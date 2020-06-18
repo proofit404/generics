@@ -1,0 +1,10 @@
+.coverage
+.coverage.*
+.pytest_cache/
+.tox/
+__pycache__/
+coverage.xml
+dist/
+htmlcov/
+node_modules/
+site/

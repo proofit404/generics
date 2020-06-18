@@ -1,0 +1,32 @@
+---
+strict: true
+site_name: generics
+site_description: A class-based toolkit designed with OOP in mind.
+theme:
+  name: material
+  palette:
+    primary: deep-purple
+    accent: deep-purple
+  icon:
+    logo: material/language-python
+  language: en
+  features:
+    - tabs
+repo_name: proofit404/generics
+repo_url: https://github.com/proofit404/generics
+edit_uri: ""
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+extra_javascript:
+  - javascripts/extra.js
+nav:
+  - Home:
+      - Home: index.md
