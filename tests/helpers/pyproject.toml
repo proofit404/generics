@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "helpers"
+version = "0"
+description = ""
+authors = []
+packages = [
+    { include = "helpers.py" },
+    { include = "mddoctest.py"},
+]
+
+[build-system]
+requires = ["poetry"]
+build-backend = "poetry.masonry.api"
