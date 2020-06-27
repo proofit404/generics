@@ -206,7 +206,6 @@ def test_ini_files_indentation():
         ".coveragerc",
         ".flake8",
         ".importlinter",
-        ".vale.ini",
         "pytest.ini",
         "tox.ini",
     ]:
