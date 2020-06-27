@@ -31,10 +31,6 @@ jobs:
           versionSpec: "12.x"
         displayName: Install NodeJS.
       - script: |
-          curl https://install.goreleaser.com/github.com/ValeLint/vale.sh | sh
-          echo '##vso[task.prependpath]$(system.defaultWorkingDirectory)/bin'
-        displayName: Install Vale.
-      - script: |
           git remote set-branches origin master
           git fetch --quiet
           git checkout master --quiet
