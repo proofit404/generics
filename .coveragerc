@@ -4,6 +4,7 @@ parallel = True
 source =
   _generics
   generics
+  entities
   helpers
   mddoctest
   tests
