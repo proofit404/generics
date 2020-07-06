@@ -2,7 +2,7 @@
 name = "generics"
 version = "1.0.0"
 
-description = "A class-based toolkit designed with OOP in mind."
+description = "A classy toolkit designed with OOP in mind."
 readme = "docs/index.md"
 license = "BSD-2-Clause"
 

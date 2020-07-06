@@ -1,7 +1,7 @@
 ---
 strict: true
 site_name: generics
-site_description: A class-based toolkit designed with OOP in mind.
+site_description: A classy toolkit designed with OOP in mind.
 theme:
   name: material
   palette:
