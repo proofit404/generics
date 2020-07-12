@@ -30,3 +30,6 @@ extra_javascript:
 nav:
   - Home:
       - Home: index.md
+      - Changelog: changelog.md
+  - Usage:
+      - Private: private.md
