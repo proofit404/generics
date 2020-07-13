@@ -6,12 +6,14 @@
 
 A classy toolkit designed with OOP in mind.
 
-**[Documentation](https://proofit404.github.io/generics/) | [Source Code](https://github.com/proofit404/generics) | [Task Tracker](https://github.com/proofit404/generics/issues)**
+**[Documentation](https://proofit404.github.io/generics/) |
+[Source Code](https://github.com/proofit404/generics) |
+[Task Tracker](https://github.com/proofit404/generics/issues)**
 
-In our opinion, main benefits of having objects implemented in the
-language are encapsulation and polymorphous. Classes that could be
-easily used in a composition are tricky to write. The `generics`
-library aims to help you in writing code with high quality.
+In our opinion, main benefits of having objects implemented in the language are
+encapsulation and polymorphous. Classes that could be easily used in a
+composition are tricky to write. The `generics` library aims to help you in
+writing code with high quality.
 
 ## Pros
 
@@ -22,9 +24,8 @@ library aims to help you in writing code with high quality.
 
 ## Example
 
-The `generics` library gives you an easy way to define private
-attributes on objects without loosing little nice things like
-readability.
+The `generics` library gives you an easy way to define private attributes on
+objects without loosing little nice things like readability.
 
 ```pycon
 
@@ -51,7 +52,10 @@ False
 
 ## Questions
 
-If you have any questions, feel free to create an issue in our [Task Tracker](https://github.com/proofit404/generics/issues). We have the [question label](https://github.com/proofit404/generics/issues?q=is%3Aopen+is%3Aissue+label%3Aquestion) exactly for this purpose.
+If you have any questions, feel free to create an issue in our
+[Task Tracker](https://github.com/proofit404/generics/issues). We have the
+[question label](https://github.com/proofit404/generics/issues?q=is%3Aopen+is%3Aissue+label%3Aquestion)
+exactly for this purpose.
 
 ## License
 
