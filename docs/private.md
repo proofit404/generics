@@ -44,6 +44,7 @@ It may be a nice convention to have it in the code base, but
 
 - [All methods are public](#all-methods-are-public)
 - [All attributes are private and hidden](#all-attributes-are-private-and-hidden)
+- [Static methods are forbidden](#static-methods-are-forbidden)
 
 ### All methods are public
 
@@ -157,5 +158,85 @@ Attribute access in the client code will raise an exception.
 Traceback (most recent call last):
   ...
 AttributeError: 'Private(User)' object has no attribute 'name'
+
+```
+
+### Static methods are forbidden
+
+Good objects expose their behavior and hide their state. The behavior objects
+expose should be related to the state object hides. This metric is called
+cohesion.
+
+Static methods can't access the inner state of the object. That's why the
+behavior they expose doesn't relate to the object. Cohesion will go down. That's
+why we forbid static methods.
+
+If you need such behavior, put it outside of the class and encapsulate it.
+
+```python tab="attrs"
+
+>>> from attr import attrs, attrib
+>>> from generics import private
+
+>>> @private
+... @attrs(frozen=True)
+... class User:
+...     name = attrib()
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+...
+...     @staticmethod
+...     def is_bot():
+...         return False
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
+
+```
+
+```python tab="dataclasses"
+
+>>> from dataclasses import dataclass
+>>> from generics import private
+
+>>> @private
+... @dataclass(frozen=True)
+... class User:
+...     name: str
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+...
+...     @staticmethod
+...     def is_bot():
+...         return False
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
+
+```
+
+```python tab="pydantic"
+
+>>> from pydantic import BaseModel
+>>> from generics import private
+
+>>> @private
+... class User(BaseModel):
+...     name: str
+...
+...     class Config:
+...         allow_mutation = False
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+...
+...     @staticmethod
+...     def is_bot():
+...         return False
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
 
 ```
