@@ -402,6 +402,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#class-methods-should-return-instances" class="md-nav__link">
+    Class methods should return instances
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -493,6 +500,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#class-methods-should-return-instances" class="md-nav__link">
+    Class methods should return instances
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -553,6 +567,7 @@ attributes.</p>
 <li><a href="#all-methods-are-public">All methods are public</a></li>
 <li><a href="#all-attributes-are-private-and-hidden">All attributes are private and hidden</a></li>
 <li><a href="#static-methods-are-forbidden">Static methods are forbidden</a></li>
+<li><a href="#class-methods-should-return-instances">Class methods should return instances</a></li>
 </ul>
 <h3 id="all-methods-are-public">All methods are public<a class="headerlink" href="#all-methods-are-public" title="Permanent link">&para;</a></h3>
 <p>The main purpose of objects in object-oriented programming is in <strong>behavior</strong>
@@ -654,7 +669,9 @@ cohesion.</p>
 <p>Static methods can't access the inner state of the object. That's why the
 behavior they expose doesn't relate to the object. Cohesion will go down. That's
 why we forbid static methods.</p>
-<p>If you need such behavior, put it outside of the class and encapsulate it.</p>
+<p>If you need such behavior, put it outside of the class. If this behavior is
+neccessary in the instance method of the original class, encapsulate it. Pass
+that new thing to the constructor and access it in methods.</p>
 <div class="tabbed-set" data-tabs="2:3">
 <input name="__tabbed_2" type="radio" id="__tabbed_2_1" checked="checked" /><label for="__tabbed_2_1">attrs</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">attr</span> <span class="kn">import</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">attrib</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
@@ -711,6 +728,75 @@ why we forbid static methods.</p>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
   <span class="o">...</span>
 <span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericClassError</span><span class="p">:</span> <span class="n">Do</span> <span class="ow">not</span> <span class="n">use</span> <span class="n">static</span> <span class="n">methods</span> <span class="p">(</span><span class="n">use</span> <span class="n">composition</span> <span class="n">instead</span><span class="p">)</span>
+</code></pre></div></div>
+</div>
+<h3 id="class-methods-should-return-instances">Class methods should return instances<a class="headerlink" href="#class-methods-should-return-instances" title="Permanent link">&para;</a></h3>
+<p>As we mentioned earlier, objects should expose behavior. Class methods do not
+have access to any kind of inner state sinse there is no object encapsulating
+it. Thus the only kind of behavior class method should be able to do is
+instantiation of the object.</p>
+<div class="tabbed-set" data-tabs="3:3">
+<input name="__tabbed_3" type="radio" id="__tabbed_3_1" checked="checked" /><label for="__tabbed_3_1">attrs</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">attr</span> <span class="kn">import</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">attrib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@private</span>
+<span class="o">...</span> <span class="nd">@attrs</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">...</span> <span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">name</span> <span class="o">=</span> <span class="n">attrib</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="nd">@classmethod</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">pass</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">User</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="o">...</span>
+<span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericInstanceError</span><span class="p">:</span> <span class="s1">&#39;create&#39;</span> <span class="nb">classmethod</span> <span class="n">should</span> <span class="k">return</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">the</span> <span class="s1">&#39;User&#39;</span> <span class="k">class</span>
+</code></pre></div></div>
+<input name="__tabbed_3" type="radio" id="__tabbed_3_2" /><label for="__tabbed_3_2">dataclasses</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@private</span>
+<span class="o">...</span> <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">...</span> <span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="nd">@classmethod</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">pass</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">User</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="o">...</span>
+<span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericInstanceError</span><span class="p">:</span> <span class="s1">&#39;create&#39;</span> <span class="nb">classmethod</span> <span class="n">should</span> <span class="k">return</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">the</span> <span class="s1">&#39;User&#39;</span> <span class="k">class</span>
+</code></pre></div></div>
+<input name="__tabbed_3" type="radio" id="__tabbed_3_3" /><label for="__tabbed_3_3">pydantic</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@private</span>
+<span class="o">...</span> <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="o">...</span>     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="o">...</span>         <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="nd">@classmethod</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">pass</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">User</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="o">...</span>
+<span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericInstanceError</span><span class="p">:</span> <span class="s1">&#39;create&#39;</span> <span class="nb">classmethod</span> <span class="n">should</span> <span class="k">return</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">the</span> <span class="s1">&#39;User&#39;</span> <span class="k">class</span>
 </code></pre></div></div>
 </div>
 <p align="center">&mdash; ⭐️ &mdash;</p>
