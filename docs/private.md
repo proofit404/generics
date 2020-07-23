@@ -45,6 +45,7 @@ It may be a nice convention to have it in the code base, but
 - [All methods are public](#all-methods-are-public)
 - [All attributes are private and hidden](#all-attributes-are-private-and-hidden)
 - [Static methods are forbidden](#static-methods-are-forbidden)
+- [Class methods should return instances](#class-methods-should-return-instances)
 
 ### All methods are public
 
@@ -171,7 +172,9 @@ Static methods can't access the inner state of the object. That's why the
 behavior they expose doesn't relate to the object. Cohesion will go down. That's
 why we forbid static methods.
 
-If you need such behavior, put it outside of the class and encapsulate it.
+If you need such behavior, put it outside of the class. If this behavior is
+neccessary in the instance method of the original class, encapsulate it. Pass
+that new thing to the constructor and access it in methods.
 
 ```python tab="attrs"
 
@@ -238,6 +241,87 @@ _generics.exceptions.GenericClassError: Do not use static methods (use compositi
 Traceback (most recent call last):
   ...
 _generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
+
+```
+
+### Class methods should return instances
+
+As we mentioned earlier, objects should expose behavior. Class methods do not
+have access to any kind of inner state sinse there is no object encapsulating
+it. Thus the only kind of behavior class method should be able to do is
+instantiation of the object.
+
+```python tab="attrs"
+
+>>> from attr import attrs, attrib
+>>> from generics import private
+
+>>> @private
+... @attrs(frozen=True)
+... class User:
+...     name = attrib()
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+...
+...     @classmethod
+...     def create(cls):
+...         pass
+
+>>> User.create()
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
+
+```
+
+```python tab="dataclasses"
+
+>>> from dataclasses import dataclass
+>>> from generics import private
+
+>>> @private
+... @dataclass(frozen=True)
+... class User:
+...     name: str
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+...
+...     @classmethod
+...     def create(cls):
+...         pass
+
+>>> User.create()
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
+
+```
+
+```python tab="pydantic"
+
+>>> from pydantic import BaseModel
+>>> from generics import private
+
+>>> @private
+... class User(BaseModel):
+...     name: str
+...
+...     class Config:
+...         allow_mutation = False
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+...
+...     @classmethod
+...     def create(cls):
+...         pass
+
+>>> User.create()
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
 
 ```
 
