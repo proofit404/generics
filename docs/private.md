@@ -46,6 +46,8 @@ It may be a nice convention to have it in the code base, but
 - [All attributes are private and hidden](#all-attributes-are-private-and-hidden)
 - [Static methods are forbidden](#static-methods-are-forbidden)
 - [Class methods should return instances](#class-methods-should-return-instances)
+- [At least one instance method is required](#at-least-one-instance-method-is-required)
+- [At least one encapsulated attribute is required](#at-least-one-encapsulated-attribute-is-required)
 
 ### All methods are public
 
@@ -322,6 +324,131 @@ _generics.exceptions.GenericInstanceError: 'create' classmethod should return an
 Traceback (most recent call last):
   ...
 _generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
+
+```
+
+### At least one instance method is required
+
+As we mention a couple of times earlier the main goal of the good objects is to
+expose behavior. If there is no methods defined on the class, it's not possible
+to expose any kind of behavior. The object becomes useless.
+
+Class methods does not count since it has a different purpose.
+
+```python tab="attrs"
+
+>>> from attr import attrs, attrib
+>>> from generics import private
+
+>>> @private
+... @attrs(frozen=True)
+... class User:
+...     name = attrib()
+...
+...     @classmethod
+...     def create(cls):
+...         pass
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Define at least one instance method
+
+```
+
+```python tab="dataclasses"
+
+>>> from dataclasses import dataclass
+>>> from generics import private
+
+>>> @private
+... @dataclass(frozen=True)
+... class User:
+...     name: str
+...
+...     @classmethod
+...     def create(cls):
+...         pass
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Define at least one instance method
+
+```
+
+```python tab="pydantic"
+
+>>> from pydantic import BaseModel
+>>> from generics import private
+
+>>> @private
+... class User(BaseModel):
+...     name: str
+...
+...     class Config:
+...         allow_mutation = False
+...
+...     @classmethod
+...     def create(cls):
+...         pass
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Define at least one instance method
+
+```
+
+### At least one encapsulated attribute is required
+
+The same as a previous one this rules exists because of the encapsulation
+restrictions. If your object does not encapsulate at least one attribute, it
+does not have any state. In that case behavior exposed by the object does not
+relate to the object itself. Thus there is no reason to define such kind of
+method on the class in the first place.
+
+```python tab="attrs"
+
+>>> from attr import attrs, attrib
+>>> from generics import private
+
+>>> @private
+... @attrs(frozen=True)
+... class User:
+...
+...     def greet(self):
+...         return 'Hello, Jeff'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Define at least one encapsulated attribute
+
+```
+
+```python tab="dataclasses"
+
+>>> from dataclasses import dataclass
+>>> from generics import private
+
+>>> @private
+... @dataclass(frozen=True)
+... class User:
+...
+...     def greet(self):
+...         return 'Hello, Jeff'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Define at least one encapsulated attribute
+
+```
+
+```python tab="pydantic"
+
+>>> from pydantic import BaseModel
+>>> from generics import private
+
+>>> @private
+... class User(BaseModel):
+...
+...     def greet(self):
+...         return 'Hello, Jeff'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Define at least one encapsulated attribute
 
 ```
 
