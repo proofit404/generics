@@ -13,7 +13,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.0">
     
     
       
@@ -21,9 +21,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.fe0cca5b.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.b5d04df8.min.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/palette.a46bcfb3.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.9ab2c1f8.min.css">
       
       
         
@@ -409,6 +409,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#at-least-one-instance-method-is-required" class="md-nav__link">
+    At least one instance method is required
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#at-least-one-encapsulated-attribute-is-required" class="md-nav__link">
+    At least one encapsulated attribute is required
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -507,6 +521,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#at-least-one-instance-method-is-required" class="md-nav__link">
+    At least one instance method is required
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#at-least-one-encapsulated-attribute-is-required" class="md-nav__link">
+    At least one encapsulated attribute is required
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -568,6 +596,8 @@ attributes.</p>
 <li><a href="#all-attributes-are-private-and-hidden">All attributes are private and hidden</a></li>
 <li><a href="#static-methods-are-forbidden">Static methods are forbidden</a></li>
 <li><a href="#class-methods-should-return-instances">Class methods should return instances</a></li>
+<li><a href="#at-least-one-instance-method-is-required">At least one instance method is required</a></li>
+<li><a href="#at-least-one-encapsulated-attribute-is-required">At least one encapsulated attribute is required</a></li>
 </ul>
 <h3 id="all-methods-are-public">All methods are public<a class="headerlink" href="#all-methods-are-public" title="Permanent link">&para;</a></h3>
 <p>The main purpose of objects in object-oriented programming is in <strong>behavior</strong>
@@ -799,6 +829,106 @@ instantiation of the object.</p>
 <span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericInstanceError</span><span class="p">:</span> <span class="s1">&#39;create&#39;</span> <span class="nb">classmethod</span> <span class="n">should</span> <span class="k">return</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">the</span> <span class="s1">&#39;User&#39;</span> <span class="k">class</span>
 </code></pre></div></div>
 </div>
+<h3 id="at-least-one-instance-method-is-required">At least one instance method is required<a class="headerlink" href="#at-least-one-instance-method-is-required" title="Permanent link">&para;</a></h3>
+<p>As we mention a couple of times earlier the main goal of the good objects is to
+expose behavior. If there is no methods defined on the class, it's not possible
+to expose any kind of behavior. The object becomes useless.</p>
+<p>Class methods does not count since it has a different purpose.</p>
+<div class="tabbed-set" data-tabs="4:3">
+<input name="__tabbed_4" type="radio" id="__tabbed_4_1" checked="checked" /><label for="__tabbed_4_1">attrs</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">attr</span> <span class="kn">import</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">attrib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@private</span>
+<span class="o">...</span> <span class="nd">@attrs</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">...</span> <span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">name</span> <span class="o">=</span> <span class="n">attrib</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="nd">@classmethod</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">pass</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="o">...</span>
+<span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericClassError</span><span class="p">:</span> <span class="n">Define</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">instance</span> <span class="n">method</span>
+</code></pre></div></div>
+<input name="__tabbed_4" type="radio" id="__tabbed_4_2" /><label for="__tabbed_4_2">dataclasses</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@private</span>
+<span class="o">...</span> <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">...</span> <span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="nd">@classmethod</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">pass</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="o">...</span>
+<span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericClassError</span><span class="p">:</span> <span class="n">Define</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">instance</span> <span class="n">method</span>
+</code></pre></div></div>
+<input name="__tabbed_4" type="radio" id="__tabbed_4_3" /><label for="__tabbed_4_3">pydantic</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@private</span>
+<span class="o">...</span> <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="o">...</span>     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="o">...</span>         <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="nd">@classmethod</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">pass</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="o">...</span>
+<span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericClassError</span><span class="p">:</span> <span class="n">Define</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">instance</span> <span class="n">method</span>
+</code></pre></div></div>
+</div>
+<h3 id="at-least-one-encapsulated-attribute-is-required">At least one encapsulated attribute is required<a class="headerlink" href="#at-least-one-encapsulated-attribute-is-required" title="Permanent link">&para;</a></h3>
+<p>The same as a previous one this rules exists because of the encapsulation
+restrictions. If your object does not encapsulate at least one attribute, it
+does not have any state. In that case behavior exposed by the object does not
+relate to the object itself. Thus there is no reason to define such kind of
+method on the class in the first place.</p>
+<div class="tabbed-set" data-tabs="5:3">
+<input name="__tabbed_5" type="radio" id="__tabbed_5_1" checked="checked" /><label for="__tabbed_5_1">attrs</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">attr</span> <span class="kn">import</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">attrib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@private</span>
+<span class="o">...</span> <span class="nd">@attrs</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">...</span> <span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">return</span> <span class="s1">&#39;Hello, Jeff&#39;</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="o">...</span>
+<span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericClassError</span><span class="p">:</span> <span class="n">Define</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">encapsulated</span> <span class="n">attribute</span>
+</code></pre></div></div>
+<input name="__tabbed_5" type="radio" id="__tabbed_5_2" /><label for="__tabbed_5_2">dataclasses</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@private</span>
+<span class="o">...</span> <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">...</span> <span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">return</span> <span class="s1">&#39;Hello, Jeff&#39;</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="o">...</span>
+<span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericClassError</span><span class="p">:</span> <span class="n">Define</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">encapsulated</span> <span class="n">attribute</span>
+</code></pre></div></div>
+<input name="__tabbed_5" type="radio" id="__tabbed_5_3" /><label for="__tabbed_5_3">pydantic</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nd">@private</span>
+<span class="o">...</span> <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="o">...</span>
+<span class="o">...</span>     <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">...</span>         <span class="k">return</span> <span class="s1">&#39;Hello, Jeff&#39;</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="o">...</span>
+<span class="n">_generics</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">GenericClassError</span><span class="p">:</span> <span class="n">Define</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">encapsulated</span> <span class="n">attribute</span>
+</code></pre></div></div>
+</div>
 <p align="center">&mdash; ⭐️ &mdash;</p>
 
 <p align="center"><i>The generics library is part of the SOLID python family.</i></p>
@@ -854,8 +984,8 @@ instantiation of the object.</p>
       
     </div>
     
-      <script src="../assets/javascripts/vendor.d710d30a.min.js"></script>
-      <script src="../assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      <script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
+      <script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
       
       <script>
         app = initialize({
