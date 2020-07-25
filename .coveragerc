@@ -4,6 +4,7 @@ parallel = True
 source =
   _generics
   generics
+  app
   entities
   helpers
   mddoctest

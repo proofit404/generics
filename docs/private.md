@@ -16,7 +16,7 @@ The naming convention with leading underscores from
 not work the way we want. For example, the code below will not hide class
 attributes.
 
-```python
+```pycon
 
 >>> class User:
 ...     def __init__(self, name):
@@ -48,6 +48,7 @@ It may be a nice convention to have it in the code base, but
 - [Class methods should return instances](#class-methods-should-return-instances)
 - [At least one instance method is required](#at-least-one-instance-method-is-required)
 - [At least one encapsulated attribute is required](#at-least-one-encapsulated-attribute-is-required)
+- [Implementation inheritance is forbidden](#implementation-inheritance-is-forbidden)
 
 ### All methods are public
 
@@ -59,7 +60,7 @@ Behavior intended by object could be expressed with its methods.
 Thus every instance and class method of the object is public. Class should be
 decorated with `@private` function.
 
-```python tab="attrs"
+```pycon tab="attrs"
 
 >>> from attr import attrs, attrib
 >>> from generics import private
@@ -84,7 +85,7 @@ Private(User(name='Jeff'))
 
 ```
 
-```python tab="dataclasses"
+```pycon tab="dataclasses"
 
 >>> from dataclasses import dataclass
 >>> from generics import private
@@ -109,7 +110,7 @@ Private(User(name='Jeff'))
 
 ```
 
-```python tab="pydantic"
+```pycon tab="pydantic"
 
 >>> from pydantic import BaseModel
 >>> from generics import private
@@ -155,7 +156,7 @@ is the only place where you can put anything inside the object. Own methods of
 the object (defined in its class) are free to use its attributes as usual.
 Attribute access in the client code will raise an exception.
 
-```python
+```pycon
 
 >>> user.name
 Traceback (most recent call last):
@@ -178,7 +179,7 @@ If you need such behavior, put it outside of the class. If this behavior is
 neccessary in the instance method of the original class, encapsulate it. Pass
 that new thing to the constructor and access it in methods.
 
-```python tab="attrs"
+```pycon tab="attrs"
 
 >>> from attr import attrs, attrib
 >>> from generics import private
@@ -200,7 +201,7 @@ _generics.exceptions.GenericClassError: Do not use static methods (use compositi
 
 ```
 
-```python tab="dataclasses"
+```pycon tab="dataclasses"
 
 >>> from dataclasses import dataclass
 >>> from generics import private
@@ -222,7 +223,7 @@ _generics.exceptions.GenericClassError: Do not use static methods (use compositi
 
 ```
 
-```python tab="pydantic"
+```pycon tab="pydantic"
 
 >>> from pydantic import BaseModel
 >>> from generics import private
@@ -253,7 +254,7 @@ have access to any kind of inner state sinse there is no object encapsulating
 it. Thus the only kind of behavior class method should be able to do is
 instantiation of the object.
 
-```python tab="attrs"
+```pycon tab="attrs"
 
 >>> from attr import attrs, attrib
 >>> from generics import private
@@ -277,7 +278,7 @@ _generics.exceptions.GenericInstanceError: 'create' classmethod should return an
 
 ```
 
-```python tab="dataclasses"
+```pycon tab="dataclasses"
 
 >>> from dataclasses import dataclass
 >>> from generics import private
@@ -301,7 +302,7 @@ _generics.exceptions.GenericInstanceError: 'create' classmethod should return an
 
 ```
 
-```python tab="pydantic"
+```pycon tab="pydantic"
 
 >>> from pydantic import BaseModel
 >>> from generics import private
@@ -335,7 +336,7 @@ to expose any kind of behavior. The object becomes useless.
 
 Class methods does not count since it has a different purpose.
 
-```python tab="attrs"
+```pycon tab="attrs"
 
 >>> from attr import attrs, attrib
 >>> from generics import private
@@ -354,7 +355,7 @@ _generics.exceptions.GenericClassError: Define at least one instance method
 
 ```
 
-```python tab="dataclasses"
+```pycon tab="dataclasses"
 
 >>> from dataclasses import dataclass
 >>> from generics import private
@@ -373,7 +374,7 @@ _generics.exceptions.GenericClassError: Define at least one instance method
 
 ```
 
-```python tab="pydantic"
+```pycon tab="pydantic"
 
 >>> from pydantic import BaseModel
 >>> from generics import private
@@ -402,7 +403,7 @@ does not have any state. In that case behavior exposed by the object does not
 relate to the object itself. Thus there is no reason to define such kind of
 method on the class in the first place.
 
-```python tab="attrs"
+```pycon tab="attrs"
 
 >>> from attr import attrs, attrib
 >>> from generics import private
@@ -419,7 +420,7 @@ _generics.exceptions.GenericClassError: Define at least one encapsulated attribu
 
 ```
 
-```python tab="dataclasses"
+```pycon tab="dataclasses"
 
 >>> from dataclasses import dataclass
 >>> from generics import private
@@ -436,7 +437,7 @@ _generics.exceptions.GenericClassError: Define at least one encapsulated attribu
 
 ```
 
-```python tab="pydantic"
+```pycon tab="pydantic"
 
 >>> from pydantic import BaseModel
 >>> from generics import private
@@ -451,6 +452,117 @@ Traceback (most recent call last):
 _generics.exceptions.GenericClassError: Define at least one encapsulated attribute
 
 ```
+
+### Implementation inheritance is forbidden
+
+First of all, there are two types of inheritance -
+[subtyping inheritance](https://en.wikipedia.org/wiki/Subtyping) and
+[implementation inheritance](<https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)>).
+
+It's nothing wrong with subtyping inheritance. It's used to create "is a"
+relationship between classes. It's a technique where you can say that this class
+is an implementation of this particular interface.
+[`abc.Meta`](https://docs.python.org/3/library/abc.html) is one of the possible
+approaches for implicit interface implementation in Python. It has alternatives
+like [Duck typing](https://en.wikipedia.org/wiki/Duck_typing) and
+[`typing_extensions.Protocol`](https://mypy.readthedocs.io/en/stable/protocols.html#simple-user-defined-protocols).
+Yet again, it's nothing wrong with it if you want to design **contracts** in
+your codebase using `abc.Meta`.
+
+On the other hand, implementation inheritance was designed for
+[code reuse](<https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#Code_reuse>)
+in its heart. That's where things start to get out of hands. **Implementation
+inheritance breaks encapsulation** by its definition. That's why it's easy to
+end up with code like that:
+
+```pycon
+
+>>> from app import Entity
+
+>>> class User(Entity):
+...     database_table = 'users'
+...     json_fields = ['id', 'name', 'surname', 'bio']
+...     permissions = ['can_read', 'can_edit']
+...     query_string_params = ['user_*']
+
+```
+
+Looking just at that code it's impossible to answer these simple yet important
+questions:
+
+1. What responsibilities it has? (What it do?)
+2. How to use this class? (What public methods does it have?)
+
+Everything is hidden from us in the base class. And it has its own base classes
+as well. You get where it's going.
+
+That's why we forbid implementation inheritance.
+
+```pycon tab="attrs"
+
+>>> from attr import attrs, attrib
+>>> from generics import private
+
+>>> from app import Entity
+
+>>> @private
+... @attrs(frozen=True)
+... class User(Entity):
+...     name = attrib()
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Do not use inheritance (use composition instead)
+
+```
+
+```pycon tab="dataclasses"
+
+>>> from dataclasses import dataclass
+>>> from generics import private
+
+>>> from app import Entity
+
+>>> @private
+... @dataclass(frozen=True)
+... class User(Entity):
+...     name: str
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Do not use inheritance (use composition instead)
+
+```
+
+```pycon tab="pydantic"
+
+>>> from pydantic import BaseModel
+>>> from generics import private
+
+>>> from app import Entity
+
+>>> @private
+... class User(Entity, BaseModel):
+...     name: str
+...
+...     class Config:
+...         allow_mutation = False
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Do not use inheritance (use composition instead)
+
+```
+
+!!! note
+
+    Subtyping inheritance with `abc.Meta` is not implemented yet.  We have plans to implement it in the future.
 
 <p align="center">&mdash; ⭐️ &mdash;</p>
 <p align="center"><i>The generics library is part of the SOLID python family.</i></p>
