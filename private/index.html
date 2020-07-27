@@ -430,6 +430,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#underscore-names-are-forbidden" class="md-nav__link">
+    Underscore names are forbidden
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -549,6 +556,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#underscore-names-are-forbidden" class="md-nav__link">
+    Underscore names are forbidden
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -613,6 +627,7 @@ attributes.</p>
 <li><a href="#at-least-one-instance-method-is-required">At least one instance method is required</a></li>
 <li><a href="#at-least-one-encapsulated-attribute-is-required">At least one encapsulated attribute is required</a></li>
 <li><a href="#implementation-inheritance-is-forbidden">Implementation inheritance is forbidden</a></li>
+<li><a href="#underscore-names-are-forbidden">Underscore names are forbidden</a></li>
 </ul>
 <h3 id="all-methods-are-public">All methods are public<a class="headerlink" href="#all-methods-are-public" title="Permanent link">&para;</a></h3>
 <p>The main purpose of objects in object-oriented programming is in <strong>behavior</strong>
@@ -1035,6 +1050,54 @@ as well. You get where it's going.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Subtyping inheritance with <code>abc.Meta</code> is not implemented yet.  We have plans to implement it in the future.</p>
+</div>
+<h3 id="underscore-names-are-forbidden">Underscore names are forbidden<a class="headerlink" href="#underscore-names-are-forbidden" title="Permanent link">&para;</a></h3>
+<p>As we mentioned at the beginning of the document, Python has a convention for
+private attributes and methods to start with a single underscore (<code>_</code>)
+character. This harms readability. Thus they are forbidden. The library hides
+everything properly anyway.</p>
+<p>The presence of private methods especially is a sign of bad design. That means
+that the class has too many layers of abstractions hidden in it. The intention
+to hide methods defined in the class means that they operate on a lower level of
+abstractions that the responsibility of the class belongs to. Instead of using
+the composition of objects and encapsulation, the author decides to use uglier
+names. That gives hope to the author that users will not use methods with ugly
+names in their code. A bad design indeed.</p>
+<div class="tabbed-set" data-tabs="7:2">
+<input name="__tabbed_7" type="radio" id="__tabbed_7_1" checked="checked" /><label for="__tabbed_7_1">attrs</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">attr</span> <span class="kn">import</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">attrib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="nd">@attrs</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">_name</span> <span class="o">=</span> <span class="n">attrib</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">surname</span> <span class="o">=</span> <span class="n">attrib</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">surname</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use private attributes</span>
+</code></pre></div></div>
+<input name="__tabbed_7" type="radio" id="__tabbed_7_2" /><label for="__tabbed_7_2">dataclasses</label><div class="tabbed-content"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">_name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="gp">... </span>    <span class="n">surname</span><span class="p">:</span> <span class="nb">str</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">surname</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use private attributes</span>
+</code></pre></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This check is not supported if you are using <code>pydantic</code> library due to its limitations.</p>
 </div>
 <p align="center">&mdash; ⭐️ &mdash;</p>
 
