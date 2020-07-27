@@ -49,6 +49,7 @@ It may be a nice convention to have it in the code base, but
 - [At least one instance method is required](#at-least-one-instance-method-is-required)
 - [At least one encapsulated attribute is required](#at-least-one-encapsulated-attribute-is-required)
 - [Implementation inheritance is forbidden](#implementation-inheritance-is-forbidden)
+- [Underscore names are forbidden](#underscore-names-are-forbidden)
 
 ### All methods are public
 
@@ -563,6 +564,63 @@ _generics.exceptions.GenericClassError: Do not use inheritance (use composition 
 !!! note
 
     Subtyping inheritance with `abc.Meta` is not implemented yet.  We have plans to implement it in the future.
+
+### Underscore names are forbidden
+
+As we mentioned at the beginning of the document, Python has a convention for
+private attributes and methods to start with a single underscore (`_`)
+character. This harms readability. Thus they are forbidden. The library hides
+everything properly anyway.
+
+The presence of private methods especially is a sign of bad design. That means
+that the class has too many layers of abstractions hidden in it. The intention
+to hide methods defined in the class means that they operate on a lower level of
+abstractions that the responsibility of the class belongs to. Instead of using
+the composition of objects and encapsulation, the author decides to use uglier
+names. That gives hope to the author that users will not use methods with ugly
+names in their code. A bad design indeed.
+
+```pycon tab="attrs"
+
+>>> from attr import attrs, attrib
+>>> from generics import private
+
+>>> @private
+... @attrs(frozen=True)
+... class User:
+...     _name = attrib()
+...     surname = attrib()
+...
+...     def greet(self):
+...         return f'Hello, {self._name} {self.surname}'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Do not use private attributes
+
+```
+
+```pycon tab="dataclasses"
+
+>>> from dataclasses import dataclass
+>>> from generics import private
+
+>>> @private
+... @dataclass(frozen=True)
+... class User:
+...     _name: str
+...     surname: str
+...
+...     def greet(self):
+...         return f'Hello, {self._name} {self.surname}'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Do not use private attributes
+
+```
+
+!!! note
+
+    This check is not supported if you are using `pydantic` library due to its limitations.
 
 <p align="center">&mdash; ⭐️ &mdash;</p>
 <p align="center"><i>The generics library is part of the SOLID python family.</i></p>
