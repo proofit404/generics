@@ -50,6 +50,7 @@ It may be a nice convention to have it in the code base, but
 - [At least one encapsulated attribute is required](#at-least-one-encapsulated-attribute-is-required)
 - [Implementation inheritance is forbidden](#implementation-inheritance-is-forbidden)
 - [Underscore names are forbidden](#underscore-names-are-forbidden)
+- [Prefer immutable classes](#prefer-immutable-classes)
 
 ### All methods are public
 
@@ -621,6 +622,108 @@ _generics.exceptions.GenericClassError: Do not use private attributes
 !!! note
 
     This check is not supported if you are using `pydantic` library due to its limitations.
+
+### Prefer immutable classes
+
+Awoid changing inner state of the classes as much as possible.
+
+Way too many problems was caused because of changed data in unexpected parts of
+code. To deal with such problem we should respect transparency of the
+references. **Always create new name for the new state**.
+
+Instead of protecting different parts of the code with same conditional
+statements, make methods of a class return a new instance of the class if it
+need to change something.
+
+_Bad_:
+
+```pycon tab="attrs"
+
+>>> from attr import attrs, attrib
+>>> from generics import private
+
+>>> @private
+... @attrs
+... class User:
+...     name = attrib()
+...
+...     def rename(self, name):
+...         self.name = name
+
+>>> User(name='Jeff').rename('John')
+
+```
+
+```pycon tab="dataclasses"
+
+>>> from dataclasses import dataclass
+>>> from generics import private
+
+>>> @private
+... @dataclass
+... class User:
+...     name: str
+...
+...     def rename(self, name):
+...         self.name = name
+
+>>> User(name='Jeff').rename('John')
+
+```
+
+```pycon tab="pydantic"
+
+>>> from pydantic import BaseModel
+>>> from generics import private
+
+>>> @private
+... class User(BaseModel):
+...     name: str
+...
+...     def rename(self, name):
+...         self.name = name
+
+>>> User(name='Jeff').rename('John')
+
+```
+
+_Good_:
+
+```pycon tab="attrs"
+
+>>> from attr import attrs, attrib, evolve
+>>> from generics import private
+
+>>> @private
+... @attrs
+... class User:
+...     name = attrib()
+...
+...     def rename(self, name):
+...         return evolve(self, name=name)
+
+>>> User(name='Jeff').rename('John')
+User(name='John')
+
+```
+
+```pycon tab="dataclasses"
+
+>>> from dataclasses import dataclass, replace
+>>> from generics import private
+
+>>> @private
+... @dataclass
+... class User:
+...     name: str
+...
+...     def rename(self, name):
+...         return replace(self, name=name)
+
+>>> User(name='Jeff').rename('John')
+User(name='John')
+
+```
 
 <p align="center">&mdash; ⭐️ &mdash;</p>
 <p align="center"><i>The generics library is part of the SOLID python family.</i></p>
