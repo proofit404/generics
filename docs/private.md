@@ -62,82 +62,88 @@ Behavior intended by object could be expressed with its methods.
 Thus every instance and class method of the object is public. Class should be
 decorated with `@private` function.
 
-```pycon tab="attrs"
+=== "attrs"
 
->>> from attr import attrs, attrib
->>> from generics import private
+    ```pycon
 
->>> @private
-... @attrs(frozen=True)
-... class User:
-...     name = attrib()
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
+    >>> from attr import attrs, attrib
+    >>> from generics import private
 
->>> User
-Private(User)
+    >>> @private
+    ... @attrs(frozen=True)
+    ... class User:
+    ...     name = attrib()
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
 
->>> user = User('Jeff')
->>> user
-Private(User(name='Jeff'))
+    >>> User
+    Private(User)
 
->>> user.greet()
-'Hello, Jeff'
+    >>> user = User('Jeff')
+    >>> user
+    Private(User(name='Jeff'))
 
-```
+    >>> user.greet()
+    'Hello, Jeff'
 
-```pycon tab="dataclasses"
+    ```
 
->>> from dataclasses import dataclass
->>> from generics import private
+=== "dataclasses"
 
->>> @private
-... @dataclass(frozen=True)
-... class User:
-...     name: str
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
+    ```pycon
 
->>> User
-Private(User)
+    >>> from dataclasses import dataclass
+    >>> from generics import private
 
->>> user = User('Jeff')
->>> user
-Private(User(name='Jeff'))
+    >>> @private
+    ... @dataclass(frozen=True)
+    ... class User:
+    ...     name: str
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
 
->>> user.greet()
-'Hello, Jeff'
+    >>> User
+    Private(User)
 
-```
+    >>> user = User('Jeff')
+    >>> user
+    Private(User(name='Jeff'))
 
-```pycon tab="pydantic"
+    >>> user.greet()
+    'Hello, Jeff'
 
->>> from pydantic import BaseModel
->>> from generics import private
+    ```
 
->>> @private
-... class User(BaseModel):
-...     name: str
-...
-...     class Config:
-...         allow_mutation = False
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
+=== "pydantic"
 
->>> User
-Private(User)
+    ```pycon
 
->>> user = User(name='Jeff')
->>> user
-Private(User(name='Jeff'))
+    >>> from pydantic import BaseModel
+    >>> from generics import private
 
->>> user.greet()
-'Hello, Jeff'
+    >>> @private
+    ... class User(BaseModel):
+    ...     name: str
+    ...
+    ...     class Config:
+    ...         allow_mutation = False
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
 
-```
+    >>> User
+    Private(User)
+
+    >>> user = User(name='Jeff')
+    >>> user
+    Private(User(name='Jeff'))
+
+    >>> user.greet()
+    'Hello, Jeff'
+
+    ```
 
 ### All attributes are private and hidden
 
@@ -181,73 +187,79 @@ If you need such behavior, put it outside of the class. If this behavior is
 neccessary in the instance method of the original class, encapsulate it. Pass
 that new thing to the constructor and access it in methods.
 
-```pycon tab="attrs"
+=== "attrs"
 
->>> from attr import attrs, attrib
->>> from generics import private
+    ```pycon
 
->>> @private
-... @attrs(frozen=True)
-... class User:
-...     name = attrib()
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-...
-...     @staticmethod
-...     def is_bot():
-...         return False
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
+    >>> from attr import attrs, attrib
+    >>> from generics import private
 
-```
+    >>> @private
+    ... @attrs(frozen=True)
+    ... class User:
+    ...     name = attrib()
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
+    ...
+    ...     @staticmethod
+    ...     def is_bot():
+    ...         return False
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
 
-```pycon tab="dataclasses"
+    ```
 
->>> from dataclasses import dataclass
->>> from generics import private
+=== "dataclasses"
 
->>> @private
-... @dataclass(frozen=True)
-... class User:
-...     name: str
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-...
-...     @staticmethod
-...     def is_bot():
-...         return False
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
+    ```pycon
 
-```
+    >>> from dataclasses import dataclass
+    >>> from generics import private
 
-```pycon tab="pydantic"
+    >>> @private
+    ... @dataclass(frozen=True)
+    ... class User:
+    ...     name: str
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
+    ...
+    ...     @staticmethod
+    ...     def is_bot():
+    ...         return False
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
 
->>> from pydantic import BaseModel
->>> from generics import private
+    ```
 
->>> @private
-... class User(BaseModel):
-...     name: str
-...
-...     class Config:
-...         allow_mutation = False
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-...
-...     @staticmethod
-...     def is_bot():
-...         return False
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
+=== "pydantic"
 
-```
+    ```pycon
+
+    >>> from pydantic import BaseModel
+    >>> from generics import private
+
+    >>> @private
+    ... class User(BaseModel):
+    ...     name: str
+    ...
+    ...     class Config:
+    ...         allow_mutation = False
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
+    ...
+    ...     @staticmethod
+    ...     def is_bot():
+    ...         return False
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Do not use static methods (use composition instead)
+
+    ```
 
 ### Class methods should return instances
 
@@ -256,79 +268,85 @@ have access to any kind of inner state sinse there is no object encapsulating
 it. Thus the only kind of behavior class method should be able to do is
 instantiation of the object.
 
-```pycon tab="attrs"
+=== "attrs"
 
->>> from attr import attrs, attrib
->>> from generics import private
+    ```pycon
 
->>> @private
-... @attrs(frozen=True)
-... class User:
-...     name = attrib()
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-...
-...     @classmethod
-...     def create(cls):
-...         pass
+    >>> from attr import attrs, attrib
+    >>> from generics import private
 
->>> User.create()
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
+    >>> @private
+    ... @attrs(frozen=True)
+    ... class User:
+    ...     name = attrib()
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
+    ...
+    ...     @classmethod
+    ...     def create(cls):
+    ...         pass
 
-```
+    >>> User.create()
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
 
-```pycon tab="dataclasses"
+    ```
 
->>> from dataclasses import dataclass
->>> from generics import private
+=== "dataclasses"
 
->>> @private
-... @dataclass(frozen=True)
-... class User:
-...     name: str
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-...
-...     @classmethod
-...     def create(cls):
-...         pass
+    ```pycon
 
->>> User.create()
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
+    >>> from dataclasses import dataclass
+    >>> from generics import private
 
-```
+    >>> @private
+    ... @dataclass(frozen=True)
+    ... class User:
+    ...     name: str
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
+    ...
+    ...     @classmethod
+    ...     def create(cls):
+    ...         pass
 
-```pycon tab="pydantic"
+    >>> User.create()
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
 
->>> from pydantic import BaseModel
->>> from generics import private
+    ```
 
->>> @private
-... class User(BaseModel):
-...     name: str
-...
-...     class Config:
-...         allow_mutation = False
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-...
-...     @classmethod
-...     def create(cls):
-...         pass
+=== "pydantic"
 
->>> User.create()
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
+    ```pycon
 
-```
+    >>> from pydantic import BaseModel
+    >>> from generics import private
+
+    >>> @private
+    ... class User(BaseModel):
+    ...     name: str
+    ...
+    ...     class Config:
+    ...         allow_mutation = False
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
+    ...
+    ...     @classmethod
+    ...     def create(cls):
+    ...         pass
+
+    >>> User.create()
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
+
+    ```
 
 ### At least one instance method is required
 
@@ -338,64 +356,70 @@ to expose any kind of behavior. The object becomes useless.
 
 Class methods does not count since it has a different purpose.
 
-```pycon tab="attrs"
+=== "attrs"
 
->>> from attr import attrs, attrib
->>> from generics import private
+    ```pycon
 
->>> @private
-... @attrs(frozen=True)
-... class User:
-...     name = attrib()
-...
-...     @classmethod
-...     def create(cls):
-...         pass
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Define at least one instance method
+    >>> from attr import attrs, attrib
+    >>> from generics import private
 
-```
+    >>> @private
+    ... @attrs(frozen=True)
+    ... class User:
+    ...     name = attrib()
+    ...
+    ...     @classmethod
+    ...     def create(cls):
+    ...         pass
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Define at least one instance method
 
-```pycon tab="dataclasses"
+    ```
 
->>> from dataclasses import dataclass
->>> from generics import private
+=== "dataclasses"
 
->>> @private
-... @dataclass(frozen=True)
-... class User:
-...     name: str
-...
-...     @classmethod
-...     def create(cls):
-...         pass
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Define at least one instance method
+    ```pycon
 
-```
+    >>> from dataclasses import dataclass
+    >>> from generics import private
 
-```pycon tab="pydantic"
+    >>> @private
+    ... @dataclass(frozen=True)
+    ... class User:
+    ...     name: str
+    ...
+    ...     @classmethod
+    ...     def create(cls):
+    ...         pass
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Define at least one instance method
 
->>> from pydantic import BaseModel
->>> from generics import private
+    ```
 
->>> @private
-... class User(BaseModel):
-...     name: str
-...
-...     class Config:
-...         allow_mutation = False
-...
-...     @classmethod
-...     def create(cls):
-...         pass
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Define at least one instance method
+=== "pydantic"
 
-```
+    ```pycon
+
+    >>> from pydantic import BaseModel
+    >>> from generics import private
+
+    >>> @private
+    ... class User(BaseModel):
+    ...     name: str
+    ...
+    ...     class Config:
+    ...         allow_mutation = False
+    ...
+    ...     @classmethod
+    ...     def create(cls):
+    ...         pass
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Define at least one instance method
+
+    ```
 
 ### At least one encapsulated attribute is required
 
@@ -405,55 +429,61 @@ does not have any state. In that case behavior exposed by the object does not
 relate to the object itself. Thus there is no reason to define such kind of
 method on the class in the first place.
 
-```pycon tab="attrs"
+=== "attrs"
 
->>> from attr import attrs, attrib
->>> from generics import private
+    ```pycon
 
->>> @private
-... @attrs(frozen=True)
-... class User:
-...
-...     def greet(self):
-...         return 'Hello, Jeff'
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Define at least one encapsulated attribute
+    >>> from attr import attrs, attrib
+    >>> from generics import private
 
-```
+    >>> @private
+    ... @attrs(frozen=True)
+    ... class User:
+    ...
+    ...     def greet(self):
+    ...         return 'Hello, Jeff'
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Define at least one encapsulated attribute
 
-```pycon tab="dataclasses"
+    ```
 
->>> from dataclasses import dataclass
->>> from generics import private
+=== "dataclasses"
 
->>> @private
-... @dataclass(frozen=True)
-... class User:
-...
-...     def greet(self):
-...         return 'Hello, Jeff'
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Define at least one encapsulated attribute
+    ```pycon
 
-```
+    >>> from dataclasses import dataclass
+    >>> from generics import private
 
-```pycon tab="pydantic"
+    >>> @private
+    ... @dataclass(frozen=True)
+    ... class User:
+    ...
+    ...     def greet(self):
+    ...         return 'Hello, Jeff'
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Define at least one encapsulated attribute
 
->>> from pydantic import BaseModel
->>> from generics import private
+    ```
 
->>> @private
-... class User(BaseModel):
-...
-...     def greet(self):
-...         return 'Hello, Jeff'
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Define at least one encapsulated attribute
+=== "pydantic"
 
-```
+    ```pycon
+
+    >>> from pydantic import BaseModel
+    >>> from generics import private
+
+    >>> @private
+    ... class User(BaseModel):
+    ...
+    ...     def greet(self):
+    ...         return 'Hello, Jeff'
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Define at least one encapsulated attribute
+
+    ```
 
 ### Implementation inheritance is forbidden
 
@@ -500,67 +530,73 @@ as well. You get where it's going.
 
 That's why we forbid implementation inheritance.
 
-```pycon tab="attrs"
+=== "attrs"
 
->>> from attr import attrs, attrib
->>> from generics import private
+    ```pycon
 
->>> from app import Entity
+    >>> from attr import attrs, attrib
+    >>> from generics import private
 
->>> @private
-... @attrs(frozen=True)
-... class User(Entity):
-...     name = attrib()
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Do not use inheritance (use composition instead)
+    >>> from app import Entity
 
-```
+    >>> @private
+    ... @attrs(frozen=True)
+    ... class User(Entity):
+    ...     name = attrib()
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Do not use inheritance (use composition instead)
 
-```pycon tab="dataclasses"
+    ```
 
->>> from dataclasses import dataclass
->>> from generics import private
+=== "dataclasses"
 
->>> from app import Entity
+    ```pycon
 
->>> @private
-... @dataclass(frozen=True)
-... class User(Entity):
-...     name: str
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Do not use inheritance (use composition instead)
+    >>> from dataclasses import dataclass
+    >>> from generics import private
 
-```
+    >>> from app import Entity
 
-```pycon tab="pydantic"
+    >>> @private
+    ... @dataclass(frozen=True)
+    ... class User(Entity):
+    ...     name: str
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Do not use inheritance (use composition instead)
 
->>> from pydantic import BaseModel
->>> from generics import private
+    ```
 
->>> from app import Entity
+=== "pydantic"
 
->>> @private
-... class User(Entity, BaseModel):
-...     name: str
-...
-...     class Config:
-...         allow_mutation = False
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Do not use inheritance (use composition instead)
+    ```pycon
 
-```
+    >>> from pydantic import BaseModel
+    >>> from generics import private
+
+    >>> from app import Entity
+
+    >>> @private
+    ... class User(Entity, BaseModel):
+    ...     name: str
+    ...
+    ...     class Config:
+    ...         allow_mutation = False
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self.name}'
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Do not use inheritance (use composition instead)
+
+    ```
 
 !!! note
 
@@ -581,43 +617,47 @@ the composition of objects and encapsulation, the author decides to use uglier
 names. That gives hope to the author that users will not use methods with ugly
 names in their code. A bad design indeed.
 
-```pycon tab="attrs"
+=== "attrs"
 
->>> from attr import attrs, attrib
->>> from generics import private
+    ```pycon
 
->>> @private
-... @attrs(frozen=True)
-... class User:
-...     _name = attrib()
-...     surname = attrib()
-...
-...     def greet(self):
-...         return f'Hello, {self._name} {self.surname}'
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Do not use private attributes
+    >>> from attr import attrs, attrib
+    >>> from generics import private
 
-```
+    >>> @private
+    ... @attrs(frozen=True)
+    ... class User:
+    ...     _name = attrib()
+    ...     surname = attrib()
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self._name} {self.surname}'
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Do not use private attributes
 
-```pycon tab="dataclasses"
+    ```
 
->>> from dataclasses import dataclass
->>> from generics import private
+=== "dataclasses"
 
->>> @private
-... @dataclass(frozen=True)
-... class User:
-...     _name: str
-...     surname: str
-...
-...     def greet(self):
-...         return f'Hello, {self._name} {self.surname}'
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericClassError: Do not use private attributes
+    ```pycon
 
-```
+    >>> from dataclasses import dataclass
+    >>> from generics import private
+
+    >>> @private
+    ... @dataclass(frozen=True)
+    ... class User:
+    ...     _name: str
+    ...     surname: str
+    ...
+    ...     def greet(self):
+    ...         return f'Hello, {self._name} {self.surname}'
+    Traceback (most recent call last):
+      ...
+    _generics.exceptions.GenericClassError: Do not use private attributes
+
+    ```
 
 !!! note
 
@@ -637,93 +677,103 @@ need to change something.
 
 _Bad_:
 
-```pycon tab="attrs"
+=== "attrs"
 
->>> from attr import attrs, attrib
->>> from generics import private
+    ```pycon
 
->>> @private
-... @attrs
-... class User:
-...     name = attrib()
-...
-...     def rename(self, name):
-...         self.name = name
+    >>> from attr import attrs, attrib
+    >>> from generics import private
 
->>> User(name='Jeff').rename('John')
+    >>> @private
+    ... @attrs
+    ... class User:
+    ...     name = attrib()
+    ...
+    ...     def rename(self, name):
+    ...         self.name = name
 
-```
+    >>> User(name='Jeff').rename('John')
 
-```pycon tab="dataclasses"
+    ```
 
->>> from dataclasses import dataclass
->>> from generics import private
+=== "dataclasses"
 
->>> @private
-... @dataclass
-... class User:
-...     name: str
-...
-...     def rename(self, name):
-...         self.name = name
+    ```pycon
 
->>> User(name='Jeff').rename('John')
+    >>> from dataclasses import dataclass
+    >>> from generics import private
 
-```
+    >>> @private
+    ... @dataclass
+    ... class User:
+    ...     name: str
+    ...
+    ...     def rename(self, name):
+    ...         self.name = name
 
-```pycon tab="pydantic"
+    >>> User(name='Jeff').rename('John')
 
->>> from pydantic import BaseModel
->>> from generics import private
+    ```
 
->>> @private
-... class User(BaseModel):
-...     name: str
-...
-...     def rename(self, name):
-...         self.name = name
+=== "pydantic"
 
->>> User(name='Jeff').rename('John')
+    ```pycon
 
-```
+    >>> from pydantic import BaseModel
+    >>> from generics import private
+
+    >>> @private
+    ... class User(BaseModel):
+    ...     name: str
+    ...
+    ...     def rename(self, name):
+    ...         self.name = name
+
+    >>> User(name='Jeff').rename('John')
+
+    ```
 
 _Good_:
 
-```pycon tab="attrs"
+=== "attrs"
 
->>> from attr import attrs, attrib, evolve
->>> from generics import private
+    ```pycon
 
->>> @private
-... @attrs
-... class User:
-...     name = attrib()
-...
-...     def rename(self, name):
-...         return evolve(self, name=name)
+    >>> from attr import attrs, attrib, evolve
+    >>> from generics import private
 
->>> User(name='Jeff').rename('John')
-User(name='John')
+    >>> @private
+    ... @attrs
+    ... class User:
+    ...     name = attrib()
+    ...
+    ...     def rename(self, name):
+    ...         return evolve(self, name=name)
 
-```
+    >>> User(name='Jeff').rename('John')
+    User(name='John')
 
-```pycon tab="dataclasses"
+    ```
 
->>> from dataclasses import dataclass, replace
->>> from generics import private
+=== "dataclasses"
 
->>> @private
-... @dataclass
-... class User:
-...     name: str
-...
-...     def rename(self, name):
-...         return replace(self, name=name)
+    ```pycon
 
->>> User(name='Jeff').rename('John')
-User(name='John')
+    >>> from dataclasses import dataclass, replace
+    >>> from generics import private
 
-```
+    >>> @private
+    ... @dataclass
+    ... class User:
+    ...     name: str
+    ...
+    ...     def rename(self, name):
+    ...         return replace(self, name=name)
+
+    >>> User(name='Jeff').rename('John')
+    User(name='John')
+
+    ```
 
 <p align="center">&mdash; ⭐️ &mdash;</p>
 <p align="center"><i>The generics library is part of the SOLID python family.</i></p>

@@ -5,7 +5,7 @@ The generics library is available on PyPI.
 To install it run:
 
 ```bash
-pip install generics
+pip install -U generics
 ```
 
 We use [semantic release](https://semantic-release.gitbook.io/semantic-release/)
