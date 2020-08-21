@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "generics"
-version = "1.0.1"
+version = "1.1.0"
 
 description = "A classy toolkit designed with OOP in mind."
 readme = "docs/index.md"
