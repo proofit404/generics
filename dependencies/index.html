@@ -17,7 +17,7 @@
     
     
       
-        <title>Installation - generics</title>
+        <title>Dependencies - generics</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#dependencies" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +88,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Installation
+              Dependencies
             
           </span>
         </div>
@@ -161,7 +161,7 @@
   
     <li class="md-tabs__item">
       
-        <a href=".." class="md-tabs__link md-tabs__link--active">
+        <a href=".." class="md-tabs__link">
           Home
         </a>
       
@@ -187,7 +187,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../dependencies/" class="md-tabs__link">
+        <a href="./" class="md-tabs__link md-tabs__link--active">
           Guides
         </a>
       
@@ -237,12 +237,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
     
     <label class="md-nav__link" for="nav-1">
       Home
@@ -276,20 +274,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="Installation" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../installation/" title="Installation" class="md-nav__link">
       Installation
     </a>
-    
   </li>
 
         
@@ -356,10 +345,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Guides
@@ -381,11 +372,20 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../dependencies/" title="Dependencies" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Dependencies" class="md-nav__link md-nav__link--active">
       Dependencies
     </a>
+    
   </li>
 
         
@@ -425,18 +425,54 @@
                   
                 
                 
-                <h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
-<p>The generics library is available on PyPI.</p>
-<p>To install it run:</p>
-<div class="highlight"><pre><span></span><code>pip install -U generics
+                <h1 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h1>
+<p>It is possible to instantiate classes decorated with <code>@private</code> function via
+<a href="https://proofit404.github.io/dependencies/">dependencies</a> library.</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">attrs</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">attr</span> <span class="kn">import</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">attrib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dependencies</span> <span class="kn">import</span> <span class="n">Injector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="nd">@attrs</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">name</span> <span class="o">=</span> <span class="n">attrib</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">UserContainer</span><span class="p">(</span><span class="n">Injector</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span>
+<span class="gp">... </span>    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Jeff&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">UserContainer</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+<span class="go">&#39;Hello, Jeff&#39;</span>
 </code></pre></div>
 
-<p>We use <a href="https://semantic-release.gitbook.io/semantic-release/">semantic release</a>
-to publish packages as soon as pull requests land to the master branch. It's not
-necessary to use develompment version of the library.</p>
-<p align="center">&mdash; ⭐️ &mdash;</p>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">dataclasses</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dependencies</span> <span class="kn">import</span> <span class="n">Injector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
 
-<p align="center"><i>The generics library is part of the SOLID python family.</i></p>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">UserContainer</span><span class="p">(</span><span class="n">Injector</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span>
+<span class="gp">... </span>    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Jeff&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">UserContainer</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+<span class="go">&#39;Hello, Jeff&#39;</span>
+</code></pre></div>
+
+</div>
+</div>
                 
               
               
@@ -455,7 +491,7 @@ necessary to use develompment version of the library.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href=".." title="Home" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../private/" title="Private" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -464,25 +500,11 @@ necessary to use develompment version of the library.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                Private
               </div>
             </div>
           </a>
         
-        
-          <a href="../changelog/" title="Changelog" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Changelog
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
         
       </nav>
     </div>
