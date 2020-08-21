@@ -39,3 +39,5 @@ nav:
       - Changelog: changelog.md
   - Usage:
       - Private: private.md
+  - Guides:
+      - Dependencies: dependencies.md
