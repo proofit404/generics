@@ -24,3 +24,7 @@ def _get_fields(entity):
 
 def _get_bases():
     return (object,)
+
+
+def _get_init_method(entity):
+    return entity.__dict__["__init__"]

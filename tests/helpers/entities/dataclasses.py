@@ -124,3 +124,6 @@ class StaticBot(object):
     def is_active(self):
         """Calculate user activity status."""
         pass  # pragma: no cover
+
+
+supports_dependencies = True

@@ -11,7 +11,7 @@ def private(cls):
     """Create class with private attributes."""
     class_name = _get_class_name(cls)
     methods = _get_methods(cls)
-    fields, bases = _get_fields(cls)
+    fields, bases, init = _get_fields(cls)
     _check_bases(cls, bases)
     _check_static_methods(cls, methods)
     _check_defined_methods(cls, methods)
@@ -20,6 +20,7 @@ def private(cls):
     _check_private_fields(fields)
     created_methods = _create_class_methods(cls, class_name, methods)
     created_methods["__new__"] = _create_new_class_method(cls, class_name, methods)
+    created_methods["__init__"] = init
     return _PrivateType(class_name, (object,), created_methods)
 
 
