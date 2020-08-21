@@ -25,3 +25,7 @@ def _get_fields(entity):
 
 def _get_bases():
     return (pydantic.main.BaseModel,)
+
+
+def _get_init_method(entity):
+    return pydantic.main.BaseModel.__dict__["__init__"]
