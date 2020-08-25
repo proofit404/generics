@@ -1,9 +1,9 @@
 # [1.1.0](https://github.com/proofit404/generics/compare/1.0.1...1.1.0) (2020-08-21)
 
-
 ### Features
 
-* support dependencies library ([7614944](https://github.com/proofit404/generics/commit/76149446a236093e453a9633e766fc5985a57215))
+- support dependencies library
+  ([7614944](https://github.com/proofit404/generics/commit/76149446a236093e453a9633e766fc5985a57215))
 
 ## [1.0.1](https://github.com/proofit404/generics/compare/1.0.0...1.0.1) (2020-08-06)
 
