@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from types import FunctionType
 from types import MethodType
 

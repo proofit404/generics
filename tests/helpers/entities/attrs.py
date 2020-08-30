@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 
 from attr import attrib
@@ -6,7 +5,7 @@ from attr import attrs
 
 
 @attrs
-class User(object):
+class User:
     """User domain model."""
 
     last_login = attrib()
@@ -26,12 +25,12 @@ class InheritanceUser(User):
     """Inherit user domain model."""
 
 
-class PlainUser(object):
+class PlainUser:
     """Plain user domain model."""
 
 
 @attrs
-class ClassMethodOnlyUser(object):
+class ClassMethodOnlyUser:
     """User domain model."""
 
     last_login = attrib()
@@ -43,14 +42,14 @@ class ClassMethodOnlyUser(object):
 
 
 @attrs
-class NoMethodsUser(object):
+class NoMethodsUser:
     """User domain model."""
 
     last_login = attrib()
 
 
 @attrs
-class NoEncapsulationUser(object):
+class NoEncapsulationUser:
     """User domain model."""
 
     def is_active(self):
@@ -59,7 +58,7 @@ class NoEncapsulationUser(object):
 
 
 @attrs
-class UnderscoreMethodUser(object):
+class UnderscoreMethodUser:
     """User domain model."""
 
     last_login = attrib()
@@ -76,7 +75,7 @@ supports_private_attributes = True
 
 
 @attrs
-class UnderscoreAttributeUser(object):
+class UnderscoreAttributeUser:
     """User domain model."""
 
     last_login = attrib()
@@ -88,7 +87,7 @@ class UnderscoreAttributeUser(object):
 
 
 @attrs
-class Bot(object):
+class Bot:
     """Bot domain model."""
 
     last_login = attrib()
@@ -113,7 +112,7 @@ class NewBot(Bot):
 
 
 @attrs
-class StaticBot(object):
+class StaticBot:
     """Bot domain model."""
 
     last_login = attrib()

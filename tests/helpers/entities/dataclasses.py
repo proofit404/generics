@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -24,19 +23,19 @@ class InheritanceUser(User):
     """Inherit user domain model."""
 
 
-class PlainUser(object):
+class PlainUser:
     """Plain user domain model."""
 
 
 @dataclass
-class NoMethodsUser(object):
+class NoMethodsUser:
     """User domain model."""
 
     last_login: datetime
 
 
 @dataclass
-class ClassMethodOnlyUser(object):
+class ClassMethodOnlyUser:
     """User domain model."""
 
     last_login: datetime
@@ -48,7 +47,7 @@ class ClassMethodOnlyUser(object):
 
 
 @dataclass
-class NoEncapsulationUser(object):
+class NoEncapsulationUser:
     """User domain model."""
 
     def is_active(self):
@@ -57,7 +56,7 @@ class NoEncapsulationUser(object):
 
 
 @dataclass
-class UnderscoreMethodUser(object):
+class UnderscoreMethodUser:
     """User domain model."""
 
     last_login: datetime
@@ -74,7 +73,7 @@ supports_private_attributes = True
 
 
 @dataclass
-class UnderscoreAttributeUser(object):
+class UnderscoreAttributeUser:
     """User domain model."""
 
     last_login: datetime
@@ -86,7 +85,7 @@ class UnderscoreAttributeUser(object):
 
 
 @dataclass
-class Bot(object):
+class Bot:
     """Bot domain model."""
 
     last_login: datetime
@@ -111,7 +110,7 @@ class NewBot(Bot):
 
 
 @dataclass
-class StaticBot(object):
+class StaticBot:
     """Bot domain model."""
 
     last_login: datetime

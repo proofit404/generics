@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 class GenericError(Exception):
     """Base error of all generics."""
 

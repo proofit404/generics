@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """A set of generics' exceptions."""
 from _generics.exceptions import GenericClassError
 from _generics.exceptions import GenericError

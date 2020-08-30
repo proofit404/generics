@@ -1,22 +1,9 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import
-
+import dataclasses
 import inspect
 
 
-try:
-    import dataclasses
-
-    IS_AVAILABLE = True
-except ImportError:
-    IS_AVAILABLE = False
-
-
 def _is_dataclass(entity):
-    if IS_AVAILABLE:
-        return inspect.isclass(entity) and dataclasses.is_dataclass(entity)
-    else:
-        return False
+    return inspect.isclass(entity) and dataclasses.is_dataclass(entity)
 
 
 def _get_fields(entity):
