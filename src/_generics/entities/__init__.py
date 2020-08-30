@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from _generics.entities import attrs
 from _generics.entities import dataclasses
 from _generics.entities import pydantic

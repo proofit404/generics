@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Tests related to the compatibility with the dependencies library."""
 from datetime import datetime
 

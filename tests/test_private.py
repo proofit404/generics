@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 """Tests related to the @private decorator."""
-import sys
 from datetime import datetime
 
 import pytest
@@ -51,10 +49,6 @@ def test_class_method_should_return_class_instance(e, method_name):
     assert str(exc_info.value) == expected
 
 
-@pytest.mark.skipif(
-    sys.version_info < (3,),
-    reason="Python 2 produce unbound method error because of the first argument",
-)
 def test_instance_method_should_not_work_with_class(e):
     """Deny to call instance methods using class attribute access."""
     user_class = private(e.User)

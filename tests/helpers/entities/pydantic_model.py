@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 
 from pydantic import BaseModel
@@ -23,7 +22,7 @@ class InheritanceUser(User):
     """Inherit user domain model."""
 
 
-class PlainUser(object):
+class PlainUser:
     """Plain user domain model."""
 
 
