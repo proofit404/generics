@@ -184,7 +184,7 @@ behavior they expose doesn't relate to the object. Cohesion will go down. That's
 why we forbid static methods.
 
 If you need such behavior, put it outside of the class. If this behavior is
-neccessary in the instance method of the original class, encapsulate it. Pass
+necessary in the instance method of the original class, encapsulate it. Pass
 that new thing to the constructor and access it in methods.
 
 === "attrs"
