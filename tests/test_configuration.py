@@ -2,6 +2,7 @@
 import collections
 import configparser
 import datetime
+import itertools
 import re
 import subprocess
 import textwrap
@@ -150,11 +151,12 @@ def test_ini_files_indentation():
 
 def test_ini_files_boolean_case():
     """INI files should have boolean values written in lowercase."""
-    for ini_file in [tox_ini, coveragerc, flake8, importlinter, pytest_ini]:
-        for section in ini_file().values():
-            for value in section.values():
-                if value.lower() in {"true", "false"}:
-                    assert value == value.lower()
+    ini_files = [tox_ini, coveragerc, flake8, importlinter, pytest_ini]
+    sections = itertools.chain.from_iterable(ini().values() for ini in ini_files)
+    values = itertools.chain.from_iterable(section.values() for section in sections)
+    for value in values:
+        if value.lower() in {"true", "false"}:
+            assert value == value.lower()
 
 
 def test_lock_files_not_committed():
