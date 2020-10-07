@@ -11,7 +11,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
     
     
       
@@ -209,7 +209,7 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="Home" class="md-nav__link">
+    <a href=".." class="md-nav__link">
       Home
     </a>
   </li>
@@ -221,7 +221,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../installation/" title="Installation" class="md-nav__link">
+    <a href="../installation/" class="md-nav__link">
       Installation
     </a>
   </li>
@@ -233,7 +233,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../changelog/" title="Changelog" class="md-nav__link">
+    <a href="../changelog/" class="md-nav__link">
       Changelog
     </a>
   </li>
@@ -286,7 +286,7 @@
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Private" class="md-nav__link md-nav__link--active">
+    <a href="./" class="md-nav__link md-nav__link--active">
       Private
     </a>
     
@@ -438,7 +438,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../dependencies/" title="Dependencies" class="md-nav__link">
+    <a href="../dependencies/" class="md-nav__link">
       Dependencies
     </a>
   </li>
@@ -609,7 +609,6 @@ attributes.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">_name</span>  <span class="c1"># No information hiding here :(</span>
 <span class="go">&#39;Jeff&#39;</span>
 </code></pre></div>
-
 <p>It may be a nice convention to have it in the code base, but</p>
 <ul>
 <li>it does not work (it does not make architecture any better)</li>
@@ -655,7 +654,6 @@ decorated with <code>@private</code> function.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
 <span class="go">&#39;Hello, Jeff&#39;</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">dataclasses</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -679,7 +677,6 @@ decorated with <code>@private</code> function.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
 <span class="go">&#39;Hello, Jeff&#39;</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">pydantic</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
@@ -705,7 +702,6 @@ decorated with <code>@private</code> function.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
 <span class="go">&#39;Hello, Jeff&#39;</span>
 </code></pre></div>
-
 </div>
 </div>
 <h3 id="all-attributes-are-private-and-hidden">All attributes are private and hidden<a class="headerlink" href="#all-attributes-are-private-and-hidden" title="Permanent link">&para;</a></h3>
@@ -727,7 +723,6 @@ Attribute access in the client code will raise an exception.</p>
   <span class="c">...</span>
 <span class="gr">AttributeError</span>: <span class="n">&#39;Private(User)&#39; object has no attribute &#39;name&#39;</span>
 </code></pre></div>
-
 <h3 id="static-methods-are-forbidden">Static methods are forbidden<a class="headerlink" href="#static-methods-are-forbidden" title="Permanent link">&para;</a></h3>
 <p>Good objects expose their behavior and hide their state. The behavior objects
 expose should be related to the state object hides. This metric is called
@@ -757,7 +752,6 @@ that new thing to the constructor and access it in methods.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use static methods (use composition instead)</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">dataclasses</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -778,7 +772,6 @@ that new thing to the constructor and access it in methods.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use static methods (use composition instead)</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">pydantic</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
@@ -801,7 +794,6 @@ that new thing to the constructor and access it in methods.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use static methods (use composition instead)</span>
 </code></pre></div>
-
 </div>
 </div>
 <h3 id="class-methods-should-return-instances">Class methods should return instances<a class="headerlink" href="#class-methods-should-return-instances" title="Permanent link">&para;</a></h3>
@@ -830,7 +822,6 @@ instantiation of the object.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericInstanceError</span>: <span class="n">&#39;create&#39; classmethod should return an instance of the &#39;User&#39; class</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">dataclasses</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -853,7 +844,6 @@ instantiation of the object.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericInstanceError</span>: <span class="n">&#39;create&#39; classmethod should return an instance of the &#39;User&#39; class</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><label for="__tabbed_3_3">pydantic</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
@@ -878,7 +868,6 @@ instantiation of the object.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericInstanceError</span>: <span class="n">&#39;create&#39; classmethod should return an instance of the &#39;User&#39; class</span>
 </code></pre></div>
-
 </div>
 </div>
 <h3 id="at-least-one-instance-method-is-required">At least one instance method is required<a class="headerlink" href="#at-least-one-instance-method-is-required" title="Permanent link">&para;</a></h3>
@@ -902,7 +891,6 @@ to expose any kind of behavior. The object becomes useless.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Define at least one instance method</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">dataclasses</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -920,7 +908,6 @@ to expose any kind of behavior. The object becomes useless.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Define at least one instance method</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><label for="__tabbed_4_3">pydantic</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
@@ -940,7 +927,6 @@ to expose any kind of behavior. The object becomes useless.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Define at least one instance method</span>
 </code></pre></div>
-
 </div>
 </div>
 <h3 id="at-least-one-encapsulated-attribute-is-required">At least one encapsulated attribute is required<a class="headerlink" href="#at-least-one-encapsulated-attribute-is-required" title="Permanent link">&para;</a></h3>
@@ -963,7 +949,6 @@ method on the class in the first place.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Define at least one encapsulated attribute</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">dataclasses</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -979,7 +964,6 @@ method on the class in the first place.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Define at least one encapsulated attribute</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><label for="__tabbed_5_3">pydantic</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
@@ -994,7 +978,6 @@ method on the class in the first place.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Define at least one encapsulated attribute</span>
 </code></pre></div>
-
 </div>
 </div>
 <h3 id="implementation-inheritance-is-forbidden">Implementation inheritance is forbidden<a class="headerlink" href="#implementation-inheritance-is-forbidden" title="Permanent link">&para;</a></h3>
@@ -1023,7 +1006,6 @@ end up with code like that:</p>
 <span class="gp">... </span>    <span class="n">permissions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;can_read&#39;</span><span class="p">,</span> <span class="s1">&#39;can_edit&#39;</span><span class="p">]</span>
 <span class="gp">... </span>    <span class="n">query_string_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;user_*&#39;</span><span class="p">]</span>
 </code></pre></div>
-
 <p>Looking just at that code it's impossible to answer these simple yet important
 questions:</p>
 <ol>
@@ -1050,7 +1032,6 @@ as well. You get where it's going.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use inheritance (use composition instead)</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">dataclasses</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -1069,7 +1050,6 @@ as well. You get where it's going.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use inheritance (use composition instead)</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><label for="__tabbed_6_3">pydantic</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
@@ -1090,7 +1070,6 @@ as well. You get where it's going.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use inheritance (use composition instead)</span>
 </code></pre></div>
-
 </div>
 </div>
 <div class="admonition note">
@@ -1125,7 +1104,6 @@ names in their code. A bad design indeed.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use private attributes</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">dataclasses</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -1143,7 +1121,6 @@ names in their code. A bad design indeed.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use private attributes</span>
 </code></pre></div>
-
 </div>
 </div>
 <div class="admonition note">
@@ -1173,7 +1150,6 @@ need to change something.</p>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">dataclasses</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -1189,7 +1165,6 @@ need to change something.</p>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><label for="__tabbed_8_3">pydantic</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
@@ -1204,7 +1179,6 @@ need to change something.</p>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
 </code></pre></div>
-
 </div>
 </div>
 <p><em>Good</em>:</p>
@@ -1223,7 +1197,6 @@ need to change something.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
 <span class="go">User(name=&#39;John&#39;)</span>
 </code></pre></div>
-
 </div>
 <input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">dataclasses</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">replace</span>
@@ -1240,11 +1213,9 @@ need to change something.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
 <span class="go">User(name=&#39;John&#39;)</span>
 </code></pre></div>
-
 </div>
 </div>
 <p align="center">&mdash; ⭐️ &mdash;</p>
-
 <p align="center"><i>The generics library is part of the SOLID python family.</i></p>
                 
               
@@ -1264,7 +1235,7 @@ need to change something.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../changelog/" title="Changelog" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../changelog/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1279,7 +1250,7 @@ need to change something.</p>
           </a>
         
         
-          <a href="../dependencies/" title="Dependencies" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../dependencies/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
@@ -1313,7 +1284,7 @@ need to change something.</p>
     </div>
     
       <script src="../assets/javascripts/vendor.77e55a48.min.js"></script>
-      <script src="../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
