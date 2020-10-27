@@ -70,19 +70,7 @@ class UnderscoreMethodUser:
         pass  # pragma: no cover
 
 
-supports_private_attributes = True
-
-
-@dataclass
-class UnderscoreAttributeUser:
-    """User domain model."""
-
-    last_login: datetime
-    _is_active: bool
-
-    def is_active(self):
-        """Calculate user activity status."""
-        pass  # pragma: no cover
+supports_private_attributes = False
 
 
 @dataclass
