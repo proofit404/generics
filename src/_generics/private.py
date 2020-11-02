@@ -1,7 +1,7 @@
 from types import FunctionType
 from types import MethodType
 
-from _generics.entities import _get_fields
+from _generics.definitions import _get_fields
 from _generics.exceptions import GenericClassError
 from _generics.exceptions import GenericInstanceError
 

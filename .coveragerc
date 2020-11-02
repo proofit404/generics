@@ -5,7 +5,7 @@ source =
   _generics
   generics
   app
-  entities
+  examples
   helpers
   mddoctest
   tests
