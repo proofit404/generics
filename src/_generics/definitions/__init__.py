@@ -1,6 +1,6 @@
-from _generics.entities import attrs
-from _generics.entities import dataclasses
-from _generics.entities import pydantic
+from _generics.definitions import attrs
+from _generics.definitions import dataclasses
+from _generics.definitions import pydantic
 from _generics.exceptions import GenericClassError
 
 
