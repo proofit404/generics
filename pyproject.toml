@@ -19,3 +19,7 @@ version = "2.0.0"
 
 [tool.poetry.dependencies]
 python = "~3.6 || ~3.7 || ~3.8"
+
+[tool.poetry.urls]
+Changelog = "https://proofit404.github.io/generics/"
+Issues = "https://github.com/proofit404/generics/issues"
