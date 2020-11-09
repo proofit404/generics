@@ -30,6 +30,9 @@ markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.tasklist:
       custom_checkbox: true
+  - mkautodoc
+extra_css:
+  - stylesheets/extra.css
 extra_javascript:
   - javascripts/extra.js
 nav:
@@ -39,5 +42,6 @@ nav:
       - Changelog: changelog.md
   - Usage:
       - Private: private.md
+      - Reference: reference.md
   - Guides:
       - Dependencies: dependencies.md
