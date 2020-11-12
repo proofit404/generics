@@ -5,6 +5,7 @@ source =
   _generics
   generics
   app
+  configuration
   examples
   helpers
   mddoctest
