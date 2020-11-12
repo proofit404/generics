@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/proofit404/generics/compare/2.0.0...3.0.0) (2020-11-12)
+
+### Build System
+
+- add python 3.9 support
+  [#186](https://github.com/proofit404/generics/issues/186)
+  ([70b39dd](https://github.com/proofit404/generics/commit/70b39dd40a3b3c0b2be2e02122aef411c71bf6ae))
+
+### BREAKING CHANGES
+
+- drop python 3.6 support.
+
 # [2.0.0](https://github.com/proofit404/generics/compare/1.1.0...2.0.0) (2020-08-30)
 
 ### Code Refactoring
