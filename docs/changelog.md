@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/proofit404/generics/compare/3.0.0...3.1.0) (2020-11-20)
+
+### Features
+
+- support pypy interpreter [#9](https://github.com/proofit404/generics/issues/9)
+  ([0045024](https://github.com/proofit404/generics/commit/004502464a231e4f23bd8b21c6188f313a67db41))
+
 # [3.0.0](https://github.com/proofit404/generics/compare/2.0.0...3.0.0) (2020-11-12)
 
 ### Build System
