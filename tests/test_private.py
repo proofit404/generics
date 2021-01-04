@@ -96,26 +96,21 @@ def test_deny_inheritance(e):
     assert str(exc_info.value) == "Do not use inheritance (use composition instead)"
 
 
-def test_deny_unknown_type(e):
-    """Deny classes defined with unknown type."""
-    with pytest.raises(GenericClassError) as exc_info:
-        private(e.PlainUser)
-    assert str(exc_info.value) == "Unknown type definition"
-
-
-def test_deny_private_method(e):
+@pytest.mark.parametrize(
+    "class_name", ["UnderscoreMethodUser", "DoubleUnderscoreMethodUser"]
+)
+def test_deny_private_method(e, class_name):
     """Deny private methods with leading underscore."""
     with pytest.raises(GenericClassError) as exc_info:
-        private(e.UnderscoreMethodUser)
+        private(getattr(e, class_name))
     assert str(exc_info.value) == "Do not use private methods (use composition instead)"
 
 
 def test_deny_private_attribute(e):
     """Deny private attributes with leading underscore."""
-    if e.supports_private_attributes:
-        with pytest.raises(GenericClassError) as exc_info:
-            private(e.UnderscoreAttributeUser)
-        assert str(exc_info.value) == "Do not use private attributes"
+    with pytest.raises(GenericClassError) as exc_info:
+        private(e.UnderscoreAttributeUser)
+    assert str(exc_info.value) == "Do not use private attributes"
 
 
 @instantiate_strategy

@@ -1,7 +1,7 @@
+from inspect import signature
 from types import FunctionType
 from types import MethodType
 
-from _generics.definitions import _get_fields
 from _generics.exceptions import GenericClassError
 from _generics.exceptions import GenericInstanceError
 
@@ -10,8 +10,9 @@ def private(cls):
     """Create class with private attributes."""
     class_name = _get_class_name(cls)
     methods = _get_methods(cls)
-    fields, bases, init = _get_fields(cls)
-    _check_bases(cls, bases)
+    init = _get_init_method(cls)
+    fields = _get_fields(cls, init)
+    _check_bases(cls)
     _check_static_methods(cls, methods)
     _check_defined_methods(cls, methods)
     _check_defined_fields(fields)
@@ -31,8 +32,19 @@ def _get_methods(cls):
     return [attrname for attrname in cls.__dict__ if _is_method(cls, attrname)]
 
 
-def _check_bases(cls, allowed_bases):
-    if cls.__bases__ != allowed_bases:
+def _get_init_method(cls):
+    return cls.__dict__.get("__init__")
+
+
+def _get_fields(cls, init):
+    if init is not None:
+        return list(signature(init).parameters)[1:]
+    else:
+        return []
+
+
+def _check_bases(cls):
+    if cls.__bases__ != (object,):
         raise GenericClassError("Do not use inheritance (use composition instead)")
 
 
