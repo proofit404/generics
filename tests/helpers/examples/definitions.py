@@ -1,12 +1,19 @@
-from dataclasses import dataclass
 from datetime import datetime
 
 
-@dataclass
 class User:
     """User domain model."""
 
-    last_login: datetime
+    def __init__(self, last_login):
+        self.last_login = last_login
+
+    def __repr__(self):
+        return (
+            self.__class__.__name__
+            + "("
+            + ", ".join(k + "=" + repr(v) for k, v in self.__dict__.items())
+            + ")"
+        )
 
     @classmethod
     def new(cls):
@@ -18,27 +25,15 @@ class User:
         return (datetime.now() - self.last_login).days < 30
 
 
-@dataclass
 class InheritanceUser(User):
     """Inherit user domain model."""
 
 
-class PlainUser:
-    """Plain user domain model."""
-
-
-@dataclass
-class NoMethodsUser:
-    """User domain model."""
-
-    last_login: datetime
-
-
-@dataclass
 class ClassMethodOnlyUser:
     """User domain model."""
 
-    last_login: datetime
+    def __init__(self, last_login):
+        pass  # pragma: no cover
 
     @classmethod
     def new(cls):
@@ -46,7 +41,13 @@ class ClassMethodOnlyUser:
         pass  # pragma: no cover
 
 
-@dataclass
+class NoMethodsUser:
+    """User domain model."""
+
+    def __init__(self, last_login):
+        pass  # pragma: no cover
+
+
 class NoEncapsulationUser:
     """User domain model."""
 
@@ -55,11 +56,11 @@ class NoEncapsulationUser:
         pass  # pragma: no cover
 
 
-@dataclass
 class UnderscoreMethodUser:
     """User domain model."""
 
-    last_login: datetime
+    def __init__(self, last_login):
+        pass  # pragma: no cover
 
     def is_active(self):
         """Calculate user activity status."""
@@ -69,26 +70,36 @@ class UnderscoreMethodUser:
         pass  # pragma: no cover
 
 
-supports_private_attributes = True
+class DoubleUnderscoreMethodUser:
+    """User domain model."""
+
+    def __init__(self, last_login):
+        pass  # pragma: no cover
+
+    def is_active(self):
+        """Calculate user activity status."""
+        pass  # pragma: no cover
+
+    def __is_active(self):
+        pass  # pragma: no cover
 
 
-@dataclass
 class UnderscoreAttributeUser:
     """User domain model."""
 
-    last_login: datetime
-    _is_active: bool
+    def __init__(self, last_login, _is_active):
+        pass  # pragma: no cover
 
     def is_active(self):
         """Calculate user activity status."""
         pass  # pragma: no cover
 
 
-@dataclass
 class Bot:
     """Bot domain model."""
 
-    last_login: datetime
+    def __init__(self, last_login):
+        self.last_login = last_login
 
     @classmethod
     def is_bot(cls):
@@ -109,11 +120,11 @@ class NewBot(Bot):
     """New bot domain model."""
 
 
-@dataclass
 class StaticBot:
     """Bot domain model."""
 
-    last_login: datetime
+    def __init__(self, last_login):
+        pass  # pragma: no cover
 
     @staticmethod
     def is_bot():
@@ -123,6 +134,3 @@ class StaticBot:
     def is_active(self):
         """Calculate user activity status."""
         pass  # pragma: no cover
-
-
-supports_dependencies = True
