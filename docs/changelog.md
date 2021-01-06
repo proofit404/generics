@@ -1,3 +1,11 @@
+# [3.2.0](https://github.com/proofit404/generics/compare/3.1.0...3.2.0) (2021-01-06)
+
+### Features
+
+- rewrite without third-party libraries
+  [#200](https://github.com/proofit404/generics/issues/200)
+  ([9abd18c](https://github.com/proofit404/generics/commit/9abd18c3f67a5c8ed2bd70475972a436611b8e4f))
+
 # [3.1.0](https://github.com/proofit404/generics/compare/3.0.0...3.1.0) (2020-11-20)
 
 ### Features
