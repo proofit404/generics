@@ -202,7 +202,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="dependencies/" class="md-tabs__link">
+      <a href="attrs/" class="md-tabs__link">
         Guides
       </a>
     </li>
@@ -464,6 +464,45 @@
 
 
   <li class="md-nav__item">
+    <a href="attrs/" class="md-nav__link">
+      Attrs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="dataclasses/" class="md-nav__link">
+      Dataclasses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="pydantic/" class="md-nav__link">
+      Pydantic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
     <a href="dependencies/" class="md-nav__link">
       Dependencies
     </a>
@@ -570,13 +609,12 @@ writing code with high quality.</p>
 <h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <p>The <code>generics</code> library gives you an easy way to define private attributes on
 objects without loosing little nice things like readability.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">attr</span> <span class="kn">import</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">attrib</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
-<span class="gp">... </span><span class="nd">@attrs</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">name</span> <span class="o">=</span> <span class="n">attrib</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>

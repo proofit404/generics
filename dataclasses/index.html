@@ -16,7 +16,7 @@
     
     
       
-        <title>Changelog - generics</title>
+        <title>Dataclasses - generics</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#320-2021-01-06" class="md-skip">
+        <a href="#dataclasses" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Changelog
+              Dataclasses
             
           </span>
         </div>
@@ -162,15 +162,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link md-tabs__link--active">
+      <a href=".." class="md-tabs__link">
         Home
       </a>
     </li>
@@ -196,13 +194,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../attrs/" class="md-tabs__link">
+      <a href="../attrs/" class="md-tabs__link md-tabs__link--active">
         Guides
       </a>
     </li>
@@ -260,14 +260,12 @@
       
 
 
-  
-
 
   
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" >
     
     <label class="md-nav__link" for="nav-1">
       Home
@@ -312,49 +310,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Changelog
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../changelog/" class="md-nav__link">
       Changelog
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    Features
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -410,12 +370,14 @@
       
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Guides
@@ -447,11 +409,20 @@
           
 
 
+  
 
-  <li class="md-nav__item">
-    <a href="../dataclasses/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Dataclasses
     </a>
+    
   </li>
 
         
@@ -504,21 +475,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    Features
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -530,62 +486,40 @@
               
                 
                 
-                <h1 id="320-2021-01-06"><a href="https://github.com/proofit404/generics/compare/3.1.0...3.2.0">3.2.0</a> (2021-01-06)<a class="headerlink" href="#320-2021-01-06" title="Permanent link">&para;</a></h1>
-<h3 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h3>
-<ul>
-<li>rewrite without third-party libraries
-  <a href="https://github.com/proofit404/generics/issues/200">#200</a>
-  (<a href="https://github.com/proofit404/generics/commit/9abd18c3f67a5c8ed2bd70475972a436611b8e4f">9abd18c</a>)</li>
-</ul>
-<h1 id="310-2020-11-20"><a href="https://github.com/proofit404/generics/compare/3.0.0...3.1.0">3.1.0</a> (2020-11-20)<a class="headerlink" href="#310-2020-11-20" title="Permanent link">&para;</a></h1>
-<h3 id="features_1">Features<a class="headerlink" href="#features_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li>support pypy interpreter <a href="https://github.com/proofit404/generics/issues/9">#9</a>
-  (<a href="https://github.com/proofit404/generics/commit/004502464a231e4f23bd8b21c6188f313a67db41">0045024</a>)</li>
-</ul>
-<h1 id="300-2020-11-12"><a href="https://github.com/proofit404/generics/compare/2.0.0...3.0.0">3.0.0</a> (2020-11-12)<a class="headerlink" href="#300-2020-11-12" title="Permanent link">&para;</a></h1>
-<h3 id="build-system">Build System<a class="headerlink" href="#build-system" title="Permanent link">&para;</a></h3>
-<ul>
-<li>add python 3.9 support
-  <a href="https://github.com/proofit404/generics/issues/186">#186</a>
-  (<a href="https://github.com/proofit404/generics/commit/70b39dd40a3b3c0b2be2e02122aef411c71bf6ae">70b39dd</a>)</li>
-</ul>
-<h3 id="breaking-changes">BREAKING CHANGES<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h3>
-<ul>
-<li>drop python 3.6 support.</li>
-</ul>
-<h1 id="200-2020-08-30"><a href="https://github.com/proofit404/generics/compare/1.1.0...2.0.0">2.0.0</a> (2020-08-30)<a class="headerlink" href="#200-2020-08-30" title="Permanent link">&para;</a></h1>
-<h3 id="code-refactoring">Code Refactoring<a class="headerlink" href="#code-refactoring" title="Permanent link">&para;</a></h3>
-<ul>
-<li>drop Python 2.7 and 3.4 support
-  <a href="https://github.com/proofit404/generics/issues/134">#134</a>
-  (<a href="https://github.com/proofit404/generics/commit/8cbbcfb42686ea2edaf3eed5e15731c2e9bd13e4">8cbbcfb</a>)</li>
-</ul>
-<h3 id="breaking-changes_1">BREAKING CHANGES<a class="headerlink" href="#breaking-changes_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Due to the our new policy of enterprise user support we will drop abandoned
-  version of python and libraries we are integrated with as soon as they reach
-  official end of life.</li>
-</ul>
-<h1 id="110-2020-08-21"><a href="https://github.com/proofit404/generics/compare/1.0.1...1.1.0">1.1.0</a> (2020-08-21)<a class="headerlink" href="#110-2020-08-21" title="Permanent link">&para;</a></h1>
-<h3 id="features_2">Features<a class="headerlink" href="#features_2" title="Permanent link">&para;</a></h3>
-<ul>
-<li>support dependencies library
-  (<a href="https://github.com/proofit404/generics/commit/76149446a236093e453a9633e766fc5985a57215">7614944</a>)</li>
-</ul>
-<h2 id="101-2020-08-06"><a href="https://github.com/proofit404/generics/compare/1.0.0...1.0.1">1.0.1</a> (2020-08-06)<a class="headerlink" href="#101-2020-08-06" title="Permanent link">&para;</a></h2>
-<h3 id="bug-fixes">Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permanent link">&para;</a></h3>
-<ul>
-<li>fake <a href="https://github.com/defended">@defended</a> and
-  <a href="https://github.com/delegated">@delegated</a> decorators
-  (<a href="https://github.com/proofit404/generics/commit/2ae14e3e17ec908b8914dd09e5498b38176eae81">2ae14e3</a>)</li>
-</ul>
-<h1 id="100-2020-07-03">1.0.0 (2020-07-03)<a class="headerlink" href="#100-2020-07-03" title="Permanent link">&para;</a></h1>
-<h3 id="features_3">Features<a class="headerlink" href="#features_3" title="Permanent link">&para;</a></h3>
-<ul>
-<li>implement <code>@private</code> decorator
-  (<a href="https://github.com/proofit404/generics/commit/1d237eb38066b722ceba8b4c4ebab6dcd66c13b6">1d237eb</a>)</li>
-</ul>
+                <h1 id="dataclasses">Dataclasses<a class="headerlink" href="#dataclasses" title="Permanent link">&para;</a></h1>
+<p><a href="https://docs.python.org/3/library/dataclasses.html">dataclasses</a> is a simpler
+alternative to <code>attrs</code> from python standard library. <code>generics</code> works with it
+out of the box. As with all previous examples we advice you to make your
+instances immutable. <code>dataclasses</code> library has a first class support for
+immutability. Enable <code>frozen</code> setting on class and use <code>replace</code> function to
+copy instancies of it.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">replace</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">rename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">User</span>
+<span class="go">Private(User)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span>
+<span class="go">Private(User(name=&#39;Jeff&#39;))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+<span class="go">&#39;Hello, Jeff&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Kate&#39;</span><span class="p">)</span>
+<span class="go">User(name=&#39;Kate&#39;)</span>
+</code></pre></div>
 <p align="center">&mdash; ⭐️ &mdash;</p>
 <p align="center"><i>The generics library is part of the SOLID python family.</i></p>
                 
@@ -606,7 +540,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../installation/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../attrs/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -615,19 +549,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Installation
+                Attrs
               </div>
             </div>
           </a>
         
         
-          <a href="../private/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../pydantic/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Private
+                Pydantic
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

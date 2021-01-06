@@ -202,7 +202,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../dependencies/" class="md-tabs__link">
+      <a href="../attrs/" class="md-tabs__link">
         Guides
       </a>
     </li>
@@ -309,9 +309,38 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Installation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Installation
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-libraries" class="md-nav__link">
+    Third-party libraries
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -407,6 +436,45 @@
 
 
   <li class="md-nav__item">
+    <a href="../attrs/" class="md-nav__link">
+      Attrs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../dataclasses/" class="md-nav__link">
+      Dataclasses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../pydantic/" class="md-nav__link">
+      Pydantic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
     <a href="../dependencies/" class="md-nav__link">
       Dependencies
     </a>
@@ -436,6 +504,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#third-party-libraries" class="md-nav__link">
+    Third-party libraries
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -458,6 +541,11 @@ necessary to use develompment version of the library.</p>
 <p>We officially support three last minor releases of CPython interpreter and last
 minor release of PyPy interpreter. We highly recommend the latest patch release
 of each Python series.</p>
+<h2 id="third-party-libraries">Third-party libraries<a class="headerlink" href="#third-party-libraries" title="Permanent link">&para;</a></h2>
+<p>If you want to use <code>pydantic</code> models as private classes, you could consider to
+use <code>pydantic-initialized</code> library as compatibility layer for that purpose.</p>
+<div class="highlight"><pre><span></span><code>pip install -U pydantic-initialized
+</code></pre></div>
 <p align="center">&mdash; ⭐️ &mdash;</p>
 <p align="center"><i>The generics library is part of the SOLID python family.</i></p>
                 
