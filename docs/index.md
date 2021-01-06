@@ -30,13 +30,12 @@ objects without loosing little nice things like readability.
 
 ```pycon
 
->>> from attr import attrs, attrib
 >>> from generics import private
 
 >>> @private
-... @attrs(frozen=True)
 ... class User:
-...     name = attrib()
+...     def __init__(self, name):
+...         self.name = name
 ...
 ...     def greet(self):
 ...         return f'Hello, {self.name}'
