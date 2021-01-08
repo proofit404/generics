@@ -27,7 +27,10 @@ def _get_class_name(cls):
 
 
 def _get_methods(cls):
-    structures = [_method_structure(attribute) for attribute in cls.__dict__.values()]
+    structures = [
+        _method_structure(cls, attribute_name, attribute)
+        for attribute_name, attribute in cls.__dict__.items()
+    ]
     return [structure for structure in structures if structure]
 
 
@@ -91,30 +94,38 @@ class _PrivateType(type):
         return cls.__name__
 
 
-def _method_structure(attribute):
+def _method_structure(cls, attribute_name, attribute):
     return (
-        _instance_method_structure(attribute)
-        or _class_method_structure(attribute)
+        _instance_method_structure(cls, attribute_name, attribute)
+        or _class_method_structure(cls, attribute_name, attribute)
         or _deny_static_method(attribute)
     )
 
 
-def _instance_method_structure(attribute):
+def _instance_method_structure(cls, attribute_name, attribute):
     if isinstance(attribute, FunctionType):
-        name = attribute.__name__
+        name = _choose_name(cls, attribute_name, attribute)
         if not _is_dunder(name):
             return _MethodStructure(True, name, attribute)
 
 
-def _class_method_structure(attribute):
+def _class_method_structure(cls, attribute_name, attribute):
     if isinstance(attribute, classmethod):
-        return _MethodStructure(False, attribute.__func__.__name__, attribute.__func__)
+        name = _choose_name(cls, attribute_name, attribute.__func__)
+        return _MethodStructure(False, name, attribute.__func__)
 
 
 def _deny_static_method(attribute):
     if isinstance(attribute, staticmethod):
         message = "Do not use static methods (use composition instead)"
         raise GenericClassError(message)
+
+
+def _choose_name(cls, attribute_name, func):
+    if func.__qualname__.startswith(f"{cls.__name__}."):
+        return func.__name__
+    else:
+        return attribute_name
 
 
 def _is_dunder(name):
