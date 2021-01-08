@@ -495,36 +495,29 @@ compatible with <code>generics</code> library decorators. As with all previous e
 advice you to make your instances immutable. <code>pydantic</code> library has a first
 class support for immutability. Disable <code>allow_mutation</code> setting on model config
 and use <code>copy</code> method of the instance.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic_initialized</span> <span class="kn">import</span> <span class="n">initialized</span>
+<div class="highlight"><pre><span></span><code><span class="go">from generics import private</span>
+<span class="go">from pydantic import BaseModel</span>
+<span class="go">from pydantic_initialized import initialized</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
-<span class="gp">... </span><span class="nd">@initialized</span>
-<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="gp">...</span>
-<span class="gp">... </span>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="gp">...</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
-<span class="gp">...</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">rename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+<span class="go">@private</span>
+<span class="go">@initialized</span>
+<span class="go">class User(BaseModel):</span>
+<span class="go">    name: str</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">User</span>
-<span class="go">Private(User)</span>
+<span class="go">    class Config:</span>
+<span class="go">        allow_mutation = False</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span>
-<span class="go">Private(User(name=&#39;Jeff&#39;))</span>
+<span class="go">    def greet(self):</span>
+<span class="go">        return f&#39;Hello, {self.name}&#39;</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
-<span class="go">&#39;Hello, Jeff&#39;</span>
+<span class="go">    def rename(self, name):</span>
+<span class="go">        return self.copy(update={&#39;name&#39;: name})</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Kate&#39;</span><span class="p">)</span>
-<span class="go">User(name=&#39;Kate&#39;)</span>
+<span class="go">user = User(name=&#39;Jeff&#39;)</span>
+
+<span class="go">user.greet() # &#39;Hello, Jeff&#39;</span>
+
+<span class="go">user.rename(&#39;Kate&#39;) # User(name=&#39;Kate&#39;)</span>
 </code></pre></div>
 <p align="center">&mdash; ⭐️ &mdash;</p>
 <p align="center"><i>The generics library is part of the SOLID python family.</i></p>
