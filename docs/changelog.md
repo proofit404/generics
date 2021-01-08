@@ -1,3 +1,11 @@
+## [3.2.1](https://github.com/proofit404/generics/compare/3.2.0...3.2.1) (2021-01-08)
+
+### Bug Fixes
+
+- allow private methods defined globally
+  [#215](https://github.com/proofit404/generics/issues/215)
+  ([432abd3](https://github.com/proofit404/generics/commit/432abd3aa0eb0f2fe9e2617bf9ae5e5656a6182a))
+
 # [3.2.0](https://github.com/proofit404/generics/compare/3.1.0...3.2.0) (2021-01-06)
 
 ### Features
