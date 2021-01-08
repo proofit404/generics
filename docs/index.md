@@ -2,12 +2,12 @@
 
 [![azure-devops-builds](https://img.shields.io/azure-devops/build/proofit404/generics/4?style=flat-square)](https://dev.azure.com/proofit404/generics/_build/latest?definitionId=4&branchName=master)
 [![azure-devops-coverage](https://img.shields.io/azure-devops/coverage/proofit404/generics/4?style=flat-square)](https://dev.azure.com/proofit404/generics/_build/latest?definitionId=4&branchName=master)
-[![pypi](https://img.shields.io/pypi/v/generics?style=flat-square)](https://pypi.python.org/pypi/generics/)
-[![python](https://img.shields.io/pypi/pyversions/generics?style=flat-square)](https://pypi.python.org/pypi/generics/)
+[![pypi](https://img.shields.io/pypi/v/generics?style=flat-square)](https://pypi.org/project/generics)
+[![python](https://img.shields.io/pypi/pyversions/generics?style=flat-square)](https://pypi.org/project/generics)
 
 A classy toolkit designed with OOP in mind.
 
-**[Documentation](https://proofit404.github.io/generics/) |
+**[Documentation](https://proofit404.github.io/generics) |
 [Source Code](https://github.com/proofit404/generics) |
 [Task Tracker](https://github.com/proofit404/generics/issues)**
 
@@ -70,7 +70,7 @@ interested in it.
 
 ## License
 
-Generics library is offered under the two clause BSD license.
+`generics` library is offered under the two clause BSD license.
 
 <p align="center">&mdash; ⭐️ &mdash;</p>
-<p align="center"><i>The generics library is part of the SOLID python family.</i></p>
+<p align="center"><i>The `generics` library is part of the SOLID python family.</i></p>

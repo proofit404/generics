@@ -1,0 +1,25 @@
+{
+  "template": "https://github.com/proofit404/python-library-template",
+  "commit": "91c58be4f39dc18d82893b9c0530d66772f2f5b6",
+  "context": {
+    "cookiecutter": {
+      "project_name": "generics",
+      "public_module_name": "generics",
+      "private_module_name": "_generics",
+      "exception_name": "GenericError",
+      "project_version": "0.0.1dev0",
+      "project_description": "A classy toolkit designed with OOP in mind.",
+      "author_name": "Artem Malyshev",
+      "author_email": "proofit404@gmail.com",
+      "github_user": "proofit404",
+      "github_repository": "https://github.com/proofit404/generics",
+      "issues_url": "https://github.com/proofit404/generics/issues",
+      "documentation_url": "https://proofit404.github.io/generics",
+      "changelog_url": "https://proofit404.github.io/generics/changelog",
+      "pypi_project": "https://pypi.org/project/generics",
+      "azure_definition_id": "4",
+      "_template": "https://github.com/proofit404/python-library-template"
+    }
+  },
+  "directory": null
+}
