@@ -97,13 +97,27 @@ def test_deny_inheritance(e):
 
 
 @pytest.mark.parametrize(
-    "class_name", ["UnderscoreMethodUser", "DoubleUnderscoreMethodUser"]
+    "class_name",
+    ["UnderscoreMethodUser", "DoubleUnderscoreMethodUser", "UnderscoreClassMethodUser"],
 )
 def test_deny_private_method(e, class_name):
     """Deny private methods with leading underscore."""
     with pytest.raises(GenericClassError) as exc_info:
         private(getattr(e, class_name))
     assert str(exc_info.value) == "Do not use private methods (use composition instead)"
+
+
+@instantiate_strategy
+def test_global_methods(e, strategy):
+    """Allow private methods defined in global scope.
+
+    This rules applies to cases if function with private name stored in public
+    attribute.
+
+    """
+    user_class = private(e.GlobalMethodUser)
+    user = strategy(user_class)
+    assert user.is_active()
 
 
 def test_deny_private_attribute(e):

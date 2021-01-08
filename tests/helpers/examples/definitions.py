@@ -84,6 +84,41 @@ class DoubleUnderscoreMethodUser:
         pass  # pragma: no cover
 
 
+class UnderscoreClassMethodUser:
+    """User domain model."""
+
+    def __init__(self, last_login):
+        pass  # pragma: no cover
+
+    @classmethod
+    def _new(cls):
+        pass  # pragma: no cover
+
+    def is_active(self):
+        """Calculate user activity status."""
+        pass  # pragma: no cover
+
+
+@classmethod
+def _global_class_method(cls):
+    return cls(last_login=datetime.now())
+
+
+def _global_method(instance):
+    return (datetime.now() - instance.last_login).days < 30
+
+
+class GlobalMethodUser:
+    """User domain model."""
+
+    def __init__(self, last_login):
+        self.last_login = last_login
+
+    new = _global_class_method
+
+    is_active = _global_method
+
+
 class UnderscoreAttributeUser:
     """User domain model."""
 
