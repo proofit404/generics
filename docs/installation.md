@@ -1,6 +1,6 @@
 # Installation
 
-The generics library is available on PyPI.
+The `generics` library is available on PyPI.
 
 To install it run:
 
@@ -26,4 +26,4 @@ pip install -U pydantic-initialized
 ```
 
 <p align="center">&mdash; ⭐️ &mdash;</p>
-<p align="center"><i>The generics library is part of the SOLID python family.</i></p>
+<p align="center"><i>The `generics` library is part of the SOLID python family.</i></p>

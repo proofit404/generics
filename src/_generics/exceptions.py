@@ -1,5 +1,5 @@
 class GenericError(Exception):
-    """Base error of all generics."""
+    """Base error of all generics errors."""
 
     pass
 
