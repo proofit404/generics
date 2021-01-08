@@ -11,29 +11,36 @@ and use `copy` method of the instance.
 
 ```pycon
 
-from generics import private
-from pydantic import BaseModel
-from pydantic_initialized import initialized
+>>> from generics import private
+>>> from pydantic import BaseModel
+>>> from pydantic_initialized import initialized
 
-@private
-@initialized
-class User(BaseModel):
-    name: str
+>>> @private
+... @initialized
+... class User(BaseModel):
+...     name: str
+...
+...     class Config:
+...         allow_mutation = False
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+...
+...     def rename(self, name):
+...         return self.copy(update={'name': name})
 
-    class Config:
-        allow_mutation = False
+>>> User
+Private(User)
 
-    def greet(self):
-        return f'Hello, {self.name}'
+>>> user = User(name='Jeff')
+>>> user
+Private(User(name='Jeff'))
 
-    def rename(self, name):
-        return self.copy(update={'name': name})
+>>> user.greet()
+'Hello, Jeff'
 
-user = User(name='Jeff')
-
-user.greet() # 'Hello, Jeff'
-
-user.rename('Kate') # User(name='Kate')
+>>> user.rename('Kate')
+User(name='Kate')
 
 ```
 
