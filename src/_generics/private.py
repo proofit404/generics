@@ -171,8 +171,8 @@ def _define_class_method_on_class(cls, structure, class_name, methods):
 
 def _define_instance_method_on_class(structure):
     def method(*args, **kwargs):
-        message = "Use instance attribute access to invoke instance methods"
-        raise GenericInstanceError(message)
+        message = "Instance methods can not be called on classes"
+        raise GenericClassError(message)
 
     method.__name__ = structure.name
     return method
@@ -180,13 +180,29 @@ def _define_instance_method_on_class(structure):
 
 def _wrap(instance, class_name, methods):
     created_methods = {
-        method.name: _create_method(instance, method) for method in methods
+        method.name: _create_instance_method(instance, method) for method in methods
     }
     created_methods["__repr__"] = _create_repr_method(instance)
     return type(class_name, (object,), created_methods)()
 
 
-def _create_method(instance, structure):
+def _create_instance_method(instance, structure):
+    if structure.is_class_method():
+        return _create_class_method_on_instance(structure)
+    else:
+        return _create_instance_method_on_instance(instance, structure)
+
+
+def _create_class_method_on_instance(structure):
+    def method(*args, **kwargs):
+        message = "Class methods can not be called on instances"
+        raise GenericInstanceError(message)
+
+    method.__name__ = structure.name
+    return classmethod(method)
+
+
+def _create_instance_method_on_instance(instance, structure):
     def method(_, *args, **kwargs):
         return structure.func(instance, *args, **kwargs)
 

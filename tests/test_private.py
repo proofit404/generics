@@ -49,12 +49,23 @@ def test_class_method_should_return_class_instance(e, method_name):
     assert str(exc_info.value) == expected
 
 
+@instantiate_strategy
+def test_class_method_should_not_work_with_instance(e, strategy):
+    """Deny to call class methods using instance attribute access."""
+    user_class = private(e.User)
+    user = strategy(user_class)
+    with pytest.raises(GenericInstanceError) as exc_info:
+        user.new()
+    expected = "Class methods can not be called on instances"
+    assert str(exc_info.value) == expected
+
+
 def test_instance_method_should_not_work_with_class(e):
     """Deny to call instance methods using class attribute access."""
     user_class = private(e.User)
-    with pytest.raises(GenericInstanceError) as exc_info:
+    with pytest.raises(GenericClassError) as exc_info:
         user_class.is_active()
-    expected = "Use instance attribute access to invoke instance methods"
+    expected = "Instance methods can not be called on classes"
     assert str(exc_info.value) == expected
 
 
@@ -154,11 +165,15 @@ def test_method_name(e, strategy):
     assert "__repr__" == user.__repr__.__name__
 
 
-def test_class_method_type(e):
+@instantiate_strategy
+def test_class_method_type(e, strategy):
     """Origin method types should be kept in the decorated class."""
     user_class = private(e.User)
     assert isinstance(user_class.__dict__["new"], classmethod)
     assert not isinstance(user_class.__dict__["is_active"], classmethod)
+    user = strategy(user_class)
+    assert isinstance(user.__class__.__dict__["new"], classmethod)
+    assert not isinstance(user.__class__.__dict__["is_active"], classmethod)
 
 
 def test_class_representation(e):
