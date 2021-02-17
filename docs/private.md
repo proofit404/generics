@@ -46,6 +46,8 @@ It may be a nice convention to have it in the code base, but
 - [All attributes are private and hidden](#all-attributes-are-private-and-hidden)
 - [Static methods are forbidden](#static-methods-are-forbidden)
 - [Class methods should return instances](#class-methods-should-return-instances)
+- [Class methods can not be called on instancies](#class-methods-can-not-be-called-on-instancies)
+- [Instance methods can not be called on classes](#instance-methods-can-not-be-called-on-classes)
 - [At least one instance method is required](#at-least-one-instance-method-is-required)
 - [At least one encapsulated attribute is required](#at-least-one-encapsulated-attribute-is-required)
 - [Implementation inheritance is forbidden](#implementation-inheritance-is-forbidden)
@@ -184,6 +186,70 @@ instantiation of the object.
 Traceback (most recent call last):
   ...
 _generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
+
+```
+
+### Class methods can not be called on instancies
+
+As we explained earlier, classmethod could only be used to instantiate entities.
+The purpose of such methods is to implement some semantics in addition to
+arguments passed to this method. In that case, if we would call classmethod
+using instance attribute access, it would be conceptually wrong. Because, this
+method call will have no relation to the instance itself. It does not have an
+access to it or its private attributes. That's why we force all call methods to
+be accessed using class reference.
+
+```pycon
+
+>>> from generics import private
+
+>>> @private
+... class User:
+...     def __init__(self, name):
+...         self.name = name
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+...
+...     @classmethod
+...     def create(cls):
+...         return cls('Jeff')
+
+>>> user = User.create()
+
+>>> user.create()
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericInstanceError: Class methods can not be called on instances
+
+```
+
+### Instance methods can not be called on classes
+
+In some cases, it's technically possible to use instance methods as functions,
+if you pass value of `self` directly as argument. This behavior is hacky. That's
+why `generics` library forbid explicitly a call of instance methods using class
+attribute access.
+
+```pycon
+
+>>> from generics import private
+
+>>> @private
+... class User:
+...     def __init__(self, name):
+...         self.name = name
+...
+...     def greet(self):
+...         return 'Hello, anonymous'
+
+>>> class AnotherUser:
+...     name = 'Jeff'
+
+>>> User.greet(AnotherUser())
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Instance methods can not be called on classes
 
 ```
 
