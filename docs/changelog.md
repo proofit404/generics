@@ -1,3 +1,11 @@
+# [3.3.0](https://github.com/proofit404/generics/compare/3.2.1...3.3.0) (2021-02-17)
+
+### Features
+
+- deny to call class methods on instances
+  [#220](https://github.com/proofit404/generics/issues/220)
+  ([9614030](https://github.com/proofit404/generics/commit/9614030e8f59b6e2bc2b72d851d2cdd522a8e173))
+
 ## [3.2.1](https://github.com/proofit404/generics/compare/3.2.0...3.2.1) (2021-01-08)
 
 ### Bug Fixes
