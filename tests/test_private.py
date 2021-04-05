@@ -138,6 +138,9 @@ def test_deny_private_attribute(e):
     assert str(exc_info.value) == "Do not use private attributes"
 
 
+# FIXME: We need to test dunder instance and dunder class methods are properly ignored.
+
+
 @instantiate_strategy
 def test_class_name(e, strategy):
     """Origin class name should appears in the class name."""
