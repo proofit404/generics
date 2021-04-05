@@ -99,6 +99,21 @@ class UnderscoreClassMethodUser:
         pass  # pragma: no cover
 
 
+class DoubleUnderscoreClassMethodUser:
+    """User domain model."""
+
+    def __init__(self, last_login):
+        pass  # pragma: no cover
+
+    @classmethod
+    def __new(cls):
+        pass  # pragma: no cover
+
+    def is_active(self):
+        """Calculate user activity status."""
+        pass  # pragma: no cover
+
+
 @classmethod
 def _global_class_method(cls):
     return cls(last_login=datetime.now())
@@ -127,6 +142,47 @@ class UnderscoreAttributeUser:
 
     def is_active(self):
         """Calculate user activity status."""
+        pass  # pragma: no cover
+
+
+class DunderMethodUser:
+    """User domain model."""
+
+    def __init__(self, last_login):
+        self.last_login = last_login
+
+    @classmethod
+    def new(cls):
+        """Instantiate class."""
+        return cls(last_login=datetime.now())
+
+    def is_active(self):
+        """Calculate user activity status."""
+        return (datetime.now() - self.last_login).days < 30
+
+    def __validate__(self):
+        """Validate."""
+        pass  # pragma: no cover
+
+
+class DunderClassMethodUser:
+    """User domain model."""
+
+    def __init__(self, last_login):
+        self.last_login = last_login
+
+    @classmethod
+    def new(cls):
+        """Instantiate class."""
+        return cls(last_login=datetime.now())
+
+    def is_active(self):
+        """Calculate user activity status."""
+        return (datetime.now() - self.last_login).days < 30
+
+    @classmethod
+    def __validate__(cls):
+        """Validate."""
         pass  # pragma: no cover
 
 

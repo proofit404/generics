@@ -1,5 +1,4 @@
 from inspect import signature
-from types import FunctionType
 
 from _generics.exceptions import GenericClassError
 from _generics.exceptions import GenericInstanceError
@@ -96,29 +95,30 @@ class _PrivateType(type):
 
 def _method_structure(cls, attribute_name, attribute):
     return (
-        _instance_method_structure(cls, attribute_name, attribute)
+        _deny_static_method(attribute)
         or _class_method_structure(cls, attribute_name, attribute)
-        or _deny_static_method(attribute)
+        or _instance_method_structure(cls, attribute_name, attribute)
     )
-
-
-def _instance_method_structure(cls, attribute_name, attribute):
-    if isinstance(attribute, FunctionType):
-        name = _choose_name(cls, attribute_name, attribute)
-        if not _is_dunder(name):
-            return _MethodStructure(True, name, attribute)
-
-
-def _class_method_structure(cls, attribute_name, attribute):
-    if isinstance(attribute, classmethod):
-        name = _choose_name(cls, attribute_name, attribute.__func__)
-        return _MethodStructure(False, name, attribute.__func__)
 
 
 def _deny_static_method(attribute):
     if isinstance(attribute, staticmethod):
         message = "Do not use static methods (use composition instead)"
         raise GenericClassError(message)
+
+
+def _class_method_structure(cls, attribute_name, attribute):
+    if isinstance(attribute, classmethod):
+        name = _choose_name(cls, attribute_name, attribute.__func__)
+        if not _is_dunder(name):
+            return _MethodStructure(False, name, attribute.__func__)
+
+
+def _instance_method_structure(cls, attribute_name, attribute):
+    if callable(attribute):
+        name = _choose_name(cls, attribute_name, attribute)
+        if not _is_dunder(name):
+            return _MethodStructure(True, name, attribute)
 
 
 def _choose_name(cls, attribute_name, func):
