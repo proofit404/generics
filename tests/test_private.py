@@ -109,7 +109,12 @@ def test_deny_inheritance(e):
 
 @pytest.mark.parametrize(
     "class_name",
-    ["UnderscoreMethodUser", "DoubleUnderscoreMethodUser", "UnderscoreClassMethodUser"],
+    [
+        "UnderscoreMethodUser",
+        "DoubleUnderscoreMethodUser",
+        "UnderscoreClassMethodUser",
+        "DoubleUnderscoreClassMethodUser",
+    ],
 )
 def test_deny_private_method(e, class_name):
     """Deny private methods with leading underscore."""
@@ -136,6 +141,21 @@ def test_deny_private_attribute(e):
     with pytest.raises(GenericClassError) as exc_info:
         private(e.UnderscoreAttributeUser)
     assert str(exc_info.value) == "Do not use private attributes"
+
+
+@instantiate_strategy
+@pytest.mark.parametrize("class_name", ["DunderMethodUser", "DunderClassMethodUser"])
+def test_dunder_method(e, strategy, class_name):
+    """Ignore methods defined with dunder name.
+
+    This is not supposed to be a publicly documented principle. It's necessary for
+    third-party libraries support which may assign their own dunder attributes for some
+    internal needs.
+
+    """
+    user_class = private(getattr(e, class_name))
+    user = strategy(user_class)
+    assert user.is_active()
 
 
 @instantiate_strategy
