@@ -3,36 +3,34 @@
 [pydantic](https://pydantic-docs.helpmanual.io/) is a popular library for data
 validation. It could be used to define business entities of your domain if you
 want validation to be applied to data your entities encapsulate. It's possible
-to use a third-party library `pydantic-initialized` to make defined models
-compatible with `generics` library decorators. As with all previous examples we
-advice you to make your instances immutable. `pydantic` library has a first
-class support for immutability. Disable `allow_mutation` setting on model config
-and use `copy` method of the instance.
+to use a
+[pydantic dataclasses](https://pydantic-docs.helpmanual.io/usage/dataclasses/)
+to make defined entities compatible with `generics` library decorators. As with
+all previous examples we advice you to make your instances immutable. `pydantic`
+library has a first class support for immutability. Enable `frozen` setting on
+class and use `replace` function to copy instancies of it.
 
 ```pycon
 
+>>> from pydantic.dataclasses import dataclass
+>>> from dataclasses import replace
 >>> from generics import private
->>> from pydantic import BaseModel
->>> from pydantic_initialized import initialized
 
 >>> @private
-... @initialized
-... class User(BaseModel):
+... @dataclass(frozen=True)
+... class User:
 ...     name: str
-...
-...     class Config:
-...         allow_mutation = False
 ...
 ...     def greet(self):
 ...         return f'Hello, {self.name}'
 ...
 ...     def rename(self, name):
-...         return self.copy(update={'name': name})
+...         return replace(self, name=name)
 
 >>> User
 Private(User)
 
->>> user = User(name='Jeff')
+>>> user = User('Jeff')
 >>> user
 Private(User(name='Jeff'))
 
@@ -41,6 +39,34 @@ Private(User(name='Jeff'))
 
 >>> user.rename('Kate')
 User(name='Kate')
+
+```
+
+Arguments validation would be applied at the object construction time. This
+behavior would match regular dataclasses created by `pydantic`.
+
+```pycon
+
+>>> from typing import Callable
+
+>>> @private
+... @dataclass(frozen=True)
+... class User:
+...     name: str
+...     console: Callable
+...
+...     def greet(self):
+...         self.console(f'Hello, {self.name}')
+
+>>> User(name='Jeff', console=print)
+Private(User(name='Jeff', console=<built-in function print>))
+
+>>> User(name='Jeff', console=True)
+Traceback (most recent call last):
+  ...
+pydantic.error_wrappers.ValidationError: 1 validation error for User
+console
+  True is not callable (type=type_error.callable; value=True)
 
 ```
 

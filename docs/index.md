@@ -1,7 +1,7 @@
 # Generics
 
-[![azure-devops-builds](https://img.shields.io/azure-devops/build/proofit404/generics/4?style=flat-square)](https://dev.azure.com/proofit404/generics/_build/latest?definitionId=4&branchName=master)
-[![azure-devops-coverage](https://img.shields.io/azure-devops/coverage/proofit404/generics/4?style=flat-square)](https://dev.azure.com/proofit404/generics/_build/latest?definitionId=4&branchName=master)
+[![azure-devops-builds](https://img.shields.io/azure-devops/build/proofit404/generics/17?style=flat-square)](https://dev.azure.com/proofit404/generics/_build/latest?definitionId=17&branchName=master)
+[![azure-devops-coverage](https://img.shields.io/azure-devops/coverage/proofit404/generics/17?style=flat-square)](https://dev.azure.com/proofit404/generics/_build/latest?definitionId=17&branchName=master)
 [![pypi](https://img.shields.io/pypi/v/generics?style=flat-square)](https://pypi.org/project/generics)
 [![python](https://img.shields.io/pypi/pyversions/generics?style=flat-square)](https://pypi.org/project/generics)
 
