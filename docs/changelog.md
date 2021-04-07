@@ -1,3 +1,11 @@
+## [3.3.1](https://github.com/proofit404/generics/compare/3.3.0...3.3.1) (2021-04-07)
+
+### Bug Fixes
+
+- ignore dunder class methods
+  [#223](https://github.com/proofit404/generics/issues/223)
+  ([b72d7ee](https://github.com/proofit404/generics/commit/b72d7eed5d417be01474b67c1642e39db948322b))
+
 # [3.3.0](https://github.com/proofit404/generics/compare/3.2.1...3.3.0) (2021-02-17)
 
 ### Features
