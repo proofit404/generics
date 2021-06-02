@@ -27,3 +27,4 @@ python = "~3.6 || ~3.7 || ~3.8 || ~3.9"
 [tool.poetry.urls]
 Changelog = "https://proofit404.github.io/generics/changelog"
 Issues = "https://github.com/proofit404/generics/issues"
+Twitter = "https://twitter.com/proofit404"

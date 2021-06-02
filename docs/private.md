@@ -21,11 +21,11 @@ attributes.
 >>> class User:
 ...     def __init__(self, name):
 ...         self._name = name
-...
 ...     def greet(self):
-...         return f'Hello, {self._name}'
+...         return f"Hello, {self._name}"
+...
 
->>> user = User('Jeff')
+>>> user = User("Jeff")
 
 >>> user.greet()
 'Hello, Jeff'
@@ -466,5 +466,5 @@ Private(User(name='John'))
 
 ```
 
-<p align="center">&mdash; ⭐️ &mdash;</p>
-<p align="center"><i>The `generics` library is part of the SOLID python family.</i></p>
+<p align="center">&mdash; ⭐ &mdash;</p>
+<p align="center"><i>The <code>generics</code> library is part of the SOLID python family.</i></p>

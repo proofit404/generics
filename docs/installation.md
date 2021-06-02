@@ -16,5 +16,5 @@ We officially support three last minor releases of CPython interpreter and last
 minor release of PyPy interpreter. We highly recommend the latest patch release
 of each Python series.
 
-<p align="center">&mdash; ⭐️ &mdash;</p>
-<p align="center"><i>The `generics` library is part of the SOLID python family.</i></p>
+<p align="center">&mdash; ⭐ &mdash;</p>
+<p align="center"><i>The <code>generics</code> library is part of the SOLID python family.</i></p>

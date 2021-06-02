@@ -15,27 +15,26 @@ immutable. `attrs` library has a first class support for immutability. Enable
 ... @attrs(frozen=True)
 ... class User:
 ...     name = attrib()
-...
 ...     def greet(self):
-...         return f'Hello, {self.name}'
-...
+...         return f"Hello, {self.name}"
 ...     def rename(self, name):
 ...         return evolve(self, name=name)
+...
 
 >>> User
 Private(User)
 
->>> user = User('Jeff')
+>>> user = User("Jeff")
 >>> user
 Private(User(name='Jeff'))
 
 >>> user.greet()
 'Hello, Jeff'
 
->>> user.rename('Kate')
+>>> user.rename("Kate")
 User(name='Kate')
 
 ```
 
-<p align="center">&mdash; ⭐️ &mdash;</p>
-<p align="center"><i>The `generics` library is part of the SOLID python family.</i></p>
+<p align="center">&mdash; ⭐ &mdash;</p>
+<p align="center"><i>The <code>generics</code> library is part of the SOLID python family.</i></p>

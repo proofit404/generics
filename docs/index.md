@@ -36,16 +36,16 @@ objects without loosing little nice things like readability.
 ... class User:
 ...     def __init__(self, name):
 ...         self.name = name
-...
 ...     def greet(self):
-...         return f'Hello, {self.name}'
+...         return f"Hello, {self.name}"
+...
 
->>> user = User('Jeff')
+>>> user = User("Jeff")
 
 >>> user.greet()
 'Hello, Jeff'
 
->>> hasattr(user, 'name')
+>>> hasattr(user, "name")
 False
 
 ```
@@ -72,5 +72,5 @@ interested in it.
 
 `generics` library is offered under the two clause BSD license.
 
-<p align="center">&mdash; ⭐️ &mdash;</p>
-<p align="center"><i>The `generics` library is part of the SOLID python family.</i></p>
+<p align="center">&mdash; ⭐ &mdash;</p>
+<p align="center"><i>The <code>generics</code> library is part of the SOLID python family.</i></p>

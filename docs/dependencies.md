@@ -12,18 +12,19 @@ It is possible to instantiate classes decorated with `@private` function via
 ... class User:
 ...     def __init__(self, name):
 ...         self.name = name
-...
 ...     def greet(self):
-...         return f'Hello, {self.name}'
+...         return f"Hello, {self.name}"
+...
 
 >>> class UserContainer(Injector):
 ...     user = User
-...     name = 'Jeff'
+...     name = "Jeff"
+...
 
 >>> UserContainer.user.greet()
 'Hello, Jeff'
 
 ```
 
-<p align="center">&mdash; ⭐️ &mdash;</p>
-<p align="center"><i>The `generics` library is part of the SOLID python family.</i></p>
+<p align="center">&mdash; ⭐ &mdash;</p>
+<p align="center"><i>The <code>generics</code> library is part of the SOLID python family.</i></p>
