@@ -12,14 +12,13 @@ It is possible to instantiate classes decorated with `@private` function via
 ... class User:
 ...     def __init__(self, name):
 ...         self.name = name
+...
 ...     def greet(self):
 ...         return f"Hello, {self.name}"
-...
 
 >>> class UserContainer(Injector):
 ...     user = User
 ...     name = "Jeff"
-...
 
 >>> UserContainer.user.greet()
 'Hello, Jeff'

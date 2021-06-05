@@ -21,9 +21,9 @@ attributes.
 >>> class User:
 ...     def __init__(self, name):
 ...         self._name = name
+...
 ...     def greet(self):
 ...         return f"Hello, {self._name}"
-...
 
 >>> user = User("Jeff")
 

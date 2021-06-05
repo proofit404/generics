@@ -15,11 +15,12 @@ immutable. `attrs` library has a first class support for immutability. Enable
 ... @attrs(frozen=True)
 ... class User:
 ...     name = attrib()
+...
 ...     def greet(self):
 ...         return f"Hello, {self.name}"
+...
 ...     def rename(self, name):
 ...         return evolve(self, name=name)
-...
 
 >>> User
 Private(User)

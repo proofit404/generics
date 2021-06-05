@@ -20,11 +20,12 @@ class and use `replace` function to copy instancies of it.
 ... @dataclass(frozen=True)
 ... class User:
 ...     name: str
+...
 ...     def greet(self):
 ...         return f"Hello, {self.name}"
+...
 ...     def rename(self, name):
 ...         return replace(self, name=name)
-...
 
 >>> User
 Private(User)
