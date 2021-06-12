@@ -2,6 +2,7 @@
 strict: true
 site_name: generics
 site_description: A classy toolkit designed with OOP in mind.
+site_url: https://proofit404.github.io/generics
 theme:
   name: material
   palette:
