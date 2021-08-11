@@ -1,5 +1,6 @@
 module.exports = {
   repositoryUrl: "https://github.com/proofit404/generics",
+  branches: ["release", { name: "develop", prerelease: "rc" }],
   tagFormat: "${version}",
   plugins: [
     "@semantic-release/commit-analyzer",
