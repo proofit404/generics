@@ -13,6 +13,14 @@ def e():
 
 
 @pytest.fixture()
+def s():
+    """Fixture with subtyping entity definitions."""
+    import examples.sybtyping_definitions
+
+    return examples.sybtyping_definitions
+
+
+@pytest.fixture()
 def a():
     """Fixture with attrs entity definitions."""
     import examples.attrs_definitions
