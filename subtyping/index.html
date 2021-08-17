@@ -11,14 +11,14 @@
       
       
       
-        <link rel="canonical" href="https://proofit404.github.io/generics/pydantic/">
+        <link rel="canonical" href="https://proofit404.github.io/generics/subtyping/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
     
     
       
-        <title>Pydantic - generics</title>
+        <title>Subtyping - generics</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pydantic" class="md-skip">
+        <a href="#interface-subtyping" class="md-skip">
           Skip to content
         </a>
       
@@ -99,7 +99,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pydantic
+              Subtyping
             
           </span>
         </div>
@@ -187,13 +187,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../private/" class="md-tabs__link">
+      <a href="../private/" class="md-tabs__link md-tabs__link--active">
         Usage
       </a>
     </li>
@@ -203,15 +205,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../attrs/" class="md-tabs__link md-tabs__link--active">
+      <a href="../attrs/" class="md-tabs__link">
         Guides
       </a>
     </li>
@@ -334,12 +334,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       <label class="md-nav__link" for="__nav_2">
         Usage
@@ -367,11 +369,71 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../subtyping/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Subtyping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Subtyping
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why" class="md-nav__link">
+    Why
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principles" class="md-nav__link">
+    Principles
+  </a>
+  
+    <nav class="md-nav" aria-label="Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inheritance-from-interface-is-allowed" class="md-nav__link">
+    Inheritance from interface is allowed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -388,14 +450,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       <label class="md-nav__link" for="__nav_3">
         Guides
@@ -435,21 +495,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../pydantic/" class="md-nav__link">
         Pydantic
       </a>
-      
     </li>
   
 
@@ -491,6 +541,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why" class="md-nav__link">
+    Why
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principles" class="md-nav__link">
+    Principles
+  </a>
+  
+    <nav class="md-nav" aria-label="Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inheritance-from-interface-is-allowed" class="md-nav__link">
+    Inheritance from interface is allowed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -502,66 +587,58 @@
               
                 
                 
-                <h1 id="pydantic">Pydantic<a class="headerlink" href="#pydantic" title="Permanent link">&para;</a></h1>
-<p><a href="https://pydantic-docs.helpmanual.io/">pydantic</a> is a popular library for data
-validation. It could be used to define business entities of your domain if you
-want validation to be applied to data your entities encapsulate. It's possible
-to use a
-<a href="https://pydantic-docs.helpmanual.io/usage/dataclasses/">pydantic dataclasses</a>
-to make defined entities compatible with <code>generics</code> library decorators. As with
-all previous examples we advice you to make your instances immutable. <code>pydantic</code>
-library has a first class support for immutability. Enable <code>frozen</code> setting on
-class and use <code>replace</code> function to copy instancies of it.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pydantic.dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">replace</span>
+                <h1 id="interface-subtyping">Interface subtyping<a class="headerlink" href="#interface-subtyping" title="Permanent link">&para;</a></h1>
+<h2 id="why">Why<a class="headerlink" href="#why" title="Permanent link">&para;</a></h2>
+<h2 id="principles">Principles<a class="headerlink" href="#principles" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#inheritance-from-interface-is-allowed">Inheritance from interface is allowed</a></li>
+</ul>
+<h3 id="inheritance-from-interface-is-allowed">Inheritance from interface is allowed<a class="headerlink" href="#inheritance-from-interface-is-allowed" title="Permanent link">&para;</a></h3>
+<p>Python has builtin support for
+<a href="https://en.wikipedia.org/wiki/Subtyping">subtype polymorphism</a> (or inclusion
+polymorphism) via <a href="https://docs.python.org/3/library/abc.html">ABC</a> library.
+It's syntax is based on defining an interface (or abstract class) and then
+inherit from it (implement interface).</p>
+<p>Personally, we dislike such syntax and would prefer <code>@implements</code> decorator or
+something similar to <code>zope.interface</code>. But default <code>ABC</code> library is widely
+supported by type checkers (like mypy) and language servers (reference search).
+That's why we decided not to reinvent our own wheel.</p>
+<p>We allow classes decorated by <code>@private</code>, <code>@defended</code> and <code>@delegated</code>
+decorators inherit from interfaces (<code>abc.ABC</code> subclasses) with some additional
+restrictions. See below.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
-<span class="gp">... </span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nd">@abstractmethod</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="gp">... </span>        <span class="o">...</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">ConsoleUser</span><span class="p">(</span><span class="n">User</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="gp">...</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">rename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">User</span>
-<span class="go">Private(User)</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s2">&quot;Jeff&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span>
-<span class="go">Private(User(name=&#39;Jeff&#39;))</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
-<span class="go">&#39;Hello, Jeff&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;Kate&quot;</span><span class="p">)</span>
-<span class="go">User(name=&#39;Kate&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ConsoleUser</span><span class="p">(</span><span class="s2">&quot;Jeff&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+<span class="go">Hello, Jeff</span>
 </code></pre></div>
-<p>Arguments validation would be applied at the object construction time. This
-behavior would match regular dataclasses created by <code>pydantic</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
-<span class="gp">... </span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="gp">... </span>    <span class="n">console</span><span class="p">:</span> <span class="n">Callable</span>
+<p>Default restrictions forced by <code>abc</code> library would apply as usual. For example,
+You have to implement all <code>@abstractmethod</code>s to instantiate the class.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">Bot</span><span class="p">(</span><span class="n">User</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">urllib</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">)</span>
 <span class="gp">...</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">console</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">,</span> <span class="n">console</span><span class="o">=</span><span class="nb">print</span><span class="p">)</span>
-<span class="go">Private(User(name=&#39;Jeff&#39;, console=&lt;built-in function print&gt;))</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">,</span> <span class="n">console</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bot</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
-<span class="gr">pydantic.error_wrappers.ValidationError</span>: <span class="n">1 validation error for User</span>
-<span class="go">console</span>
-<span class="go">  True is not callable (type=type_error.callable; value=True)</span>
+<span class="gr">TypeError</span>: <span class="n">Can&#39;t instantiate abstract class Bot with abstract method greet</span>
 </code></pre></div>
 <p align="center">&mdash; ⭐ &mdash;</p>
 <p align="center"><i>The <code>generics</code> library is part of the SOLID python family.</i></p>
@@ -584,7 +661,7 @@ behavior would match regular dataclasses created by <code>pydantic</code>.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../dataclasses/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dataclasses" rel="prev">
+        <a href="../private/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Private" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -593,20 +670,20 @@ behavior would match regular dataclasses created by <code>pydantic</code>.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              Dataclasses
+              Private
             </div>
           </div>
         </a>
       
       
         
-        <a href="../dependencies/" class="md-footer__link md-footer__link--next" aria-label="Next: Dependencies" rel="next">
+        <a href="../attrs/" class="md-footer__link md-footer__link--next" aria-label="Next: Attrs" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Dependencies
+              Attrs
             </div>
           </div>
           <div class="md-footer__button md-icon">
