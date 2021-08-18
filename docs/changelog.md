@@ -1,3 +1,10 @@
+# 3.4.0 (2021-08-18)
+
+### Features
+
+- allow inheritance from interface
+  [#94](https://github.com/proofit404/generics/issues/94) fbf7bd1
+
 ## [3.3.1](https://github.com/proofit404/generics/compare/3.3.0...3.3.1) (2021-04-07)
 
 ### Bug Fixes
