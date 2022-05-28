@@ -50,6 +50,7 @@ It may be a nice convention to have it in the code base, but
 - [Instance methods can not be called on classes](#instance-methods-can-not-be-called-on-classes)
 - [At least one instance method is required](#at-least-one-instance-method-is-required)
 - [At least one encapsulated attribute is required](#at-least-one-encapsulated-attribute-is-required)
+- [Variable-length encapsulated attributes are forbidden](#variable-length-encapsulated-attributes-are-forbidden)
 - [Implementation inheritance is forbidden](#implementation-inheritance-is-forbidden)
 - [Underscore names are forbidden](#underscore-names-are-forbidden)
 - [Prefer immutable classes](#prefer-immutable-classes)
@@ -307,6 +308,29 @@ _generics.exceptions.GenericClassError: Define at least one encapsulated attribu
     `generics` library assumes that constructor of the decorated class will assign
     its arguments to the instance properties with same names. That's why encapsulated
     attributes are inferred from constructor arguments.
+
+### Variable-length encapsulated attributes are forbidden
+
+Classes should not encapsulate average set of attributes. This makes code hard
+to reason about. This makes object state unrepresented in the source code.
+
+```pycon
+
+>>> from generics import private
+
+>>> @private
+... class User:
+...
+...     def __init__(self, *args):
+...         self.args = args
+...
+...     def greet(self):
+...         return 'Hello, Jeff'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Class could not have variable encapsulated attribute
+
+```
 
 ### Implementation inheritance is forbidden
 
