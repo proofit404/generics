@@ -26,4 +26,3 @@ It is possible to instantiate classes decorated with `@private` function via
 ```
 
 <p align="center">&mdash; ⭐ &mdash;</p>
-<p align="center"><i>The <code>generics</code> library is part of the SOLID python family.</i></p>

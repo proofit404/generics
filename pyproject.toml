@@ -22,7 +22,7 @@ repository = "https://github.com/proofit404/generics"
 version = "3.4.0"
 
 [tool.poetry.dependencies]
-python = "~3.6 || ~3.7 || ~3.8 || ~3.9"
+python = "*"
 
 [tool.poetry.urls]
 Changelog = "https://proofit404.github.io/generics/changelog"

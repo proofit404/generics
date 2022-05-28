@@ -1,6 +1,7 @@
 {
   "template": "https://github.com/proofit404/python-library-template",
-  "commit": "117c1043861330fb6c3048d0d3f220d3c734b8c1",
+  "commit": "f9c2657ec63611f0b88182df05fb28fdc5c6fb36",
+  "checkout": null,
   "context": {
     "cookiecutter": {
       "project_name": "generics",
@@ -17,13 +18,12 @@
       "changelog_url": "https://proofit404.github.io/generics/changelog",
       "twitter_url": "https://twitter.com/proofit404",
       "pypi_project": "https://pypi.org/project/generics",
-      "azure_definition_id": "17",
-      "azure_build_url": "https://dev.azure.com/proofit404/generics/_build/latest?definitionId=17&branchName=master",
-      "azure_build_badge_url": "https://img.shields.io/azure-devops/build/proofit404/generics/17?style=flat-square",
-      "azure_coverage_url": "https://dev.azure.com/proofit404/generics/_build/latest?definitionId=17&branchName=master",
-      "azure_coverage_badge_url": "https://img.shields.io/azure-devops/coverage/proofit404/generics/17?style=flat-square",
+      "github_workflow": "release",
+      "github_workflow_url": "https://github.com/proofit404/generics/actions/workflows/release.yml?query=branch%3Arelease",
+      "github_workflow_badge_url": "https://img.shields.io/github/workflow/status/proofit404/generics/release?style=flat-square",
       "pypi_badge_url": "https://img.shields.io/pypi/v/generics?style=flat-square",
       "python_version_badge_url": "https://img.shields.io/pypi/pyversions/generics?style=flat-square",
+      "danger_github_api_token": "Z2hwXzZodGx3NDV6NVJsT0ljaW9zSHZwQzZKck5YYUdkUzJNdWhkcAo=",
       "_template": "https://github.com/proofit404/python-library-template"
     }
   },

@@ -1,7 +1,6 @@
 # Generics
 
-[![azure-devops-builds](https://img.shields.io/azure-devops/build/proofit404/generics/17?style=flat-square)](https://dev.azure.com/proofit404/generics/_build/latest?definitionId=17&branchName=master)
-[![azure-devops-coverage](https://img.shields.io/azure-devops/coverage/proofit404/generics/17?style=flat-square)](https://dev.azure.com/proofit404/generics/_build/latest?definitionId=17&branchName=master)
+[![build](https://img.shields.io/github/workflow/status/proofit404/generics/release?style=flat-square)](https://github.com/proofit404/generics/actions/workflows/release.yml?query=branch%3Arelease)
 [![pypi](https://img.shields.io/pypi/v/generics?style=flat-square)](https://pypi.org/project/generics)
 [![python](https://img.shields.io/pypi/pyversions/generics?style=flat-square)](https://pypi.org/project/generics)
 
@@ -73,4 +72,3 @@ interested in it.
 `generics` library is offered under the two clause BSD license.
 
 <p align="center">&mdash; ⭐ &mdash;</p>
-<p align="center"><i>The <code>generics</code> library is part of the SOLID python family.</i></p>
