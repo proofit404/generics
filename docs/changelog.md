@@ -1,3 +1,10 @@
+# 3.5.0 (2022-05-28)
+
+### Features
+
+- protect from star args constructor
+  [#212](https://github.com/proofit404/generics/issues/212) 656d370
+
 # 3.4.0 (2021-08-18)
 
 ### Features
