@@ -93,6 +93,13 @@ def test_require_at_least_one_encapsulated_attribute(e):
     assert str(exc_info.value) == "Define at least one encapsulated attribute"
 
 
+def test_deny_variable_encapsulated_attributes(e):
+    """Deny star arguments in class constructor."""
+    with pytest.raises(GenericClassError) as exc_info:
+        private(e.VarArgsUser)
+    assert str(exc_info.value) == "Class could not have variable encapsulated attribute"
+
+
 def test_deny_static_method(e):
     """Deny static methods on classes."""
     with pytest.raises(GenericClassError) as exc_info:

@@ -16,6 +16,7 @@ def private(cls):
     _check_defined_fields(fields)
     _check_private_methods(methods)
     _check_private_fields(fields)
+    _check_variable_positional_fields(fields)
     created_methods = _create_class_methods(cls, class_name, methods)
     created_methods["__new__"] = _create_new_class_method(cls, class_name, methods)
     created_methods["__init__"] = init
@@ -39,10 +40,15 @@ def _get_init_method(cls):
 
 
 def _get_fields(init):
+    result = []
     if init is not None:
-        return list(signature(init).parameters)[1:]
-    else:
-        return []
+        params = signature(init).parameters
+        for name in list(params)[1:]:
+            param = params[name]
+            if param.kind is param.VAR_POSITIONAL:
+                name = f"*{name}"
+            result.append(name)
+    return result
 
 
 def _check_bases(cls):
@@ -72,6 +78,12 @@ def _check_private_fields(fields):
     private_fields = [field for field in fields if field.startswith("_")]
     if private_fields:
         raise GenericClassError("Do not use private attributes")
+
+
+def _check_variable_positional_fields(fields):
+    variable_length = [field for field in fields if field.startswith("*")]
+    if variable_length:
+        raise GenericClassError("Class could not have variable encapsulated attribute")
 
 
 def _create_class_methods(cls, class_name, methods):

@@ -56,6 +56,17 @@ class NoEncapsulationUser:
         pass  # pragma: no cover
 
 
+class VarArgsUser:
+    """User domain model."""
+
+    def __init__(self, *args):
+        pass  # pragma: no cover
+
+    def is_active(self):
+        """Calculate user activity status."""
+        pass  # pragma: no cover
+
+
 class UnderscoreMethodUser:
     """User domain model."""
 
