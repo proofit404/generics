@@ -182,6 +182,8 @@ def test_method_name(e, strategy):
     user = strategy(user_class)
     assert "new" == user.new.__name__
     assert "is_active" == user.is_active.__name__
+    assert "__repr__" == user_class.__repr__.__name__
+    assert "__repr__" == user.__class__.__repr__.__name__
     assert "__repr__" == user.__repr__.__name__
 
 
