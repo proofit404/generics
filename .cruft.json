@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/proofit404/python-library-template",
-  "commit": "f9c2657ec63611f0b88182df05fb28fdc5c6fb36",
+  "commit": "805d005efe453acde4b46d88e8296f09dddfcd68",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -22,7 +22,6 @@
       "github_workflow_url": "https://github.com/proofit404/generics/actions/workflows/release.yml?query=branch%3Arelease",
       "github_workflow_badge_url": "https://img.shields.io/github/workflow/status/proofit404/generics/release?style=flat-square",
       "pypi_badge_url": "https://img.shields.io/pypi/v/generics?style=flat-square",
-      "python_version_badge_url": "https://img.shields.io/pypi/pyversions/generics?style=flat-square",
       "danger_github_api_token": "Z2hwXzZodGx3NDV6NVJsT0ljaW9zSHZwQzZKck5YYUdkUzJNdWhkcAo=",
       "_template": "https://github.com/proofit404/python-library-template"
     }
