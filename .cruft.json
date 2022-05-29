@@ -22,7 +22,7 @@
       "github_workflow_url": "https://github.com/proofit404/generics/actions/workflows/release.yml?query=branch%3Arelease",
       "github_workflow_badge_url": "https://img.shields.io/github/workflow/status/proofit404/generics/release?style=flat-square",
       "pypi_badge_url": "https://img.shields.io/pypi/v/generics?style=flat-square",
-      "danger_github_api_token": "Z2hwXzZodGx3NDV6NVJsT0ljaW9zSHZwQzZKck5YYUdkUzJNdWhkcAo=",
+      "danger_github_api_token": "Z2hwXzhoTkVraVRQSXRUVDRQa0JQT3JRZ0daSjJmdTZWMzFyRHNkdAo=",
       "_template": "https://github.com/proofit404/python-library-template"
     }
   },

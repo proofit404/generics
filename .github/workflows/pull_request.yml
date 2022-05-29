@@ -34,4 +34,4 @@ jobs:
       - run: ./scripts/test
       - run: ./scripts/review
         env:
-          DANGER_GITHUB_API_TOKEN: Z2hwXzZodGx3NDV6NVJsT0ljaW9zSHZwQzZKck5YYUdkUzJNdWhkcAo=
+          DANGER_GITHUB_API_TOKEN: Z2hwXzhoTkVraVRQSXRUVDRQa0JQT3JRZ0daSjJmdTZWMzFyRHNkdAo=
