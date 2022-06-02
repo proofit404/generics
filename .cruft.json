@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/proofit404/python-library-template",
-  "commit": "805d005efe453acde4b46d88e8296f09dddfcd68",
+  "commit": "d3627a8456df61c46395e2d3319c5823d3fbc1bf",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -9,7 +9,7 @@
       "private_module_name": "_generics",
       "exception_name": "GenericError",
       "project_description": "A classy toolkit designed with OOP in mind.",
-      "author_name": "Artem Malyshev",
+      "author_name": "Josiah Kaviani",
       "author_email": "proofit404@gmail.com",
       "github_user": "proofit404",
       "github_repository": "https://github.com/proofit404/generics",

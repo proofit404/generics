@@ -3,12 +3,11 @@ from datetime import datetime
 
 import pytest
 
-from generics import defended
 from generics import delegated
 from generics import private
 
 
-pytestmark = pytest.mark.parametrize("f", [private, delegated, defended])
+pytestmark = pytest.mark.parametrize("f", [private, delegated])
 
 
 def test_allow_inheritance_from_interface(f, s):

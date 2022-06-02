@@ -19,9 +19,9 @@ something similar to `zope.interface`. But default `ABC` library is widely
 supported by type checkers (like mypy) and language servers (reference search).
 That's why we decided not to reinvent our own wheel.
 
-We allow classes decorated by `@private`, `@defended` and `@delegated`
-decorators inherit from interfaces (`abc.ABC` subclasses) with some additional
-restrictions. See below.
+We allow classes decorated by `@private` and `@delegated` decorators inherit
+from interfaces (`abc.ABC` subclasses) with some additional restrictions. See
+below.
 
 ```pycon
 
