@@ -4,4 +4,4 @@ from _generics.exceptions import GenericError
 from _generics.exceptions import GenericInstanceError
 
 
-__all__ = ["GenericError", "GenericClassError", "GenericInstanceError"]
+__all__ = ("GenericError", "GenericClassError", "GenericInstanceError")
