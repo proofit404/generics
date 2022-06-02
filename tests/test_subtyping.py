@@ -1,17 +1,21 @@
 """Tests related to inheritance from interface."""
 from datetime import datetime
 
-import pytest
-
 from generics import delegated
 from generics import private
 
 
-pytestmark = pytest.mark.parametrize("f", [private, delegated])
-
-
-def test_allow_inheritance_from_interface(f, s):
+def test_private_allow_inheritance_from_interface(s):
     """Allow inheritance from interface."""
-    user_class = f(s.User)
+    user_class = private(s.User)
     user = user_class(last_login=datetime(1999, 12, 31))
     assert not user.is_active()
+
+
+def test_delegated_allow_inheritance_from_interface(s):
+    """Allow inheritance from interface."""
+    user_class = private(s.User)
+    smart_user_class = delegated(s.UserType)(s.SmartUser)
+    user = user_class(last_login=datetime(1999, 12, 31))
+    smart_user = smart_user_class(user)
+    assert not smart_user.is_active()

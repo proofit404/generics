@@ -20,7 +20,7 @@ def private(cls):
     created_methods = _create_class_methods(cls, class_name, methods)
     created_methods["__new__"] = _create_new_class_method(cls, class_name, methods)
     created_methods["__init__"] = init
-    return _PrivateType(class_name, (object,), created_methods)
+    return _PrivateType(class_name, (), created_methods)
 
 
 def _get_class_name(cls):
