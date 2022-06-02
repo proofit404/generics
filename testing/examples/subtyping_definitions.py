@@ -20,3 +20,10 @@ class User(UserType):
     def is_active(self):
         """Calculate user activity status."""
         return (datetime.now() - self.last_login).days < 30
+
+
+class SmartUser:
+    """User model decorator."""
+
+    def __init__(self, user):
+        self.user = user

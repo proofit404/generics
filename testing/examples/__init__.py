@@ -13,11 +13,19 @@ def e():
 
 
 @pytest.fixture()
+def w():
+    """Fixture with all possible entity decorators."""
+    import examples.delegates_definitions
+
+    return examples.delegates_definitions
+
+
+@pytest.fixture()
 def s():
     """Fixture with subtyping entity definitions."""
-    import examples.sybtyping_definitions
+    import examples.subtyping_definitions
 
-    return examples.sybtyping_definitions
+    return examples.subtyping_definitions
 
 
 @pytest.fixture()
