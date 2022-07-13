@@ -1,3 +1,10 @@
+# 3.6.0 (2022-07-13)
+
+### Features
+
+- implement [@delegated](https://github.com/delegated) decorator
+  [#77](https://github.com/proofit404/generics/issues/77) 916fd1f
+
 # 3.5.0 (2022-05-28)
 
 ### Features
