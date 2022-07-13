@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://proofit404.github.io/generics/subtyping/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.16">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -21,15 +21,16 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1c3799f8.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cc9b2e1e.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
         
           
           
           <meta name="theme-color" content="#7e56c2">
         
+      
       
     
     
@@ -387,6 +388,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../delegated/" class="md-nav__link">
+        Delegated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -637,9 +652,9 @@ inherit from it (implement interface).</p>
 something similar to <code>zope.interface</code>. But default <code>ABC</code> library is widely
 supported by type checkers (like mypy) and language servers (reference search).
 That's why we decided not to reinvent our own wheel.</p>
-<p>We allow classes decorated by <code>@private</code>, <code>@defended</code> and <code>@delegated</code>
-decorators inherit from interfaces (<code>abc.ABC</code> subclasses) with some additional
-restrictions. See below.</p>
+<p>We allow classes decorated by <code>@private</code> and <code>@delegated</code> decorators inherit
+from interfaces (<code>abc.ABC</code> subclasses) with some additional restrictions. See
+below.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
 
@@ -678,6 +693,7 @@ You have to implement all <code>@abstractmethod</code>s to instantiate the class
 
               
             </article>
+            
           </div>
         </div>
         
@@ -685,10 +701,11 @@ You have to implement all <code>@abstractmethod</code>s to instantiate the class
       
         <footer class="md-footer">
   
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../private/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Private" rel="prev">
+        <a href="../delegated/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Delegated" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -697,7 +714,7 @@ You have to implement all <code>@abstractmethod</code>s to instantiate the class
               <span class="md-footer__direction">
                 Previous
               </span>
-              Private
+              Delegated
             </div>
           </div>
         </a>
@@ -740,10 +757,10 @@ You have to implement all <code>@abstractmethod</code>s to instantiate the class
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs"], "search": "../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs"], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.3a4b43e5.min.js"></script>
+      <script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
         <script src="../javascripts/extra.js"></script>
       
