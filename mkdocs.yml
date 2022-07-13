@@ -39,6 +39,7 @@ nav:
       - Changelog: changelog.md
   - Usage:
       - Private: private.md
+      - Delegated: delegated.md
       - Subtyping: subtyping.md
   - Guides:
       - Attrs: attrs.md
