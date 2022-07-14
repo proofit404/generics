@@ -4,49 +4,38 @@ import pytest
 # Fixtures.
 
 
-@pytest.fixture()
-def e():
-    """Fixture with all possible entity definitions."""
+def _definitions():
     import examples.definitions
+    import examples.attrs
+    import examples.dataclasses
+    import examples.pydantic
 
-    return examples.definitions
+    yield examples.definitions
+    yield examples.attrs
+    yield examples.dataclasses
+    yield examples.pydantic
+
+
+@pytest.fixture(
+    params=_definitions(),
+    ids=["definitions", "attrs", "dataclass", "pydantic"],
+)
+def e(request):
+    """Fixture with all possible entity definitions."""
+    return request.param
 
 
 @pytest.fixture()
 def w():
     """Fixture with all possible entity decorators."""
-    import examples.delegates_definitions
+    import examples.delegates
 
-    return examples.delegates_definitions
+    return examples.delegates
 
 
 @pytest.fixture()
 def s():
     """Fixture with subtyping entity definitions."""
-    import examples.subtyping_definitions
+    import examples.subtyping
 
-    return examples.subtyping_definitions
-
-
-@pytest.fixture()
-def a():
-    """Fixture with attrs entity definitions."""
-    import examples.attrs_definitions
-
-    return examples.attrs_definitions
-
-
-@pytest.fixture()
-def d():
-    """Fixture with dataclass entity definitions."""
-    import examples.dataclass_definitions
-
-    return examples.dataclass_definitions
-
-
-@pytest.fixture()
-def p():
-    """Fixture with pydantic entity definitions."""
-    import examples.pydantic_definitions
-
-    return examples.pydantic_definitions
+    return examples.subtyping
