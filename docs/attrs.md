@@ -33,7 +33,7 @@ Private::User(name='Jeff')
 'Hello, Jeff'
 
 >>> user.rename("Kate")
-User(name='Kate')
+Private::User(name='Kate')
 
 ```
 

@@ -227,7 +227,10 @@ class _InstanceMethod:
     def to_instance(self, instance, methods):
         class Method:
             def __call__(_, *args, **kwargs):
-                return self.func(instance, *args, **kwargs)
+                result = self.func(instance, *args, **kwargs)
+                if type(result) is self.cls:
+                    result = _wrap(result, methods)
+                return result
 
             def __repr__(_):
                 return f"Private::{instance!r}.{self.name}"
