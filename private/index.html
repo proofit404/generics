@@ -521,6 +521,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#methods-would-have-representation" class="md-nav__link">
+    Methods would have representation
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -797,6 +804,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#methods-would-have-representation" class="md-nav__link">
+    Methods would have representation
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -863,6 +877,7 @@ attributes.</p>
 <li><a href="#implementation-inheritance-is-forbidden">Implementation inheritance is forbidden</a></li>
 <li><a href="#underscore-names-are-forbidden">Underscore names are forbidden</a></li>
 <li><a href="#prefer-immutable-classes">Prefer immutable classes</a></li>
+<li><a href="#methods-would-have-representation">Methods would have representation</a></li>
 </ul>
 <h3 id="all-methods-are-public">All methods are public<a class="headerlink" href="#all-methods-are-public" title="Permanent link">&para;</a></h3>
 <p>The main purpose of objects in object-oriented programming is in <strong>behavior</strong>
@@ -878,22 +893,17 @@ decorated with <code>@private</code> function.</p>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="p">(</span>
-<span class="gp">... </span>            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
-<span class="gp">... </span>            <span class="o">+</span> <span class="s2">&quot;(&quot;</span>
-<span class="gp">... </span>            <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-<span class="gp">... </span>            <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
-<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;User(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">=!r}</span><span class="s2">)&quot;</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span>
-<span class="go">Private(User)</span>
+<span class="go">Private::User</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span>
-<span class="go">Private(User(name=&#39;Jeff&#39;))</span>
+<span class="go">Private::User(self.name=&#39;Jeff&#39;)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
 <span class="go">&#39;Hello, Jeff&#39;</span>
@@ -915,7 +925,7 @@ Attribute access in the client code will raise an exception.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">name</span>
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
-<span class="gr">AttributeError</span>: <span class="n">&#39;Private(User)&#39; object has no attribute &#39;name&#39;</span>
+<span class="gr">AttributeError</span>: <span class="n">&#39;Private::User&#39; object has no attribute &#39;name&#39;</span>
 </code></pre></div>
 <h3 id="static-methods-are-forbidden">Static methods are forbidden<a class="headerlink" href="#static-methods-are-forbidden" title="Permanent link">&para;</a></h3>
 <p>Good objects expose their behavior and hide their state. The behavior objects
@@ -1189,18 +1199,55 @@ need to change something.</p>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="p">(</span>
-<span class="gp">... </span>            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
-<span class="gp">... </span>            <span class="o">+</span> <span class="s2">&quot;(&quot;</span>
-<span class="gp">... </span>            <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-<span class="gp">... </span>            <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
-<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;User(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">=!r}</span><span class="s2">)&quot;</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">rename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
-<span class="go">Private(User(name=&#39;John&#39;))</span>
+<span class="go">Private::User(self.name=&#39;John&#39;)</span>
+</code></pre></div>
+<h3 id="methods-would-have-representation">Methods would have representation<a class="headerlink" href="#methods-would-have-representation" title="Permanent link">&para;</a></h3>
+<p>In some cases, instead of object composition people would create composition of
+callables. Usually, this happens when you pass bound method of one object into
+constructor of another object. Service objects tend to do this a lot. Most of
+the time they primary goal to trigger some action. Such objects are rarely
+interested in knowledge who would implement the action. To make service objects
+representation look nice, generics library provides representation to class and
+instance methods of <code>@private</code> classes.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">Registration</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">send_message</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">send_message</span> <span class="o">=</span> <span class="n">send_message</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Registration(</span><span class="se">\n</span><span class="s2">    </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">send_message</span><span class="si">=!r}</span><span class="se">\n</span><span class="s2">)&quot;</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">sign_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phone</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">phone</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">Message</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;SignUp(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="si">=!r}</span><span class="s2">)&quot;</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phone</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="si">!r}</span><span class="s2"> was sent to </span><span class="si">{</span><span class="n">phone</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">message</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="s2">&quot;Welcome to the service&quot;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">registration</span> <span class="o">=</span> <span class="n">Registration</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">send</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">registration</span><span class="o">.</span><span class="n">sign_up</span><span class="p">(</span><span class="s2">&quot;911&quot;</span><span class="p">)</span>
+<span class="go">Message &#39;Welcome to the service&#39; was sent to &#39;911&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">registration</span>
+<span class="go">Private::Registration(</span>
+<span class="go">    self.send_message=Private::SignUp(self.text=&#39;Welcome to the service&#39;).send</span>
+<span class="go">)</span>
 </code></pre></div>
 <p align="center">&mdash; ⭐ &mdash;</p>
 

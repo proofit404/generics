@@ -576,11 +576,11 @@ class and use <code>replace</code> function to copy instancies of it.</p>
 <span class="gp">... </span>        <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span>
-<span class="go">Private(User)</span>
+<span class="go">Private::User</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s2">&quot;Jeff&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span>
-<span class="go">Private(User(name=&#39;Jeff&#39;))</span>
+<span class="go">Private::User(name=&#39;Jeff&#39;)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
 <span class="go">&#39;Hello, Jeff&#39;</span>
@@ -602,7 +602,7 @@ behavior would match regular dataclasses created by <code>pydantic</code>.</p>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">console</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">,</span> <span class="n">console</span><span class="o">=</span><span class="nb">print</span><span class="p">)</span>
-<span class="go">Private(User(name=&#39;Jeff&#39;, console=&lt;built-in function print&gt;))</span>
+<span class="go">Private::User(name=&#39;Jeff&#39;, console=&lt;built-in function print&gt;)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jeff&#39;</span><span class="p">,</span> <span class="n">console</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>

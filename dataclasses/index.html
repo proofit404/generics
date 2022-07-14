@@ -572,11 +572,11 @@ copy instancies of it.</p>
 <span class="gp">... </span>        <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">User</span>
-<span class="go">Private(User)</span>
+<span class="go">Private::User</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s2">&quot;Jeff&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span>
-<span class="go">Private(User(name=&#39;Jeff&#39;))</span>
+<span class="go">Private::User(name=&#39;Jeff&#39;)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
 <span class="go">&#39;Hello, Jeff&#39;</span>
