@@ -1,14 +1,13 @@
 from datetime import date
 
+from pydantic.dataclasses import dataclass
 
+
+@dataclass
 class User:
     """User domain model."""
 
-    def __init__(self, last_login):
-        self.last_login = last_login
-
-    def __repr__(self):
-        return f"User({self.last_login=!r})"
+    last_login: date
 
     @classmethod
     def new(cls):
@@ -20,15 +19,16 @@ class User:
         return (date.today() - self.last_login).days < 30
 
 
+@dataclass
 class InheritanceUser(User):
     """Inherit user domain model."""
 
 
+@dataclass
 class ClassMethodOnlyUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login: date
 
     @classmethod
     def new(cls):
@@ -36,13 +36,14 @@ class ClassMethodOnlyUser:
         raise RuntimeError
 
 
+@dataclass
 class NoMethodsUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login: date
 
 
+@dataclass
 class NoEncapsulationUser:
     """User domain model."""
 
@@ -51,6 +52,7 @@ class NoEncapsulationUser:
         raise RuntimeError
 
 
+@dataclass
 class VarArgsUser:
     """User domain model."""
 
@@ -62,11 +64,11 @@ class VarArgsUser:
         raise RuntimeError
 
 
+@dataclass
 class UnderscoreMethodUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login: date
 
     def is_active(self):
         """Calculate user activity status."""
@@ -76,11 +78,11 @@ class UnderscoreMethodUser:
         raise RuntimeError
 
 
+@dataclass
 class DoubleUnderscoreMethodUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login: date
 
     def is_active(self):
         """Calculate user activity status."""
@@ -90,11 +92,11 @@ class DoubleUnderscoreMethodUser:
         raise RuntimeError
 
 
+@dataclass
 class UnderscoreClassMethodUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login: date
 
     @classmethod
     def _new(cls):
@@ -105,11 +107,11 @@ class UnderscoreClassMethodUser:
         raise RuntimeError
 
 
+@dataclass
 class DoubleUnderscoreClassMethodUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login: date
 
     @classmethod
     def __new(cls):
@@ -120,22 +122,11 @@ class DoubleUnderscoreClassMethodUser:
         raise RuntimeError
 
 
-class UnderscoreAttributeUser:
-    """User domain model."""
-
-    def __init__(self, last_login, _is_active):
-        raise RuntimeError
-
-    def is_active(self):
-        """Calculate user activity status."""
-        raise RuntimeError
-
-
+@dataclass
 class DunderMethodUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        self.last_login = last_login
+    last_login: date
 
     @classmethod
     def new(cls):
@@ -151,11 +142,11 @@ class DunderMethodUser:
         raise RuntimeError
 
 
+@dataclass
 class DunderClassMethodUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        self.last_login = last_login
+    last_login: date
 
     @classmethod
     def new(cls):
@@ -172,11 +163,11 @@ class DunderClassMethodUser:
         raise RuntimeError
 
 
+@dataclass
 class Bot:
     """Bot domain model."""
 
-    def __init__(self, last_login):
-        self.last_login = last_login
+    last_login: date
 
     @classmethod
     def is_bot(cls):
@@ -193,15 +184,16 @@ class Bot:
         raise RuntimeError
 
 
+@dataclass
 class NewBot(Bot):
     """New bot domain model."""
 
 
+@dataclass
 class StaticBot:
     """Bot domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login: date
 
     @staticmethod
     def is_bot():

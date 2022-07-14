@@ -9,7 +9,9 @@ from generics.exceptions import GenericInstanceError
 
 
 instantiate_strategy = pytest.mark.parametrize(
-    "strategy", [lambda c: c(last_login=date.today()), lambda c: c.new()]
+    "strategy",
+    [lambda c: c(last_login=date.today()), lambda c: c.new()],
+    ids=["constructor", "factory"],
 )
 
 
@@ -132,21 +134,10 @@ def test_deny_private_method(e, class_name):
     assert str(exc_info.value) == "Do not use private methods (use composition instead)"
 
 
-@instantiate_strategy
-def test_global_methods(e, strategy):
-    """Allow private methods defined in global scope.
-
-    This rules applies to cases if function with private name stored in public
-    attribute.
-
-    """
-    user_class = private(e.GlobalMethodUser)
-    user = strategy(user_class)
-    assert user.is_active()
-
-
 def test_deny_private_attribute(e):
     """Deny private attributes with leading underscore."""
+    if not hasattr(e, "UnderscoreAttributeUser"):
+        pytest.skip("Declaration does not support private attributes")
     with pytest.raises(GenericClassError) as exc_info:
         private(e.UnderscoreAttributeUser)
     assert str(exc_info.value) == "Do not use private attributes"
