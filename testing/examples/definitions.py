@@ -20,6 +20,21 @@ class User:
         return (date.today() - self.last_login).days < 30
 
 
+class NamedUser:
+    """User domain model."""
+
+    def __init__(self, name):
+        self.name = name
+
+    def greet(self):
+        """Say nice thing."""
+        return f"Hello, {self.name}"
+
+    def rename(self, name):
+        """Change user name."""
+        return self.__class__(name)
+
+
 class InheritanceUser(User):
     """Inherit user domain model."""
 

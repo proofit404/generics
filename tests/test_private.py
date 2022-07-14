@@ -53,6 +53,17 @@ def test_class_method_should_return_class_instance(e, method_name):
     assert str(exc_info.value) == expected
 
 
+def test_instance_method_return_class_instance(e):
+    """Instances returned from methods should be @private as well."""
+    user_class = private(e.NamedUser)
+    user = user_class(name="John").rename("Kate")
+    assert user.greet() == "Hello, Kate"
+    with pytest.raises(AttributeError) as exc_info:
+        user.name
+    expected = "'Private::NamedUser' object has no attribute 'name'"
+    assert str(exc_info.value) == expected
+
+
 @instantiate_strategy
 def test_class_method_should_not_work_with_instance(e, strategy):
     """Deny to call class methods using instance attribute access."""

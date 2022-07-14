@@ -1,3 +1,4 @@
+from dataclasses import replace
 from datetime import date
 
 from pydantic.dataclasses import dataclass
@@ -17,6 +18,21 @@ class User:
     def is_active(self):
         """Calculate user activity status."""
         return (date.today() - self.last_login).days < 30
+
+
+@dataclass
+class NamedUser:
+    """User domain model."""
+
+    name: str
+
+    def greet(self):
+        """Say nice thing."""
+        return f"Hello, {self.name}"
+
+    def rename(self, name):
+        """Change user name."""
+        return replace(self, name=name)
 
 
 @dataclass

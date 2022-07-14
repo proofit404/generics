@@ -1,6 +1,7 @@
 from datetime import date
 
 from attrs import define
+from attrs import evolve
 from attrs import field
 
 
@@ -18,6 +19,21 @@ class User:
     def is_active(self):
         """Calculate user activity status."""
         return (date.today() - self.last_login).days < 30
+
+
+@define
+class NamedUser:
+    """User domain model."""
+
+    name = field()
+
+    def greet(self):
+        """Say nice thing."""
+        return f"Hello, {self.name}"
+
+    def rename(self, name):
+        """Change user name."""
+        return evolve(self, name=name)
 
 
 @define
