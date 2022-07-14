@@ -1,3 +1,10 @@
+# 3.8.0 (2022-07-14)
+
+### Features
+
+- protect instances returned from methods
+  [#233](https://github.com/proofit404/generics/issues/233) 20d1703
+
 # 3.7.0 (2022-07-14)
 
 ### Features
