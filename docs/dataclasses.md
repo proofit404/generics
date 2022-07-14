@@ -24,11 +24,11 @@ copy instancies of it.
 ...         return replace(self, name=name)
 
 >>> User
-Private(User)
+Private::User
 
 >>> user = User("Jeff")
 >>> user
-Private(User(name='Jeff'))
+Private::User(name='Jeff')
 
 >>> user.greet()
 'Hello, Jeff'

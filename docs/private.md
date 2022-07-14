@@ -75,22 +75,17 @@ decorated with `@private` function.
 ...         self.name = name
 ...
 ...     def __repr__(self):
-...         return (
-...             self.__class__.__name__
-...             + "("
-...             + ", ".join(k + "=" + repr(v) for k, v in self.__dict__.items())
-...             + ")"
-...         )
+...         return f"User({self.name=!r})"
 ...
 ...     def greet(self):
 ...         return f'Hello, {self.name}'
 
 >>> User
-Private(User)
+Private::User
 
 >>> user = User('Jeff')
 >>> user
-Private(User(name='Jeff'))
+Private::User(self.name='Jeff')
 
 >>> user.greet()
 'Hello, Jeff'
@@ -121,7 +116,7 @@ Attribute access in the client code will raise an exception.
 >>> user.name
 Traceback (most recent call last):
   ...
-AttributeError: 'Private(User)' object has no attribute 'name'
+AttributeError: 'Private::User' object has no attribute 'name'
 
 ```
 
@@ -475,18 +470,13 @@ _Good_:
 ...         self.name = name
 ...
 ...     def __repr__(self):
-...         return (
-...             self.__class__.__name__
-...             + "("
-...             + ", ".join(k + "=" + repr(v) for k, v in self.__dict__.items())
-...             + ")"
-...         )
+...         return f"User({self.name=!r})"
 ...
 ...     def rename(self, name):
 ...         return User(name)
 
 >>> User(name='Jeff').rename('John')
-Private(User(name='John'))
+Private::User(self.name='John')
 
 ```
 

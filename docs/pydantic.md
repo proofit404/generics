@@ -28,11 +28,11 @@ class and use `replace` function to copy instancies of it.
 ...         return replace(self, name=name)
 
 >>> User
-Private(User)
+Private::User
 
 >>> user = User("Jeff")
 >>> user
-Private(User(name='Jeff'))
+Private::User(name='Jeff')
 
 >>> user.greet()
 'Hello, Jeff'
@@ -59,7 +59,7 @@ behavior would match regular dataclasses created by `pydantic`.
 ...         self.console(f'Hello, {self.name}')
 
 >>> User(name='Jeff', console=print)
-Private(User(name='Jeff', console=<built-in function print>))
+Private::User(name='Jeff', console=<built-in function print>)
 
 >>> User(name='Jeff', console=True)
 Traceback (most recent call last):
