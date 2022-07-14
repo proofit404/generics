@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 
 
 class User:
@@ -8,21 +8,16 @@ class User:
         self.last_login = last_login
 
     def __repr__(self):
-        return (
-            self.__class__.__name__
-            + "("
-            + ", ".join(k + "=" + repr(v) for k, v in self.__dict__.items())
-            + ")"
-        )
+        return f"User({self.last_login=!r})"
 
     @classmethod
     def new(cls):
         """Instantiate class."""
-        return cls(last_login=datetime.now())
+        return cls(last_login=date.today())
 
     def is_active(self):
         """Calculate user activity status."""
-        return (datetime.now() - self.last_login).days < 30
+        return (date.today() - self.last_login).days < 30
 
 
 class InheritanceUser(User):
@@ -127,11 +122,11 @@ class DoubleUnderscoreClassMethodUser:
 
 @classmethod
 def _global_class_method(cls):
-    return cls(last_login=datetime.now())
+    return cls(last_login=date.today())
 
 
 def _global_method(instance):
-    return (datetime.now() - instance.last_login).days < 30
+    return (date.today() - instance.last_login).days < 30
 
 
 class GlobalMethodUser:
@@ -165,11 +160,11 @@ class DunderMethodUser:
     @classmethod
     def new(cls):
         """Instantiate class."""
-        return cls(last_login=datetime.now())
+        return cls(last_login=date.today())
 
     def is_active(self):
         """Calculate user activity status."""
-        return (datetime.now() - self.last_login).days < 30
+        return (date.today() - self.last_login).days < 30
 
     def __validate__(self):
         """Validate."""
@@ -185,11 +180,11 @@ class DunderClassMethodUser:
     @classmethod
     def new(cls):
         """Instantiate class."""
-        return cls(last_login=datetime.now())
+        return cls(last_login=date.today())
 
     def is_active(self):
         """Calculate user activity status."""
-        return (datetime.now() - self.last_login).days < 30
+        return (date.today() - self.last_login).days < 30
 
     @classmethod
     def __validate__(cls):
@@ -211,7 +206,7 @@ class Bot:
     @classmethod
     def new_bot(cls):
         """Create an instance of the `NewBot`."""
-        return NewBot(last_login=datetime.now())
+        return NewBot(last_login=date.today())
 
     def is_active(self):
         """Calculate user activity status."""

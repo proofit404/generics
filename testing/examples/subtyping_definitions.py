@@ -1,6 +1,6 @@
 from abc import ABC
 from abc import abstractclassmethod
-from datetime import datetime
+from datetime import date
 
 
 class UserType(ABC):
@@ -19,7 +19,7 @@ class User(UserType):
 
     def is_active(self):
         """Calculate user activity status."""
-        return (datetime.now() - self.last_login).days < 30
+        return (date.today() - self.last_login).days < 30
 
 
 class SmartUser:

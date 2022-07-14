@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 
 from attr import attrib
 from attr import attrs
@@ -12,4 +12,4 @@ class User:
 
     def is_active(self):
         """Calculate user activity status."""
-        return (datetime.now() - self.last_login).days < 30
+        return (date.today() - self.last_login).days < 30

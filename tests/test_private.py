@@ -1,5 +1,5 @@
 """Tests related to the @private decorator."""
-from datetime import datetime
+from datetime import date
 
 import pytest
 
@@ -9,14 +9,14 @@ from generics.exceptions import GenericInstanceError
 
 
 instantiate_strategy = pytest.mark.parametrize(
-    "strategy", [lambda c: c(last_login=datetime.now()), lambda c: c.new()]
+    "strategy", [lambda c: c(last_login=date.today()), lambda c: c.new()]
 )
 
 
 def test_allow_method_access(e):
     """All methods should be public."""
     user_class = private(e.User)
-    user = user_class(last_login=datetime(1999, 12, 31))
+    user = user_class(last_login=date(1999, 12, 31))
     assert not user.is_active()
 
 
@@ -25,8 +25,10 @@ def test_deny_attribute_access(e, strategy):
     """All attributes should be private."""
     user_class = private(e.User)
     user = strategy(user_class)
-    with pytest.raises(AttributeError):
+    with pytest.raises(AttributeError) as exc_info:
         user.last_login
+    expected = "'Private::User' object has no attribute 'last_login'"
+    assert str(exc_info.value) == expected
 
 
 @instantiate_strategy
@@ -166,56 +168,35 @@ def test_dunder_method(e, strategy, class_name):
 
 
 @instantiate_strategy
-def test_class_name(e, strategy):
-    """Origin class name should appears in the class name."""
+def test_class_representation(e, strategy):
+    """Origin class name should appears in the class representation."""
     user_class = private(e.User)
     user = strategy(user_class)
-    assert "Private(User)" == user_class.__name__
-    assert "Private(User)" == user.__class__.__name__
-
-
-def test_class_method_name(e):
-    """Origin method name should appears in the class method name."""
-    user_class = private(e.User)
-    assert "__new__" == user_class.__new__.__name__
-    assert "new" == user_class.new.__name__
-    assert "is_active" == user_class.is_active.__name__
+    assert "Private::User" == repr(user_class)
+    assert "Private::User" == repr(user.__class__)
 
 
 @instantiate_strategy
-def test_method_name(e, strategy):
+def test_instance_representation(e, strategy):
+    """Origin instance representation should appears in the representation."""
+    user_class = private(e.User)
+    user = strategy(user_class)
+    origin = e.User(last_login=date.today())
+    assert f"Private::{origin!r}" == repr(user)
+
+
+def test_class_method_representation(e):
+    """Origin method name should appears in the class method representation."""
+    user_class = private(e.User)
+    assert "Private::User.new" == repr(user_class.new)
+    assert "Private::User.is_active" == repr(user_class.is_active)
+
+
+@instantiate_strategy
+def test_instance_method_representation(e, strategy):
     """Origin method name should appears in the method name."""
     user_class = private(e.User)
     user = strategy(user_class)
-    assert "new" == user.new.__name__
-    assert "is_active" == user.is_active.__name__
-    assert "__repr__" == user_class.__repr__.__name__
-    assert "__repr__" == user.__class__.__repr__.__name__
-    assert "__repr__" == user.__repr__.__name__
-
-
-@instantiate_strategy
-def test_class_method_type(e, strategy):
-    """Origin method types should be kept in the decorated class."""
-    user_class = private(e.User)
-    assert isinstance(user_class.__dict__["new"], classmethod)
-    assert not isinstance(user_class.__dict__["is_active"], classmethod)
-    user = strategy(user_class)
-    assert isinstance(user.__class__.__dict__["new"], classmethod)
-    assert not isinstance(user.__class__.__dict__["is_active"], classmethod)
-
-
-def test_class_representation(e):
-    """Origin class name should appears in the class representation."""
-    user_class = private(e.User)
-    assert "Private(User)" == repr(user_class)
-
-
-def test_instance_representation(e):
-    """Origin instance representation should appears in the representation."""
-    last_login = datetime.now()
-    user_class = private(e.User)
-    user = user_class(last_login=last_login)
-    origin_user = e.User(last_login=last_login)
-    expected = "Private(" + repr(origin_user) + ")"
-    assert expected == repr(user)
+    origin = e.User(last_login=date.today())
+    assert f"Private::{origin!r}.new" == repr(user.new)
+    assert f"Private::{origin!r}.is_active" == repr(user.is_active)
