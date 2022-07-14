@@ -46,7 +46,8 @@ It may be a nice convention to have it in the code base, but
 - [All attributes are private and hidden](#all-attributes-are-private-and-hidden)
 - [Static methods are forbidden](#static-methods-are-forbidden)
 - [Class methods should return instances](#class-methods-should-return-instances)
-- [Class methods can not be called on instancies](#class-methods-can-not-be-called-on-instancies)
+- [Class methods can not be called on instances](#class-methods-can-not-be-called-on-instances)
+- [Instance methods can return instances](#instance-methods-can-return-instances)
 - [Instance methods can not be called on classes](#instance-methods-can-not-be-called-on-classes)
 - [At least one instance method is required](#at-least-one-instance-method-is-required)
 - [At least one encapsulated attribute is required](#at-least-one-encapsulated-attribute-is-required)
@@ -186,7 +187,7 @@ _generics.exceptions.GenericInstanceError: 'create' classmethod should return an
 
 ```
 
-### Class methods can not be called on instancies
+### Class methods can not be called on instances
 
 As we explained earlier, classmethod could only be used to instantiate entities.
 The purpose of such methods is to implement some semantics in addition to
@@ -220,6 +221,17 @@ Traceback (most recent call last):
 _generics.exceptions.GenericInstanceError: Class methods can not be called on instances
 
 ```
+
+### Instance methods can return instances
+
+In case your object return another instance of the same class from its method,
+this instance would be `@private` as well. This is a good practice to follow.
+For example, instead of assigning new value to the attributes (aka setters),
+create new instance of the class with necessary changes and return it from
+method. Immutability is a powerful technique, which would help you to build safe
+architecture suitable for multi-threaded applications.
+
+See more in [Prefer immutable classes](#prefer-immutable-classes).
 
 ### Instance methods can not be called on classes
 
