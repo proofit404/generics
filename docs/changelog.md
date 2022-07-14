@@ -1,3 +1,10 @@
+# 3.7.0 (2022-07-14)
+
+### Features
+
+- implement methods representation
+  [#231](https://github.com/proofit404/generics/issues/231) 67927ce
+
 # 3.6.0 (2022-07-13)
 
 ### Features

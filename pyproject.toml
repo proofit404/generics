@@ -19,7 +19,7 @@ packages = [
 ]
 readme = "docs/index.md"
 repository = "https://github.com/proofit404/generics"
-version = "3.6.0"
+version = "3.7.0"
 
 [tool.poetry.dependencies]
 python = "*"
