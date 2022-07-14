@@ -466,8 +466,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#class-methods-can-not-be-called-on-instancies" class="md-nav__link">
-    Class methods can not be called on instancies
+  <a href="#class-methods-can-not-be-called-on-instances" class="md-nav__link">
+    Class methods can not be called on instances
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-methods-can-return-instances" class="md-nav__link">
+    Instance methods can return instances
   </a>
   
 </li>
@@ -749,8 +756,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#class-methods-can-not-be-called-on-instancies" class="md-nav__link">
-    Class methods can not be called on instancies
+  <a href="#class-methods-can-not-be-called-on-instances" class="md-nav__link">
+    Class methods can not be called on instances
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-methods-can-return-instances" class="md-nav__link">
+    Instance methods can return instances
   </a>
   
 </li>
@@ -869,7 +883,8 @@ attributes.</p>
 <li><a href="#all-attributes-are-private-and-hidden">All attributes are private and hidden</a></li>
 <li><a href="#static-methods-are-forbidden">Static methods are forbidden</a></li>
 <li><a href="#class-methods-should-return-instances">Class methods should return instances</a></li>
-<li><a href="#class-methods-can-not-be-called-on-instancies">Class methods can not be called on instancies</a></li>
+<li><a href="#class-methods-can-not-be-called-on-instances">Class methods can not be called on instances</a></li>
+<li><a href="#instance-methods-can-return-instances">Instance methods can return instances</a></li>
 <li><a href="#instance-methods-can-not-be-called-on-classes">Instance methods can not be called on classes</a></li>
 <li><a href="#at-least-one-instance-method-is-required">At least one instance method is required</a></li>
 <li><a href="#at-least-one-encapsulated-attribute-is-required">At least one encapsulated attribute is required</a></li>
@@ -978,7 +993,7 @@ instantiation of the object.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericInstanceError</span>: <span class="n">&#39;create&#39; classmethod should return an instance of the &#39;User&#39; class</span>
 </code></pre></div>
-<h3 id="class-methods-can-not-be-called-on-instancies">Class methods can not be called on instancies<a class="headerlink" href="#class-methods-can-not-be-called-on-instancies" title="Permanent link">&para;</a></h3>
+<h3 id="class-methods-can-not-be-called-on-instances">Class methods can not be called on instances<a class="headerlink" href="#class-methods-can-not-be-called-on-instances" title="Permanent link">&para;</a></h3>
 <p>As we explained earlier, classmethod could only be used to instantiate entities.
 The purpose of such methods is to implement some semantics in addition to
 arguments passed to this method. In that case, if we would call classmethod
@@ -1007,6 +1022,14 @@ be accessed using class reference.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericInstanceError</span>: <span class="n">Class methods can not be called on instances</span>
 </code></pre></div>
+<h3 id="instance-methods-can-return-instances">Instance methods can return instances<a class="headerlink" href="#instance-methods-can-return-instances" title="Permanent link">&para;</a></h3>
+<p>In case your object return another instance of the same class from its method,
+this instance would be <code>@private</code> as well. This is a good practice to follow.
+For example, instead of assigning new value to the attributes (aka setters),
+create new instance of the class with necessary changes and return it from
+method. Immutability is a powerful technique, which would help you to build safe
+architecture suitable for multi-threaded applications.</p>
+<p>See more in <a href="#prefer-immutable-classes">Prefer immutable classes</a>.</p>
 <h3 id="instance-methods-can-not-be-called-on-classes">Instance methods can not be called on classes<a class="headerlink" href="#instance-methods-can-not-be-called-on-classes" title="Permanent link">&para;</a></h3>
 <p>In some cases, it's technically possible to use instance methods as functions,
 if you pass value of <code>self</code> directly as argument. This behavior is hacky. That's
