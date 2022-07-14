@@ -54,6 +54,7 @@ It may be a nice convention to have it in the code base, but
 - [Implementation inheritance is forbidden](#implementation-inheritance-is-forbidden)
 - [Underscore names are forbidden](#underscore-names-are-forbidden)
 - [Prefer immutable classes](#prefer-immutable-classes)
+- [Methods would have representation](#methods-would-have-representation)
 
 ### All methods are public
 
@@ -477,6 +478,54 @@ _Good_:
 
 >>> User(name='Jeff').rename('John')
 Private::User(self.name='John')
+
+```
+
+### Methods would have representation
+
+In some cases, instead of object composition people would create composition of
+callables. Usually, this happens when you pass bound method of one object into
+constructor of another object. Service objects tend to do this a lot. Most of
+the time they primary goal to trigger some action. Such objects are rarely
+interested in knowledge who would implement the action. To make service objects
+representation look nice, generics library provides representation to class and
+instance methods of `@private` classes.
+
+```pycon
+
+>>> @private
+... class Registration:
+...     def __init__(self, send_message):
+...         self.send_message = send_message
+...
+...     def __repr__(self):
+...         return f"Registration(\n    {self.send_message=!r}\n)"
+...
+...     def sign_up(self, phone):
+...         self.send_message(phone)
+
+>>> @private
+... class Message:
+...     def __init__(self, text):
+...         self.text = text
+...
+...     def __repr__(self):
+...         return f"SignUp({self.text=!r})"
+...
+...     def send(self, phone):
+...         print(f"Message {self.text!r} was sent to {phone!r}")
+
+>>> message = Message("Welcome to the service")
+
+>>> registration = Registration(message.send)
+
+>>> registration.sign_up("911")
+Message 'Welcome to the service' was sent to '911'
+
+>>> registration
+Private::Registration(
+    self.send_message=Private::SignUp(self.text='Welcome to the service').send
+)
 
 ```
 
