@@ -15,6 +15,7 @@ def private(cls):
     _check_fields(fields)
     _check_private_methods(methods)
     _check_private_fields(fields)
+    _check_variable_keyword_fields(fields)
     _check_variable_positional_fields(fields)
     class_name = _get_class_name(cls)
     defined = _define_class_methods(methods)
@@ -37,15 +38,20 @@ def _get_init(cls):
 
 
 def _get_fields(init):
-    fields = []
-    if init is not None:
-        params = signature(init).parameters
-        for name in list(params)[1:]:
-            param = params[name]
-            if param.kind is param.VAR_POSITIONAL:
-                name = f"*{name}"
-            fields.append(name)
-    return fields
+    if init is None:
+        return []
+    params = iter(signature(init).parameters.items())
+    next(params)  # Skip self constructor argument.
+    return [_get_field_name(name, param) for name, param in params]
+
+
+def _get_field_name(name, param):
+    if param.kind is param.VAR_POSITIONAL:
+        return f"*{name}"
+    elif param.kind is param.VAR_KEYWORD:
+        return f"**{name}"
+    else:
+        return name
 
 
 def _check_bases(cls):
@@ -77,6 +83,14 @@ def _check_private_fields(fields):
     for field in fields:
         if field.startswith("_"):
             raise GenericClassError("Do not use private attributes")
+
+
+def _check_variable_keyword_fields(fields):
+    for field in fields:
+        if field.startswith("**"):
+            raise GenericClassError(
+                "Class could not have keyword encapsulated attribute"
+            )
 
 
 def _check_variable_positional_fields(fields):

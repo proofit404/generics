@@ -81,6 +81,18 @@ class VarArgsUser:
 
 
 @dataclass
+class KwArgsUser:
+    """User domain model."""
+
+    def __init__(self, **kwargs):
+        raise RuntimeError
+
+    def is_active(self):
+        """Calculate user activity status."""
+        raise RuntimeError
+
+
+@dataclass
 class UnderscoreMethodUser:
     """User domain model."""
 
