@@ -82,6 +82,18 @@ class VarArgsUser:
 
 
 @define
+class KwArgsUser:
+    """User domain model."""
+
+    def __init__(self, **kwargs):
+        raise RuntimeError
+
+    def is_active(self):
+        """Calculate user activity status."""
+        raise RuntimeError
+
+
+@define
 class UnderscoreMethodUser:
     """User domain model."""
 

@@ -115,6 +115,13 @@ def test_deny_variable_encapsulated_attributes(e):
     assert str(exc_info.value) == "Class could not have variable encapsulated attribute"
 
 
+def test_deny_keyword_encapsulated_attributes(e):
+    """Deny double star arguments in class constructor."""
+    with pytest.raises(GenericClassError) as exc_info:
+        private(e.KwArgsUser)
+    assert str(exc_info.value) == "Class could not have keyword encapsulated attribute"
+
+
 def test_deny_static_method(e):
     """Deny static methods on classes."""
     with pytest.raises(GenericClassError) as exc_info:
