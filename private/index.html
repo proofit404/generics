@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://proofit404.github.io/generics/private/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
@@ -508,6 +508,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#keyword-encapsulated-attributes-are-forbidden" class="md-nav__link">
+    Keyword encapsulated attributes are forbidden
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#implementation-inheritance-is-forbidden" class="md-nav__link">
     Implementation inheritance is forbidden
   </a>
@@ -798,6 +805,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#keyword-encapsulated-attributes-are-forbidden" class="md-nav__link">
+    Keyword encapsulated attributes are forbidden
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#implementation-inheritance-is-forbidden" class="md-nav__link">
     Implementation inheritance is forbidden
   </a>
@@ -889,6 +903,7 @@ attributes.</p>
 <li><a href="#at-least-one-instance-method-is-required">At least one instance method is required</a></li>
 <li><a href="#at-least-one-encapsulated-attribute-is-required">At least one encapsulated attribute is required</a></li>
 <li><a href="#variable-length-encapsulated-attributes-are-forbidden">Variable-length encapsulated attributes are forbidden</a></li>
+<li><a href="#keyword-encapsulated-attributes-are-forbidden">Keyword encapsulated attributes are forbidden</a></li>
 <li><a href="#implementation-inheritance-is-forbidden">Implementation inheritance is forbidden</a></li>
 <li><a href="#underscore-names-are-forbidden">Underscore names are forbidden</a></li>
 <li><a href="#prefer-immutable-classes">Prefer immutable classes</a></li>
@@ -1111,6 +1126,24 @@ to reason about. This makes object state unrepresented in the source code.</p>
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Class could not have variable encapsulated attribute</span>
+</code></pre></div>
+<h3 id="keyword-encapsulated-attributes-are-forbidden">Keyword encapsulated attributes are forbidden<a class="headerlink" href="#keyword-encapsulated-attributes-are-forbidden" title="Permanent link">&para;</a></h3>
+<p>Classes should not encapsulate attributes which names defined outside of the
+class. This makes code hard to reason about. This makes object structure
+unrepresented in the source code.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="s1">&#39;Hello, Jeff&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Class could not have keyword encapsulated attribute</span>
 </code></pre></div>
 <h3 id="implementation-inheritance-is-forbidden">Implementation inheritance is forbidden<a class="headerlink" href="#implementation-inheritance-is-forbidden" title="Permanent link">&para;</a></h3>
 <p>First of all, there are two types of inheritance -
