@@ -1,3 +1,10 @@
+# 3.9.0 (2022-07-24)
+
+### Features
+
+- deny keyword arguments in constructor
+  [#213](https://github.com/proofit404/generics/issues/213) 5d0c4e1
+
 # 3.8.0 (2022-07-14)
 
 ### Features
