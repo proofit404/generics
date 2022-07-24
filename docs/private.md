@@ -52,6 +52,7 @@ It may be a nice convention to have it in the code base, but
 - [At least one instance method is required](#at-least-one-instance-method-is-required)
 - [At least one encapsulated attribute is required](#at-least-one-encapsulated-attribute-is-required)
 - [Variable-length encapsulated attributes are forbidden](#variable-length-encapsulated-attributes-are-forbidden)
+- [Keyword encapsulated attributes are forbidden](#keyword-encapsulated-attributes-are-forbidden)
 - [Implementation inheritance is forbidden](#implementation-inheritance-is-forbidden)
 - [Underscore names are forbidden](#underscore-names-are-forbidden)
 - [Prefer immutable classes](#prefer-immutable-classes)
@@ -337,6 +338,30 @@ to reason about. This makes object state unrepresented in the source code.
 Traceback (most recent call last):
   ...
 _generics.exceptions.GenericClassError: Class could not have variable encapsulated attribute
+
+```
+
+### Keyword encapsulated attributes are forbidden
+
+Classes should not encapsulate attributes which names defined outside of the
+class. This makes code hard to reason about. This makes object structure
+unrepresented in the source code.
+
+```pycon
+
+>>> from generics import private
+
+>>> @private
+... class User:
+...
+...     def __init__(self, **kwargs):
+...         self.kwargs = kwargs
+...
+...     def greet(self):
+...         return 'Hello, Jeff'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Class could not have keyword encapsulated attribute
 
 ```
 
