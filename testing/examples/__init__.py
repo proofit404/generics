@@ -31,11 +31,3 @@ def w():
     import examples.delegates
 
     return examples.delegates
-
-
-@pytest.fixture()
-def s():
-    """Fixture with subtyping entity definitions."""
-    import examples.subtyping
-
-    return examples.subtyping

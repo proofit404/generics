@@ -1,4 +1,3 @@
-from abc import ABC
 from inspect import signature
 
 from _generics.exceptions import GenericClassError
@@ -55,9 +54,8 @@ def _get_field_name(name, param):
 
 
 def _check_bases(cls):
-    for base in cls.__bases__:
-        if base is not object and not issubclass(base, ABC):
-            raise GenericClassError("Do not use inheritance (use composition instead)")
+    if cls.__bases__ != (object,):
+        raise GenericClassError("Do not use inheritance (use composition instead)")
 
 
 def _check_methods(methods):
