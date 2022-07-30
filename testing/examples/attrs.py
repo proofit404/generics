@@ -1,15 +1,15 @@
 from datetime import date
 
-from attrs import define
-from attrs import evolve
-from attrs import field
+from attr import attrib
+from attr import attrs
+from attr import evolve
 
 
-@define
+@attrs
 class User:
     """User domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     @classmethod
     def new(cls):
@@ -21,11 +21,11 @@ class User:
         return (date.today() - self.last_login).days < 30
 
 
-@define
+@attrs
 class NamedUser:
     """User domain model."""
 
-    name = field()
+    name = attrib()
 
     def greet(self):
         """Say nice thing."""
@@ -36,16 +36,16 @@ class NamedUser:
         return evolve(self, name=name)
 
 
-@define
+@attrs
 class InheritanceUser(User):
     """Inherit user domain model."""
 
 
-@define
+@attrs
 class ClassMethodOnlyUser:
     """User domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     @classmethod
     def new(cls):
@@ -53,14 +53,14 @@ class ClassMethodOnlyUser:
         raise RuntimeError
 
 
-@define
+@attrs
 class NoMethodsUser:
     """User domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
 
-@define
+@attrs
 class NoEncapsulationUser:
     """User domain model."""
 
@@ -69,7 +69,7 @@ class NoEncapsulationUser:
         raise RuntimeError
 
 
-@define
+@attrs(init=False)
 class VarArgsUser:
     """User domain model."""
 
@@ -81,7 +81,7 @@ class VarArgsUser:
         raise RuntimeError
 
 
-@define
+@attrs(init=False)
 class KwArgsUser:
     """User domain model."""
 
@@ -93,11 +93,11 @@ class KwArgsUser:
         raise RuntimeError
 
 
-@define
+@attrs
 class UnderscoreMethodUser:
     """User domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     def is_active(self):
         """Calculate user activity status."""
@@ -107,11 +107,11 @@ class UnderscoreMethodUser:
         raise RuntimeError
 
 
-@define
+@attrs
 class DoubleUnderscoreMethodUser:
     """User domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     def is_active(self):
         """Calculate user activity status."""
@@ -121,11 +121,11 @@ class DoubleUnderscoreMethodUser:
         raise RuntimeError
 
 
-@define
+@attrs
 class UnderscoreClassMethodUser:
     """User domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     @classmethod
     def _new(cls):
@@ -136,11 +136,11 @@ class UnderscoreClassMethodUser:
         raise RuntimeError
 
 
-@define
+@attrs
 class DoubleUnderscoreClassMethodUser:
     """User domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     @classmethod
     def __new(cls):
@@ -151,11 +151,24 @@ class DoubleUnderscoreClassMethodUser:
         raise RuntimeError
 
 
-@define
+@attrs
+class ClassAttributeUser:
+    """User domain model."""
+
+    has_profile = True
+
+    last_login = attrib()
+
+    def is_active(self):
+        """Calculate user activity status."""
+        raise RuntimeError
+
+
+@attrs
 class DunderMethodUser:
     """User domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     @classmethod
     def new(cls):
@@ -171,11 +184,11 @@ class DunderMethodUser:
         raise RuntimeError
 
 
-@define
+@attrs
 class DunderClassMethodUser:
     """User domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     @classmethod
     def new(cls):
@@ -192,11 +205,11 @@ class DunderClassMethodUser:
         raise RuntimeError
 
 
-@define
+@attrs
 class Bot:
     """Bot domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     @classmethod
     def is_bot(cls):
@@ -213,16 +226,16 @@ class Bot:
         raise RuntimeError
 
 
-@define
+@attrs
 class NewBot(Bot):
     """New bot domain model."""
 
 
-@define
+@attrs
 class StaticBot:
     """Bot domain model."""
 
-    last_login = field()
+    last_login = attrib()
 
     @staticmethod
     def is_bot():

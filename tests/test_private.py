@@ -161,6 +161,13 @@ def test_deny_private_attribute(e):
     assert str(exc_info.value) == "Do not use private attributes"
 
 
+def test_deny_class_attribute(e):
+    """Deny attributes defined on class."""
+    with pytest.raises(GenericClassError) as exc_info:
+        private(e.ClassAttributeUser)
+    assert str(exc_info.value) == "Do not assign attributes to class"
+
+
 @instantiate_strategy
 @pytest.mark.parametrize("class_name", ["DunderMethodUser", "DunderClassMethodUser"])
 def test_dunder_method(e, strategy, class_name):
