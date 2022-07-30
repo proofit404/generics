@@ -151,6 +151,19 @@ class DoubleUnderscoreClassMethodUser:
 
 
 @dataclass
+class ClassAttributeUser:
+    """User domain model."""
+
+    has_profile = True
+
+    last_login: date
+
+    def is_active(self):
+        """Calculate user activity status."""
+        raise RuntimeError
+
+
+@dataclass
 class DunderMethodUser:
     """User domain model."""
 

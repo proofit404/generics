@@ -157,6 +157,19 @@ class UnderscoreAttributeUser:
         raise RuntimeError
 
 
+class ClassAttributeUser:
+    """User domain model."""
+
+    has_profile = True
+
+    def __init__(self, last_login):
+        raise RuntimeError
+
+    def is_active(self):
+        """Calculate user activity status."""
+        raise RuntimeError
+
+
 class DunderMethodUser:
     """User domain model."""
 

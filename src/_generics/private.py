@@ -143,6 +143,7 @@ def _get_method(cls, attribute_name, attribute):
         _deny_static_method(attribute)
         or _get_class_method(cls, attribute_name, attribute)
         or _get_instance_method(cls, attribute_name, attribute)
+        or _deny_class_attribute(attribute_name, attribute)
     )
 
 
@@ -164,6 +165,11 @@ def _get_instance_method(cls, attribute_name, attribute):
         name = _choose_name(cls, attribute_name, attribute)
         if not _is_dunder(name):
             return _InstanceMethod(cls, name, attribute)
+
+
+def _deny_class_attribute(name, attribute):
+    if not _is_dunder(name) and not callable(attribute):
+        raise GenericClassError("Do not assign attributes to class")
 
 
 def _choose_name(cls, attribute_name, func):

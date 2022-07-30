@@ -6,11 +6,12 @@ class Delegated:
 
     def __call__(self, cls):
         """Create decorator class."""
-        created_methods = {"__init__": cls.__dict__["__init__"]}
-        for name in self.interface.__dict__:
-            if name.startswith("_"):
-                continue
-            created_methods[name] = _create_method(name)
+        created_methods = {
+            name: _create_method(name)
+            for name in self.interface.__dict__
+            if not name.startswith("_")
+        }
+        created_methods["__init__"] = cls.__dict__["__init__"]
         return type(cls.__name__, (), created_methods)
 
 
