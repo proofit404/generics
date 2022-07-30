@@ -378,8 +378,12 @@ is an implementation of this particular interface.
 approaches for implicit interface implementation in Python. It has alternatives
 like [Duck typing](https://en.wikipedia.org/wiki/Duck_typing) and
 [`typing_extensions.Protocol`](https://mypy.readthedocs.io/en/stable/protocols.html#simple-user-defined-protocols).
-Yet again, it's nothing wrong with it if you want to design **contracts** in
-your codebase using `abc.Meta`.
+If you want to design **contracts** in your codebase using `abc.Meta`, we advice
+you not to do so. `Protocol` would make it possible to define contract close to
+the place where object of this interface would be used. The most practical place
+to put interface declaration. More importantly it would not create broken (from
+the point of logic) import graph and would not force you to create dumb top-down
+architecture. `abc.Meta` makes both of these goals hard to achieve.
 
 On the other hand, implementation inheritance was designed for
 [code reuse](<https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#Code_reuse>)

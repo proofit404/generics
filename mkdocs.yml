@@ -41,7 +41,6 @@ nav:
   - Usage:
       - Private: private.md
       - Delegated: delegated.md
-      - Subtyping: subtyping.md
   - Guides:
       - Attrs: attrs.md
       - Dataclasses: dataclasses.md
