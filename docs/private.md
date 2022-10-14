@@ -55,6 +55,7 @@ It may be a nice convention to have it in the code base, but
 - [Keyword encapsulated attributes are forbidden](#keyword-encapsulated-attributes-are-forbidden)
 - [Implementation inheritance is forbidden](#implementation-inheritance-is-forbidden)
 - [Underscore names are forbidden](#underscore-names-are-forbidden)
+- [Class attributes are forbidden](#class-attributes-are-forbidden)
 - [Prefer immutable classes](#prefer-immutable-classes)
 - [Methods would have representation](#methods-would-have-representation)
 
@@ -467,6 +468,129 @@ names in their code. A bad design indeed.
 Traceback (most recent call last):
   ...
 _generics.exceptions.GenericClassError: Do not use private attributes
+
+```
+
+### Class attributes are forbidden
+
+If you keep in mind that classes decorated with `@private` decorator does not
+expose instance attributes, you would agree that class attributes in that case
+became useless.
+
+Usually, it would be used as some kind of marker for external purposes. Let say
+some kind of regestry could access class attribute to make decision what to do
+with class.
+
+_Bad_:
+
+```pycon
+
+>>> class User:
+...     bot_flag = False
+
+>>> def register(cls):
+...     if cls.bot_flag:
+...         print('extend bot registry')
+
+>>> register(User)
+
+```
+
+_Good_:
+
+```pycon
+
+>>> from generics import private
+
+>>> @private
+... class User:
+...     def __init__(self, name):
+...         self.name = name
+...
+...     def is_bot(self):
+...         return False
+
+>>> def register(visitor):
+...     if visitor.is_bot():
+...         print('extend bot registry')
+
+>>> register(User('Jeff'))
+
+```
+
+In some cases people tend to use class attributes as some kind of constants to
+be used by methods of the class. Most common intent for such style would be
+abbility to override that constant using inheritance. We consider this practice
+an antipattern as well. Our suggestion would be to move this constant to the
+default value of the keyword argument of the method.
+
+If you need this constant in more than one method of your class, it is a clear
+sign that your class is doing too much. It's a code smell related to the
+[Single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle).
+Do not define module level uppercase-named variable. Do not repeat same keyword
+argument in many methods of the same class. Instead of this you could extract
+logic related to the constant into a smaller low-level class. After that you
+would be able to encapsulate its instance into original class and remove existed
+duplication.
+
+_Bad_:
+
+```pycon
+
+>>> class User:
+...     active_status = 'active'
+...
+...     def __init__(self, status):
+...         self.status = status
+...
+...     def is_active(self):
+...         return self.status == self.active_status
+
+>>> user = User('banned')
+>>> user.is_active()
+False
+
+```
+
+_Good_:
+
+```pycon
+
+>>> from generics import private
+
+>>> @private
+... class User:
+...     def __init__(self, status):
+...         self.status = status
+...
+...     def is_active(self, active_status='active'):
+...         return self.status == active_status
+
+>>> user = User('banned')
+>>> user.is_active()
+False
+
+```
+
+Which that reasons in mind `generics` library deny class attributes to be
+defined on classes decorated with `@private` decorator.
+
+```pycon
+
+>>> from generics import private
+
+>>> @private
+... class User:
+...     alive = True
+...
+...     def __init__(self, name):
+...         self.name = name
+...
+...     def greet(self):
+...         return f'Hello, {self.name}'
+Traceback (most recent call last):
+  ...
+_generics.exceptions.GenericClassError: Do not define attributes on classes
 
 ```
 

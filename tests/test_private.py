@@ -165,7 +165,7 @@ def test_deny_class_attribute(e):
     """Deny attributes defined on class."""
     with pytest.raises(GenericClassError) as exc_info:
         private(e.ClassAttributeUser)
-    assert str(exc_info.value) == "Do not assign attributes to class"
+    assert str(exc_info.value) == "Do not define attributes on classes"
 
 
 @instantiate_strategy
