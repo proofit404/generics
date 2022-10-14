@@ -169,7 +169,7 @@ def _get_instance_method(cls, attribute_name, attribute):
 
 def _deny_class_attribute(name, attribute):
     if not _is_dunder(name) and not callable(attribute):
-        raise GenericClassError("Do not assign attributes to class")
+        raise GenericClassError("Do not define attributes on classes")
 
 
 def _choose_name(cls, attribute_name, func):
