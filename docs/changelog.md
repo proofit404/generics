@@ -1,3 +1,20 @@
+# 4.0.0 (2022-10-14)
+
+### Code Refactoring
+
+- drop abc.Meta subtyping
+  [#57](https://github.com/proofit404/generics/issues/57) 1ea34e5
+
+### Features
+
+- deny class attributes [#57](https://github.com/proofit404/generics/issues/57)
+  ee512f7
+
+### BREAKING CHANGES
+
+- Inheritance of any kind is not allowed any more. If you are using `abc.Meta`,
+  we suggest to use `typing.Protocol` instead.
+
 # 3.9.0 (2022-07-24)
 
 ### Features
