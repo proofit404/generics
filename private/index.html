@@ -531,6 +531,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#class-attributes-are-forbidden" class="md-nav__link">
+    Class attributes are forbidden
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prefer-immutable-classes" class="md-nav__link">
     Prefer immutable classes
   </a>
@@ -566,20 +573,6 @@
     <li class="md-nav__item">
       <a href="../delegated/" class="md-nav__link">
         Delegated
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../subtyping/" class="md-nav__link">
-        Subtyping
       </a>
     </li>
   
@@ -828,6 +821,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#class-attributes-are-forbidden" class="md-nav__link">
+    Class attributes are forbidden
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prefer-immutable-classes" class="md-nav__link">
     Prefer immutable classes
   </a>
@@ -909,6 +909,7 @@ attributes.</p>
 <li><a href="#keyword-encapsulated-attributes-are-forbidden">Keyword encapsulated attributes are forbidden</a></li>
 <li><a href="#implementation-inheritance-is-forbidden">Implementation inheritance is forbidden</a></li>
 <li><a href="#underscore-names-are-forbidden">Underscore names are forbidden</a></li>
+<li><a href="#class-attributes-are-forbidden">Class attributes are forbidden</a></li>
 <li><a href="#prefer-immutable-classes">Prefer immutable classes</a></li>
 <li><a href="#methods-would-have-representation">Methods would have representation</a></li>
 </ul>
@@ -1159,8 +1160,12 @@ is an implementation of this particular interface.
 approaches for implicit interface implementation in Python. It has alternatives
 like <a href="https://en.wikipedia.org/wiki/Duck_typing">Duck typing</a> and
 <a href="https://mypy.readthedocs.io/en/stable/protocols.html#simple-user-defined-protocols"><code>typing_extensions.Protocol</code></a>.
-Yet again, it's nothing wrong with it if you want to design <strong>contracts</strong> in
-your codebase using <code>abc.Meta</code>.</p>
+If you want to design <strong>contracts</strong> in your codebase using <code>abc.Meta</code>, we advice
+you not to do so. <code>Protocol</code> would make it possible to define contract close to
+the place where object of this interface would be used. The most practical place
+to put interface declaration. More importantly it would not create broken (from
+the point of logic) import graph and would not force you to create dumb top-down
+architecture. <code>abc.Meta</code> makes both of these goals hard to achieve.</p>
 <p>On the other hand, implementation inheritance was designed for
 <a href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)#Code_reuse">code reuse</a>
 in its heart. That's where things start to get out of hands. <strong>Implementation
@@ -1227,6 +1232,99 @@ names in their code. A bad design indeed.</p>
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use private attributes</span>
+</code></pre></div>
+<h3 id="class-attributes-are-forbidden">Class attributes are forbidden<a class="headerlink" href="#class-attributes-are-forbidden" title="Permanent link">&para;</a></h3>
+<p>If you keep in mind that classes decorated with <code>@private</code> decorator does not
+expose instance attributes, you would agree that class attributes in that case
+became useless.</p>
+<p>Usually, it would be used as some kind of marker for external purposes. Let say
+some kind of regestry could access class attribute to make decision what to do
+with class.</p>
+<p><em>Bad</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">bot_flag</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">bot_flag</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;extend bot registry&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+</code></pre></div>
+<p><em>Good</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">is_bot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">visitor</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">visitor</span><span class="o">.</span><span class="n">is_bot</span><span class="p">():</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;extend bot registry&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="s1">&#39;Jeff&#39;</span><span class="p">))</span>
+</code></pre></div>
+<p>In some cases people tend to use class attributes as some kind of constants to
+be used by methods of the class. Most common intent for such style would be
+abbility to override that constant using inheritance. We consider this practice
+an antipattern as well. Our suggestion would be to move this constant to the
+default value of the keyword argument of the method.</p>
+<p>If you need this constant in more than one method of your class, it is a clear
+sign that your class is doing too much. It's a code smell related to the
+<a href="https://en.wikipedia.org/wiki/Single-responsibility_principle">Single-responsibility principle</a>.
+Do not define module level uppercase-named variable. Do not repeat same keyword
+argument in many methods of the same class. Instead of this you could extract
+logic related to the constant into a smaller low-level class. After that you
+would be able to encapsulate its instance into original class and remove existed
+duplication.</p>
+<p><em>Bad</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">active_status</span> <span class="o">=</span> <span class="s1">&#39;active&#39;</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_status</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;banned&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">()</span>
+<span class="go">False</span>
+</code></pre></div>
+<p><em>Good</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">active_status</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">active_status</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;banned&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">()</span>
+<span class="go">False</span>
+</code></pre></div>
+<p>Which that reasons in mind <code>generics</code> library deny class attributes to be
+defined on classes decorated with <code>@private</code> decorator.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">alive</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not define attributes on classes</span>
 </code></pre></div>
 <h3 id="prefer-immutable-classes">Prefer immutable classes<a class="headerlink" href="#prefer-immutable-classes" title="Permanent link">&para;</a></h3>
 <p>Awoid changing inner state of the classes as much as possible.</p>
