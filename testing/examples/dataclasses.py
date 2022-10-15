@@ -9,14 +9,41 @@ class User:
 
     last_login: date
 
-    @classmethod
-    def new(cls):
-        """Instantiate class."""
-        return cls(last_login=date.today())
-
     def is_active(self):
         """Calculate user activity status."""
         return (date.today() - self.last_login).days < 30
+
+
+@dataclass
+class StaticMethodUser:
+    """User domain model."""
+
+    last_login: date
+
+    @staticmethod
+    def is_bot():
+        """Perform bot check."""
+        raise RuntimeError
+
+    def is_active(self):
+        """Calculate user activity status."""
+        raise RuntimeError
+
+
+@dataclass
+class ClassMethodUser:
+    """User domain model."""
+
+    last_login: date
+
+    @classmethod
+    def new(cls):
+        """Instantiate class."""
+        raise RuntimeError
+
+    def is_active(self):
+        """Calculate user activity status."""
+        raise RuntimeError
 
 
 @dataclass
@@ -37,18 +64,6 @@ class NamedUser:
 @dataclass
 class InheritanceUser(User):
     """Inherit user domain model."""
-
-
-@dataclass
-class ClassMethodOnlyUser:
-    """User domain model."""
-
-    last_login: date
-
-    @classmethod
-    def new(cls):
-        """Instantiate class."""
-        raise RuntimeError
 
 
 @dataclass
@@ -106,50 +121,6 @@ class UnderscoreMethodUser:
 
 
 @dataclass
-class DoubleUnderscoreMethodUser:
-    """User domain model."""
-
-    last_login: date
-
-    def is_active(self):
-        """Calculate user activity status."""
-        raise RuntimeError
-
-    def __is_active(self):
-        raise RuntimeError
-
-
-@dataclass
-class UnderscoreClassMethodUser:
-    """User domain model."""
-
-    last_login: date
-
-    @classmethod
-    def _new(cls):
-        raise RuntimeError
-
-    def is_active(self):
-        """Calculate user activity status."""
-        raise RuntimeError
-
-
-@dataclass
-class DoubleUnderscoreClassMethodUser:
-    """User domain model."""
-
-    last_login: date
-
-    @classmethod
-    def __new(cls):
-        raise RuntimeError
-
-    def is_active(self):
-        """Calculate user activity status."""
-        raise RuntimeError
-
-
-@dataclass
 class UnderscoreAttributeUser:
     """User domain model."""
 
@@ -168,89 +139,6 @@ class ClassAttributeUser:
     has_profile = True
 
     last_login: date
-
-    def is_active(self):
-        """Calculate user activity status."""
-        raise RuntimeError
-
-
-@dataclass
-class DunderMethodUser:
-    """User domain model."""
-
-    last_login: date
-
-    @classmethod
-    def new(cls):
-        """Instantiate class."""
-        return cls(last_login=date.today())
-
-    def is_active(self):
-        """Calculate user activity status."""
-        return (date.today() - self.last_login).days < 30
-
-    def __validate__(self):
-        """Validate."""
-        raise RuntimeError
-
-
-@dataclass
-class DunderClassMethodUser:
-    """User domain model."""
-
-    last_login: date
-
-    @classmethod
-    def new(cls):
-        """Instantiate class."""
-        return cls(last_login=date.today())
-
-    def is_active(self):
-        """Calculate user activity status."""
-        return (date.today() - self.last_login).days < 30
-
-    @classmethod
-    def __validate__(cls):
-        """Validate."""
-        raise RuntimeError
-
-
-@dataclass
-class Bot:
-    """Bot domain model."""
-
-    last_login: date
-
-    @classmethod
-    def is_bot(cls):
-        """Perform bot check."""
-        return True
-
-    @classmethod
-    def new_bot(cls):
-        """Create an instance of the `NewBot`."""
-        return NewBot(last_login=date.today())
-
-    def is_active(self):
-        """Calculate user activity status."""
-        raise RuntimeError
-
-
-@dataclass
-class NewBot(Bot):
-    """New bot domain model."""
-
-
-@dataclass
-class StaticBot:
-    """Bot domain model."""
-
-    last_login: date
-
-    @staticmethod
-    def is_bot():
-        """Perform bot check."""
-        raise RuntimeError
 
     def is_active(self):
         """Calculate user activity status."""
