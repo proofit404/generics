@@ -1,25 +1,26 @@
 from datetime import date
 
+from attrs import define
+from attrs import evolve
+from attrs import field
 
+
+@define
 class User:
     """User domain model."""
 
-    def __init__(self, last_login):
-        self.last_login = last_login
-
-    def __repr__(self):
-        return f"User({self.last_login=!r})"
+    last_login = field()
 
     def is_active(self):
         """Calculate user activity status."""
         return (date.today() - self.last_login).days < 30
 
 
+@define
 class StaticMethodUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login = field()
 
     @staticmethod
     def is_bot():
@@ -31,11 +32,11 @@ class StaticMethodUser:
         raise RuntimeError
 
 
+@define
 class ClassMethodUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login = field()
 
     @classmethod
     def new(cls):
@@ -47,11 +48,11 @@ class ClassMethodUser:
         raise RuntimeError
 
 
+@define
 class NamedUser:
     """User domain model."""
 
-    def __init__(self, name):
-        self.name = name
+    name = field()
 
     def greet(self):
         """Say nice thing."""
@@ -59,20 +60,22 @@ class NamedUser:
 
     def rename(self, name):
         """Change user name."""
-        return self.__class__(name)
+        return evolve(self, name=name)
 
 
+@define
 class InheritanceUser(User):
     """Inherit user domain model."""
 
 
+@define
 class NoMethodsUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login = field()
 
 
+@define
 class NoEncapsulationUser:
     """User domain model."""
 
@@ -81,6 +84,7 @@ class NoEncapsulationUser:
         raise RuntimeError
 
 
+@define(init=False)
 class VarArgsUser:
     """User domain model."""
 
@@ -92,6 +96,7 @@ class VarArgsUser:
         raise RuntimeError
 
 
+@define(init=False)
 class KwArgsUser:
     """User domain model."""
 
@@ -103,11 +108,11 @@ class KwArgsUser:
         raise RuntimeError
 
 
+@define
 class UnderscoreMethodUser:
     """User domain model."""
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login = field()
 
     def is_active(self):
         """Calculate user activity status."""
@@ -117,24 +122,13 @@ class UnderscoreMethodUser:
         raise RuntimeError
 
 
-class UnderscoreAttributeUser:
-    """User domain model."""
-
-    def __init__(self, last_login, _is_active):
-        raise RuntimeError
-
-    def is_active(self):
-        """Calculate user activity status."""
-        raise RuntimeError
-
-
+@define
 class ClassAttributeUser:
     """User domain model."""
 
     has_profile = True
 
-    def __init__(self, last_login):
-        raise RuntimeError
+    last_login = field()
 
     def is_active(self):
         """Calculate user activity status."""

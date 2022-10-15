@@ -1,7 +1,7 @@
 from inspect import signature
+from types import MemberDescriptorType
 
 from _generics.exceptions import GenericClassError
-from _generics.exceptions import GenericInstanceError
 
 
 def private(cls):
@@ -25,8 +25,8 @@ def private(cls):
 
 def _get_methods(cls):
     methods = []
-    for attribute_name, attribute in cls.__dict__.items():
-        method = _get_method(cls, attribute_name, attribute)
+    for name, attribute in cls.__dict__.items():
+        method = _get_method(cls, name, attribute)
         if method:
             methods.append(method)
     return methods
@@ -59,8 +59,7 @@ def _check_bases(cls):
 
 
 def _check_methods(methods):
-    instance_methods = [method for method in methods if method.is_instance_method()]
-    if not instance_methods:
+    if not methods:
         raise GenericClassError("Define at least one instance method")
 
 
@@ -138,13 +137,14 @@ class _PrivateType(type):
         return cls.__name__
 
 
-def _get_method(cls, attribute_name, attribute):
-    return (
-        _deny_static_method(attribute)
-        or _get_class_method(cls, attribute_name, attribute)
-        or _get_instance_method(cls, attribute_name, attribute)
-        or _deny_class_attribute(attribute_name, attribute)
-    )
+def _get_method(cls, name, attribute):
+    if not _is_dunder(name):
+        return (
+            _deny_static_method(attribute)
+            or _deny_class_method(attribute)
+            or _get_instance_method(cls, name, attribute)
+            or _deny_class_attribute(attribute)
+        )
 
 
 def _deny_static_method(attribute):
@@ -153,83 +153,31 @@ def _deny_static_method(attribute):
         raise GenericClassError(message)
 
 
-def _get_class_method(cls, attribute_name, attribute):
+def _deny_class_method(attribute):
     if isinstance(attribute, classmethod):
-        name = _choose_name(cls, attribute_name, attribute.__func__)
-        if not _is_dunder(name):
-            return _ClassMethod(cls, name, attribute.__func__)
+        message = "Do not use class methods (call constructor instead)"
+        raise GenericClassError(message)
 
 
-def _get_instance_method(cls, attribute_name, attribute):
+def _get_instance_method(cls, name, attribute):
     if callable(attribute):
-        name = _choose_name(cls, attribute_name, attribute)
-        if not _is_dunder(name):
-            return _InstanceMethod(cls, name, attribute)
+        return _Method(cls, name, attribute)
 
 
-def _deny_class_attribute(name, attribute):
-    if not _is_dunder(name) and not callable(attribute):
+def _deny_class_attribute(attribute):
+    if not isinstance(attribute, MemberDescriptorType):
         raise GenericClassError("Do not define attributes on classes")
 
 
-def _choose_name(cls, attribute_name, func):
-    if func.__qualname__.startswith(f"{cls.__name__}."):
-        return func.__name__
-    else:
-        return attribute_name
-
-
 def _is_dunder(name):
-    return name.startswith("__") and name.endswith("__")
+    return name.startswith("__") and name.endswith("__")  # pragma: no mutate
 
 
-class _ClassMethod:
+class _Method:
     def __init__(self, cls, name, func):
         self.cls = cls
         self.name = name
         self.func = func
-
-    def is_instance_method(self):
-        return False
-
-    def to_class(self, methods):
-        class Method:
-            def __call__(_, *args, **kwargs):
-                result = self.func(self.cls, *args, **kwargs)
-                if type(result) is self.cls:
-                    return _wrap(result, methods)
-                else:
-                    message = (
-                        f"{self.name!r} classmethod should return an instance of "
-                        f"the {self.cls.__name__!r} class"
-                    )
-                    raise GenericInstanceError(message)
-
-            def __repr__(_):
-                return f"Private::{self.cls.__name__}.{self.name}"
-
-        return Method()
-
-    def to_instance(self, instance, methods):
-        class Method:
-            def __call__(_, *args, **kwargs):
-                message = "Class methods can not be called on instances"
-                raise GenericInstanceError(message)
-
-            def __repr__(_):
-                return f"Private::{instance!r}.{self.name}"
-
-        return Method()
-
-
-class _InstanceMethod:
-    def __init__(self, cls, name, func):
-        self.cls = cls
-        self.name = name
-        self.func = func
-
-    def is_instance_method(self):
-        return True
 
     def to_class(self, methods):
         class Method:
