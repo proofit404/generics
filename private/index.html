@@ -461,15 +461,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#class-methods-should-return-instances" class="md-nav__link">
-    Class methods should return instances
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#class-methods-can-not-be-called-on-instances" class="md-nav__link">
-    Class methods can not be called on instances
+  <a href="#class-methods-are-forbidden" class="md-nav__link">
+    Class methods are forbidden
   </a>
   
 </li>
@@ -751,15 +744,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#class-methods-should-return-instances" class="md-nav__link">
-    Class methods should return instances
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#class-methods-can-not-be-called-on-instances" class="md-nav__link">
-    Class methods can not be called on instances
+  <a href="#class-methods-are-forbidden" class="md-nav__link">
+    Class methods are forbidden
   </a>
   
 </li>
@@ -899,8 +885,7 @@ attributes.</p>
 <li><a href="#all-methods-are-public">All methods are public</a></li>
 <li><a href="#all-attributes-are-private-and-hidden">All attributes are private and hidden</a></li>
 <li><a href="#static-methods-are-forbidden">Static methods are forbidden</a></li>
-<li><a href="#class-methods-should-return-instances">Class methods should return instances</a></li>
-<li><a href="#class-methods-can-not-be-called-on-instances">Class methods can not be called on instances</a></li>
+<li><a href="#class-methods-are-forbidden">Class methods are forbidden</a></li>
 <li><a href="#instance-methods-can-return-instances">Instance methods can return instances</a></li>
 <li><a href="#instance-methods-can-not-be-called-on-classes">Instance methods can not be called on classes</a></li>
 <li><a href="#at-least-one-instance-method-is-required">At least one instance method is required</a></li>
@@ -988,58 +973,26 @@ that new thing to the constructor and access it in methods.</p>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use static methods (use composition instead)</span>
 </code></pre></div>
-<h3 id="class-methods-should-return-instances">Class methods should return instances<a class="headerlink" href="#class-methods-should-return-instances" title="Permanent link">&para;</a></h3>
+<h3 id="class-methods-are-forbidden">Class methods are forbidden<a class="headerlink" href="#class-methods-are-forbidden" title="Permanent link">&para;</a></h3>
 <p>As we mentioned earlier, objects should expose behavior. Class methods do not
 have access to any kind of inner state sinse there is no object encapsulating
-it. Thus the only kind of behavior class method should be able to do is
-instantiation of the object.</p>
+it. That's why we forbid class methods.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
 <span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-<span class="gp">...</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
-<span class="gp">...</span>
 <span class="gp">... </span>    <span class="nd">@classmethod</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">pass</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
-<span class="gt">Traceback (most recent call last):</span>
-  <span class="c">...</span>
-<span class="gr">_generics.exceptions.GenericInstanceError</span>: <span class="n">&#39;create&#39; classmethod should return an instance of the &#39;User&#39; class</span>
-</code></pre></div>
-<h3 id="class-methods-can-not-be-called-on-instances">Class methods can not be called on instances<a class="headerlink" href="#class-methods-can-not-be-called-on-instances" title="Permanent link">&para;</a></h3>
-<p>As we explained earlier, classmethod could only be used to instantiate entities.
-The purpose of such methods is to implement some semantics in addition to
-arguments passed to this method. In that case, if we would call classmethod
-using instance attribute access, it would be conceptually wrong. Because, this
-method call will have no relation to the instance itself. It does not have an
-access to it or its private attributes. That's why we force all call methods to
-be accessed using class reference.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
-<span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+<span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
-<span class="gp">...</span>
-<span class="gp">... </span>    <span class="nd">@classmethod</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
-<span class="gr">_generics.exceptions.GenericInstanceError</span>: <span class="n">Class methods can not be called on instances</span>
+<span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Do not use class methods (call constructor instead)</span>
 </code></pre></div>
 <h3 id="instance-methods-can-return-instances">Instance methods can return instances<a class="headerlink" href="#instance-methods-can-return-instances" title="Permanent link">&para;</a></h3>
 <p>In case your object return another instance of the same class from its method,
@@ -1083,10 +1036,6 @@ to expose any kind of behavior. The object becomes useless.</p>
 <span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-<span class="gp">...</span>
-<span class="gp">... </span>    <span class="nd">@classmethod</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">pass</span>
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
 <span class="gr">_generics.exceptions.GenericClassError</span>: <span class="n">Define at least one instance method</span>
