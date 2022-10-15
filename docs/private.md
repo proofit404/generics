@@ -45,8 +45,7 @@ It may be a nice convention to have it in the code base, but
 - [All methods are public](#all-methods-are-public)
 - [All attributes are private and hidden](#all-attributes-are-private-and-hidden)
 - [Static methods are forbidden](#static-methods-are-forbidden)
-- [Class methods should return instances](#class-methods-should-return-instances)
-- [Class methods can not be called on instances](#class-methods-can-not-be-called-on-instances)
+- [Class methods are forbidden](#class-methods-are-forbidden)
 - [Instance methods can return instances](#instance-methods-can-return-instances)
 - [Instance methods can not be called on classes](#instance-methods-can-not-be-called-on-classes)
 - [At least one instance method is required](#at-least-one-instance-method-is-required)
@@ -159,12 +158,11 @@ _generics.exceptions.GenericClassError: Do not use static methods (use compositi
 
 ```
 
-### Class methods should return instances
+### Class methods are forbidden
 
 As we mentioned earlier, objects should expose behavior. Class methods do not
 have access to any kind of inner state sinse there is no object encapsulating
-it. Thus the only kind of behavior class method should be able to do is
-instantiation of the object.
+it. That's why we forbid class methods.
 
 ```pycon
 
@@ -172,55 +170,18 @@ instantiation of the object.
 
 >>> @private
 ... class User:
-...     def __init__(self, name):
-...         self.name = name
-...
-...     def greet(self):
-...         return f'Hello, {self.name}'
-...
 ...     @classmethod
 ...     def create(cls):
 ...         pass
-
->>> User.create()
-Traceback (most recent call last):
-  ...
-_generics.exceptions.GenericInstanceError: 'create' classmethod should return an instance of the 'User' class
-
-```
-
-### Class methods can not be called on instances
-
-As we explained earlier, classmethod could only be used to instantiate entities.
-The purpose of such methods is to implement some semantics in addition to
-arguments passed to this method. In that case, if we would call classmethod
-using instance attribute access, it would be conceptually wrong. Because, this
-method call will have no relation to the instance itself. It does not have an
-access to it or its private attributes. That's why we force all call methods to
-be accessed using class reference.
-
-```pycon
-
->>> from generics import private
-
->>> @private
-... class User:
+...
 ...     def __init__(self, name):
 ...         self.name = name
 ...
 ...     def greet(self):
 ...         return f'Hello, {self.name}'
-...
-...     @classmethod
-...     def create(cls):
-...         return cls('Jeff')
-
->>> user = User.create()
-
->>> user.create()
 Traceback (most recent call last):
   ...
-_generics.exceptions.GenericInstanceError: Class methods can not be called on instances
+_generics.exceptions.GenericClassError: Do not use class methods (call constructor instead)
 
 ```
 
@@ -280,10 +241,6 @@ Class methods does not count since it has a different purpose.
 ... class User:
 ...     def __init__(self, name):
 ...         self.name = name
-...
-...     @classmethod
-...     def create(cls):
-...         pass
 Traceback (most recent call last):
   ...
 _generics.exceptions.GenericClassError: Define at least one instance method
