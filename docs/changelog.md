@@ -1,3 +1,19 @@
+# 5.0.0 (2022-10-15)
+
+### Features
+
+- deny class methods on [@private](https://github.com/private) classes
+  [#238](https://github.com/proofit404/generics/issues/238) 2be2561
+
+### BREAKING CHANGES
+
+- It is used to instantiate classes. We use `dependencies` library and stories
+  state normalization for such things. I would like not to work on same thing
+  twice. In addition I personally would never use factory method pattern. The
+  worst part, it broke `@delegated` decorator semantic since it planned to be
+  used with instances only. Class methods on delegated classes does not make
+  sense.
+
 # 4.0.0 (2022-10-14)
 
 ### Code Refactoring
