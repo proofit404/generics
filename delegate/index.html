@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="https://proofit404.github.io/generics/delegated/">
+        <link rel="canonical" href="https://proofit404.github.io/generics/delegate/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
     
     
       
-        <title>Delegated - generics</title>
+        <title>Delegate - generics</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#delegated" class="md-skip">
+        <a href="#delegate" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Delegated
+              Delegate
             
           </span>
         </div>
@@ -402,12 +402,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Delegated
+          Delegate
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Delegated
+        Delegate
       </a>
       
         
@@ -454,8 +454,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#missing-methods-would-be-defined-automatically" class="md-nav__link">
-    Missing methods would be defined automatically
+  <a href="#methods-would-be-dispatched-dynamically" class="md-nav__link">
+    Methods would be dispatched dynamically
   </a>
   
 </li>
@@ -625,8 +625,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#missing-methods-would-be-defined-automatically" class="md-nav__link">
-    Missing methods would be defined automatically
+  <a href="#methods-would-be-dispatched-dynamically" class="md-nav__link">
+    Methods would be dispatched dynamically
   </a>
   
 </li>
@@ -651,7 +651,7 @@
                   
 
 
-<h1 id="delegated">Delegated<a class="headerlink" href="#delegated" title="Permanent link">&para;</a></h1>
+<h1 id="delegate">Delegate<a class="headerlink" href="#delegate" title="Permanent link">&para;</a></h1>
 <h2 id="why">Why<a class="headerlink" href="#why" title="Permanent link">&para;</a></h2>
 <p>Decorator is a powerful pattern in the OOP world. It means to adjust behavior of
 the object, you suppose to encapsulate it inside another object. Adjusted
@@ -670,62 +670,81 @@ access should return bound method.</p>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
 <span class="gp">...</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;User(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">=!r}</span><span class="s2">)&quot;</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Decorator</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">_user</span> <span class="o">=</span> <span class="n">user</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="n">boundmethod</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_user</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">def</span> <span class="nf">boundmethod</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;=&gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_user</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">(*</span><span class="si">{</span><span class="n">args</span><span class="si">!r}</span><span class="s2">, **</span><span class="si">{</span><span class="n">kwargs</span><span class="si">!r}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="gp">... </span>            <span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_user</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="gp">... </span>            <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">... </span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;= </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_user</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">... </span>            <span class="k">return</span> <span class="n">result</span>
+<span class="gp">...</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="n">boundmethod</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s2">&quot;Jeff&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="go">&#39;Hello, Jeff&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decorated_user</span> <span class="o">=</span> <span class="n">Decorator</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decorated_user</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="go">=&gt; User(self._name=&#39;Jeff&#39;).greet(*(&#39;Hello&#39;,), **{})</span>
+<span class="go">&lt;= User(self._name=&#39;Jeff&#39;).greet: &#39;Hello, Jeff&#39;</span>
+<span class="go">&#39;Hello, Jeff&#39;</span>
 </code></pre></div>
 <h2 id="principles">Principles<a class="headerlink" href="#principles" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="#missing-methods-would-be-defined-automatically">Missing methods would be defined automatically</a></li>
+<li><a href="#methods-would-be-dispatched-dynamically">Methods would be dispatched dynamically</a></li>
 </ul>
-<h3 id="missing-methods-would-be-defined-automatically">Missing methods would be defined automatically<a class="headerlink" href="#missing-methods-would-be-defined-automatically" title="Permanent link">&para;</a></h3>
+<h3 id="methods-would-be-dispatched-dynamically">Methods would be dispatched dynamically<a class="headerlink" href="#methods-would-be-dispatched-dynamically" title="Permanent link">&para;</a></h3>
 <p>When you need to adjust behavior only of a few methods of the class, there is no
 point to write dumb boilerplate methods that would pass arguments as is to the
 method of encapsulated object.</p>
-<p>Methods of encapsulated object would be defined on the delegated class
-automatically.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">timedelta</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span><span class="p">,</span> <span class="n">delegated</span>
+<p>Methods of encapsulated object would be dispatched to the generic
+implementation.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">generics</span> <span class="kn">import</span> <span class="n">private</span><span class="p">,</span> <span class="n">delegate</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
 <span class="gp">... </span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">last_login</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">last_login</span> <span class="o">=</span> <span class="n">last_login</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;User(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">=!r}</span><span class="s1">)&#39;</span>
 <span class="gp">...</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@private</span>
+<span class="gp">... </span><span class="k">class</span> <span class="nc">Logged</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="n">instance</span>
 <span class="gp">...</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_login</span> <span class="o">&gt;=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nd">@delegate</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;=&gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">instance</span><span class="si">!r}</span><span class="s1">.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">(*</span><span class="si">{</span><span class="n">args</span><span class="si">!r}</span><span class="s1">, **</span><span class="si">{</span><span class="n">kwargs</span><span class="si">!r}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instance</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&lt;= </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">result</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@delegated</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">class</span> <span class="nc">LoggedUser</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
-<span class="gp">...</span>
-<span class="gp">... </span>    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Greeting </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">yesterday</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">month_ago</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">31</span><span class="p">)</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;Jeff&#39;</span><span class="p">,</span> <span class="n">yesterday</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;Jeff&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
 <span class="go">&#39;Hello, Jeff&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">()</span>
-<span class="go">True</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">logged_user</span> <span class="o">=</span> <span class="n">LoggedUser</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="s1">&#39;Kate&#39;</span><span class="p">,</span> <span class="n">month_ago</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">logged_user</span><span class="o">.</span><span class="n">is_active</span><span class="p">()</span>
-<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">logged_user</span> <span class="o">=</span> <span class="n">Logged</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="s1">&#39;Kate&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">logged_user</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+<span class="go">=&gt; Private::User(self.name=&#39;Kate&#39;).greet(*(), **{})</span>
+<span class="go">&lt;= Private::User(self.name=&#39;Kate&#39;).greet: Hello, Kate</span>
+<span class="go">&#39;Hello, Kate&#39;</span>
 </code></pre></div>
 <p align="center">&mdash; ⭐ &mdash;</p>
 
