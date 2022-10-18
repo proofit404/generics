@@ -1,3 +1,14 @@
+# 6.0.0 (2022-10-18)
+
+### Features
+
+- implement [@delegate](https://github.com/delegate) decorator
+  [#236](https://github.com/proofit404/generics/issues/236) 0b81538
+
+### BREAKING CHANGES
+
+- `@delegate` method decorator replaces `@delegated` class decorator.
+
 # 5.0.0 (2022-10-15)
 
 ### Features
