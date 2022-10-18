@@ -1,6 +1,8 @@
 from inspect import signature
 from types import MemberDescriptorType
 
+from _generics.delegate import _dynamic
+from _generics.delegate import Delegate
 from _generics.exceptions import GenericClassError
 
 
@@ -70,7 +72,7 @@ def _check_fields(fields):
 
 def _check_private_methods(methods):
     for method in methods:
-        if method.name.startswith("_"):
+        if method.is_underscore():
             raise GenericClassError(
                 "Do not use private methods (use composition instead)"
             )
@@ -139,12 +141,17 @@ class _PrivateType(type):
 
 def _get_method(cls, name, attribute):
     if not _is_dunder(name):
-        return (
-            _deny_static_method(attribute)
-            or _deny_class_method(attribute)
-            or _get_instance_method(cls, name, attribute)
-            or _deny_class_attribute(attribute)
-        )
+        return _get_method_1(cls, name, attribute)
+
+
+def _get_method_1(cls, name, attribute):
+    return (
+        _deny_static_method(attribute)
+        or _deny_class_method(attribute)
+        or _get_delegate_method(cls, name, attribute)
+        or _get_instance_method(cls, name, attribute)
+        or _deny_class_attribute(attribute)
+    )
 
 
 def _deny_static_method(attribute):
@@ -157,6 +164,11 @@ def _deny_class_method(attribute):
     if isinstance(attribute, classmethod):
         message = "Do not use class methods (call constructor instead)"
         raise GenericClassError(message)
+
+
+def _get_delegate_method(cls, name, attribute):
+    if isinstance(attribute, Delegate):
+        return _DelegateMethod(cls, "__getattr__", _dynamic(attribute.f))
 
 
 def _get_instance_method(cls, name, attribute):
@@ -178,6 +190,9 @@ class _Method:
         self.cls = cls
         self.name = name
         self.func = func
+
+    def is_underscore(self):
+        return self.name.startswith("_")
 
     def to_class(self, methods):
         class Method:
@@ -202,3 +217,8 @@ class _Method:
                 return f"Private::{instance!r}.{self.name}"
 
         return Method()
+
+
+class _DelegateMethod(_Method):
+    def is_underscore(self):
+        return False
