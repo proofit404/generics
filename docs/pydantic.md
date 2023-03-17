@@ -69,5 +69,3 @@ console
   True is not callable (type=type_error.callable; value=True)
 
 ```
-
-<p align="center">&mdash; ⭐ &mdash;</p>

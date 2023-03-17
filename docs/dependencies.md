@@ -24,5 +24,3 @@ It is possible to instantiate classes decorated with `@private` function via
 'Hello, Jeff'
 
 ```
-
-<p align="center">&mdash; ⭐ &mdash;</p>

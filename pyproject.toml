@@ -4,19 +4,11 @@ requires = ["poetry-core"]
 
 [tool.poetry]
 authors = ["Josiah Kaviani <proofit404@gmail.com>"]
-classifiers = [
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy",
-]
 description = "A classy toolkit designed with OOP in mind."
 documentation = "https://proofit404.github.io/generics"
 homepage = "https://pypi.org/project/generics"
 license = "BSD-2-Clause"
 name = "generics"
-packages = [
-    { include = "_generics", from = "src" },
-    { include = "generics", from = "src" },
-]
 readme = "docs/index.md"
 repository = "https://github.com/proofit404/generics"
 version = "6.0.0"

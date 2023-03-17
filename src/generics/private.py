@@ -1,7 +1,7 @@
 from inspect import signature
 from types import MemberDescriptorType
 
-from _generics.exceptions import GenericClassError
+from generics.exceptions import GenericClassError
 
 
 def private(cls):

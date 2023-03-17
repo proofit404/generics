@@ -1,21 +1,9 @@
 [run]
+source = .
 branch = true
 parallel = true
 disable_warnings =
   module-not-imported
-source =
-  _generics
-  generics
-  app
-  configuration
-  examples
-  mddoctest
-  tests
-
-[paths]
-source =
-  src
-  .tox/*/site-packages
 
 [report]
 exclude_lines =

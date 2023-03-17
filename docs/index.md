@@ -1,4 +1,4 @@
-# Generics [![build](https://img.shields.io/github/workflow/status/proofit404/generics/release?style=flat-square)](https://github.com/proofit404/generics/actions/workflows/release.yml?query=branch%3Arelease) [![pypi](https://img.shields.io/pypi/v/generics?style=flat-square)](https://pypi.org/project/generics)
+# generics [![build](https://img.shields.io/github/actions/workflow/status/proofit404/generics/release.yml?branch=release&style=flat-square)](https://github.com/proofit404/generics/actions/workflows/release.yml?query=branch%3Arelease) [![pypi](https://img.shields.io/pypi/v/generics?style=flat-square)](https://pypi.org/project/generics)
 
 A classy toolkit designed with OOP in mind.
 
@@ -66,5 +66,3 @@ interested in it.
 ## License
 
 `generics` library is offered under the two clause BSD license.
-
-<p align="center">&mdash; ⭐ &mdash;</p>

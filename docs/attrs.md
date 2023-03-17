@@ -36,5 +36,3 @@ Private::User(name='Jeff')
 Private::User(name='Kate')
 
 ```
-
-<p align="center">&mdash; ⭐ &mdash;</p>
