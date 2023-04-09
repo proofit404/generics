@@ -160,5 +160,3 @@
 ### Features
 
 - implement `@private` decorator
-
-<p align="center">&mdash; ⭐ &mdash;</p>

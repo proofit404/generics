@@ -25,11 +25,3 @@ def _definitions():
 def e(request):
     """Fixture with all possible entity definitions."""
     return request.param
-
-
-@pytest.fixture()
-def w():
-    """Fixture with all possible entity decorators."""
-    import examples.delegates
-
-    return examples.delegates

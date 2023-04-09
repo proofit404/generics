@@ -1,7 +1,16 @@
-"""A set of generics' exceptions."""
-from _generics.exceptions import GenericClassError
-from _generics.exceptions import GenericError
-from _generics.exceptions import GenericInstanceError
+class GenericError(Exception):
+    """Base error of all generics errors."""
+
+    pass
 
 
-__all__ = ("GenericError", "GenericClassError", "GenericInstanceError")
+class GenericClassError(GenericError):
+    """Generics class error."""
+
+    pass
+
+
+class GenericInstanceError(GenericError):
+    """Generics instance error."""
+
+    pass

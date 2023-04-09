@@ -1,9 +1,7 @@
 from inspect import signature
 from types import MemberDescriptorType
 
-from _generics.delegate import _dynamic
-from _generics.delegate import Delegate
-from _generics.exceptions import GenericClassError
+from generics.exceptions import GenericClassError
 
 
 def private(cls):
@@ -148,7 +146,6 @@ def _get_method_1(cls, name, attribute):
     return (
         _deny_static_method(attribute)
         or _deny_class_method(attribute)
-        or _get_delegate_method(cls, name, attribute)
         or _get_instance_method(cls, name, attribute)
         or _deny_class_attribute(attribute)
     )
@@ -164,11 +161,6 @@ def _deny_class_method(attribute):
     if isinstance(attribute, classmethod):
         message = "Do not use class methods (call constructor instead)"
         raise GenericClassError(message)
-
-
-def _get_delegate_method(cls, name, attribute):
-    if isinstance(attribute, Delegate):
-        return _DelegateMethod(cls, "__getattr__", _dynamic(attribute.f))
 
 
 def _get_instance_method(cls, name, attribute):
@@ -217,8 +209,3 @@ class _Method:
                 return f"Private::{instance!r}.{self.name}"
 
         return Method()
-
-
-class _DelegateMethod(_Method):
-    def is_underscore(self):
-        return False
