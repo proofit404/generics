@@ -40,7 +40,6 @@ nav:
       - Changelog: changelog.md
   - Usage:
       - Private: private.md
-      - Delegate: delegate.md
   - Guides:
       - Attrs: attrs.md
       - Dataclasses: dataclasses.md
